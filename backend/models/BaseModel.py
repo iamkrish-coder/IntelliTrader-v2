@@ -19,11 +19,11 @@ class BaseModel(ABC):
             if not callable(attr_value) and attr_value is not None:
                 rows[attr_name] = attr_value
 
-        data_dict["row_data"] = rows
+        data_dict["dataset_object"] = rows
 
-        # Extract partition key information from the already created table_row_data
+        # Extract partition key information from the already created table_dataset_object
         partition_key_name = table_configuration["partition_key"]
-        partition_key_value = data_dict["row_data"][partition_key_name]
+        partition_key_value = data_dict["dataset_object"][partition_key_name]
 
         data_dict["partition_object"] = {
             "key_value": {
@@ -41,7 +41,7 @@ class BaseModel(ABC):
         # Extract sort key information (if applicable)
         sort_key_name = table_configuration.get("sort_key")
         if sort_key_name:
-            sort_key_value = data_dict["row_data"][sort_key_name]
+            sort_key_value = data_dict["dataset_object"][sort_key_name]
 
             data_dict["sort_object"] = {
                 "key_value": {

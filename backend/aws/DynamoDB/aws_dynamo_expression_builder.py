@@ -8,6 +8,7 @@ class DynamoExpressionBuilder:
     def __init__(self):
         self.item = None
         self.key = None
+        self.condition_expression = None
         self.key_condition_expression = None
         self.update_expression = None
         self.filter_expression = None
@@ -60,6 +61,10 @@ class DynamoExpressionBuilder:
 
     def use_item(self, item):
         self.item = item
+        return self
+
+    def use_condition_expression(self, partition_key):
+        self.condition_expression = Attr(partition_key['key']).not_exists()
         return self
 
     def use_key_condition_expression(self, partition_key, sort_key):
@@ -131,6 +136,7 @@ class DynamoExpressionBuilder:
             key: value for key, value in {
                 "Key": self.key,
                 "Item": self.item,
+                "ConditionExpression": self.condition_expression,
                 "KeyConditionExpression": self.key_condition_expression,
                 "UpdateExpression": self.update_expression,
                 "FilterExpression": self.filter_expression,

@@ -5,7 +5,7 @@ import LogoMedium from '../assets/images/logo-medium.png'
 import LogoLarge from '../assets/images/logo-large.png'
 import LogoExtraLarge from '../assets/images/logo-extra-large.png'
 
-export const IMAGES = {
+const IMAGES = {
     Background1 : Bg1,
     Background2 : Bg2,
     LogoMedium : LogoMedium,

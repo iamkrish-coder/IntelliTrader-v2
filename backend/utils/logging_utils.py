@@ -13,7 +13,7 @@ def configure_logging():
     """Configures logging with a console handler (optional)."""
 
     root_logger = logging.getLogger()
-    root_logger.setLevel(logging.DEBUG)
+    root_logger.setLevel(logging.INFO)
 
     # Colored console handler with additional configuration (optional)
     console_handler = colorlog.StreamHandler()
@@ -28,28 +28,6 @@ def configure_logging():
     plain_formatter = logging.Formatter('%(asctime)s  %(levelname)-8s : %(message)s')
     file_handler.setFormatter(plain_formatter)
     root_logger.addHandler(file_handler)
-
-
-def get_message(resource_string):
-    """Retrieves message from ResourceStrings or returns the input string if not found.
-
-    Args:
-        resource_string (str | backend.enumerations.messages.Info_Messages |
-                          backend.enumerations.messages.Error_Messages |
-                          backend.enumerations.messages.Warning_Messages):
-            The enum member representing the message you want to retrieve or a custom string message.
-
-    Returns:
-        str: The message string (either from ResourceStrings or the input string).
-    """
-
-    if isinstance(resource_string, (INFO, ERROR, WARN)):
-        message = ResourceStrings.get(resource_string)
-        return message or resource_string.value
-    else:
-        # logging.warning(f"get_message received a non-enum string: {resource_string}")
-        return resource_string
-
 
 def log_message(level, message, filename, *args, **kwargs):
     """
@@ -74,11 +52,31 @@ def log_message(level, message, filename, *args, **kwargs):
     else:
         formatted_message = get_message(message)
 
-    logger = logging.getLogger(__name__)
+    logger = logging.getLogger("uvicorn")
     if level == 40:
         logger.log(level, f"{filename}: {formatted_message}")
     else:
         logger.log(level, formatted_message)
+
+def get_message(resource_string):
+    """Retrieves message from ResourceStrings or returns the input string if not found.
+
+    Args:
+        resource_string (str | backend.enumerations.messages.Info_Messages |
+                          backend.enumerations.messages.Error_Messages |
+                          backend.enumerations.messages.Warning_Messages):
+            The enum member representing the message you want to retrieve or a custom string message.
+
+    Returns:
+        str: The message string (either from ResourceStrings or the input string).
+    """
+
+    if isinstance(resource_string, (INFO, ERROR, WARN)):
+        message = ResourceStrings.get(resource_string)
+        return message or resource_string.value
+    else:
+        # logging.warning(f"get_message received a non-enum string: {resource_string}")
+        return resource_string
 
 def log_info(message, *args, **kwargs):
     """Logs a message with INFO level."""

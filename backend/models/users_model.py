@@ -11,6 +11,7 @@ class UsersModel(BaseModel):
         user_email=None,
         user_password=None,
         user_password_salt=None,
+        user_password_reset_token=None,
         created_date=None,
         modified_date=None,
     ):
@@ -20,6 +21,6 @@ class UsersModel(BaseModel):
         self.user_email = user_email
         self.user_password = user_password
         self.user_password_salt = user_password_salt
+        self.user_password_reset_token = user_password_reset_token
         self.created_date = created_date
         self.modified_date = modified_date
-

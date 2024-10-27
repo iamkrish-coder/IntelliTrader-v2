@@ -1,57 +1,91 @@
 import React, { useState } from 'react';
-import { Row, Card, Button, Form, Container } from 'react-bootstrap';
 import { useNavigate, Link } from 'react-router-dom';
-import { toast } from 'sonner'; 
+import { Row, Card, Button, Form, Container } from 'react-bootstrap';
+import { toast } from 'sonner';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { registrationService } from '../api';
+import { LoadingSpinner } from '../components';
+import { handleSuccess, handleError } from '../utils';
 
 const Register = ({ assets }) => {
-    const { ICONS, IMAGES } = assets;
+    // Assets
+    const { ICONS, VECTORS, IMAGES, MESSAGES } = assets;
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '' 
-    });
-    const [validated, setValidated] = useState(false);
 
+    // States
+    const [showPassword, setShowPassword] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
+    const [validated, setValidated] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState({
+        userFullName: '',
+        userEmail: '',
+        userPassword: '',
+        userConfirmPassword: ''
+    });
+
+    // Change Handlers
+    const handleFocus = () => setIsTyping(true);
+    const handleBlur = () => setIsTyping(false);
+    const handleMouseEnter = () => setShowPassword(true);
+    const handleMouseLeave = () => setShowPassword(false);
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    // Validation logic for email format
+    // Validations
     const isEmailValid = (email) => {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailPattern.test(email);
     };
 
-    const handleSubmit = (e) => {
+    // Submit Handler
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        e.stopPropagation();   
+        e.stopPropagation();
 
         const form = e.currentTarget;
         setValidated(true);
         if (form.checkValidity() === false) {
-            toast.error("Please provide the required information!"); 
+            toast.error(MESSAGES["CLIENT_REQUIRED_INFORMATION"]);
+            return;
+        }
+
+        // Check if full name contains only alphabets
+        if (!/^[A-Za-z\s]+$/.test(formData.userFullName.trim())) {
+            toast.error(MESSAGES["CLIENT_FULL_NAME_INVALID"]);
             return;
         }
 
         // Check if email is valid
-        if (!isEmailValid(formData.email)) {
-            toast.error("Please provide a valid email address!");
-            return;
-        }
-        
-        // Check if passwords match
-        if (formData.password !== formData.confirmPassword) {
-            toast.error("Passwords do not match!");
+        if (!isEmailValid(formData.userEmail)) {
+            toast.error(MESSAGES["CLIENT_EMAIL_INVALID"]);
             return;
         }
 
-        // Handle registration logic here (e.g., API call)
-        console.log('Form submitted:', formData);
-        toast.success("Registration successful!"); 
-        navigate('/login'); 
+        // Check if passwords match
+        if (formData.userPassword !== formData.userConfirmPassword) {
+            toast.error(MESSAGES["CLIENT_PASSWORDS_DO_NOT_MATCH"]);
+            return;
+        }
+
+        if (formData.userPassword.length < 8) {
+            toast.error(MESSAGES["CLIENT_PASSWORD_TOO_WEAK"]);
+            return;
+        }
+
+        // Handle registration logic (e.g., API call)
+        setLoading(true);
+        try {
+            const registrationResponse = await registrationService(formData);
+            handleSuccess(registrationResponse);
+            navigate('/login');
+        } catch (error) {
+            handleError(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -65,70 +99,85 @@ const Register = ({ assets }) => {
                 </Card.Header>
                 <Card.Body>
                     <Form noValidate validated={validated} onSubmit={handleSubmit} method="post">
-                        <Row className="mb-3">
-                            <Form.Group md="4" controlId="username">
+                        <Row className="mb-2">
+                            <Form.Group md="2" controlId="userFullName">
                                 <Form.Label>Full name</Form.Label>
-                                <Form.Control  
-                                    type="text" 
-                                    placeholder="Enter your full name" 
-                                    name="username" 
-                                    value={formData.username}
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter your full name"
+                                    name="userFullName"
+                                    value={formData.userFullName}
                                     onChange={handleChange}
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter your full name</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
-                        <Row className="mb-3">
-                            <Form.Group md="4" controlId="email">
+                        <Row className="mb-2">
+                            <Form.Group md="2" controlId="userEmail">
                                 <Form.Label>Email address</Form.Label>
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="Enter your email address" 
-                                    name="email"
-                                    value={formData.email}
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter your email address"
+                                    name="userEmail"
+                                    value={formData.userEmail}
                                     onChange={handleChange}
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">Please enter a valid email address</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
-                        <Row className="mb-3">
-                            <Form.Group md="4" controlId="password">
+                        <Row className="mb-2">
+                            <Form.Group md="2" controlId="userPassword">
                                 <Form.Label>Password</Form.Label>
-                                <Form.Control 
-                                    type="password" 
-                                    placeholder="Enter your password" 
-                                    name="password"
-                                    value={formData.password}
-                                    onChange={handleChange}
-                                    required
-                                />
+                                <div className="password-input-container">
+                                    <Form.Control
+                                        type={showPassword ? "text" : "password"}
+                                        placeholder="Enter your password"
+                                        name="userPassword"
+                                        value={formData.userPassword}
+                                        onChange={handleChange}
+                                        onFocus={handleFocus}
+                                        onBlur={handleBlur}
+                                        required
+                                    />
+                                    {isTyping && (
+                                        <span
+                                            onMouseEnter={handleMouseEnter}
+                                            onMouseLeave={handleMouseLeave}
+                                            className="password-icon"
+                                        >
+                                            {showPassword ? <FaEye /> : <FaEyeSlash />} {/* Show/hide icon */}
+                                        </span>
+                                    )}
+                                </div>
                                 <Form.Control.Feedback type="invalid">Please enter a password</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
-                        <Row className="mb-3">
-                            <Form.Group md="4" controlId="confirmPassword">
+                        <Row className="mb-2">
+                            <Form.Group md="2" controlId="userConfirmPassword">
                                 <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control 
-                                    type="password" 
-                                    placeholder="Confirm your password" 
-                                    name="confirmPassword"
-                                    value={formData.confirmPassword}
+                                <Form.Control
+                                    type="password"
+                                    placeholder="Confirm your password"
+                                    name="userConfirmPassword"
+                                    value={formData.userConfirmPassword}
                                     onChange={handleChange}
                                     required
                                 />
                                 <Form.Control.Feedback type="invalid">Please confirm your password</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
-                        <Row className="mb-4">
+                        <Row className="mt-4 mb-2">
                             <small>By clicking <strong>Create Account</strong> below, you agree to our terms of service and privacy statement.</small>
                         </Row>
-                        <Button type="submit" variant="primary" className="btn-sign">Create Account</Button>
+                        <Button type="submit" variant="primary" className="btn-sign">
+                            {loading ? <LoadingSpinner /> : 'Create Account'}
+                        </Button>
                     </Form>
                 </Card.Body>
                 <Card.Footer>
-                Already have an account? <Link to="/login">Sign In</Link>
+                    Already have an account? <Link to="/login">Sign In</Link>
                 </Card.Footer>
             </Card>
         </Container>

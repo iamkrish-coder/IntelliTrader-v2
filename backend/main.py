@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request, Response
+import uvicorn
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.autorun import Algo
-from backend.api.register import Register
-from backend.api.login import Login
+
+# Import the router from your routes file
+from backend.api.v1.routes import router as api_router
 
 app = FastAPI()
 
@@ -14,23 +15,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.post("/api/register")
-async def register(request: Request):
-    body = await request.json()
-    register_object = Register(body)
-    return register_object.handle_request()
+# Include the API router
+app.include_router(api_router, prefix="/api/v1")
 
-@app.post("/api/login")
-async def login(request: Request):
-    body = await request.json()
-    login_object = Login(body)
-    return login_object.handle_request()
-
-@app.get("/autorun")
-async def trigger_algo():
-    try:
-        application = Algo()
-        await application.autorun()
-        return {"message": "Algo started successfully"}
-    except Exception as error:
-        return {"error": str(error)}
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
