@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.4.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.3.1...v8.4.0) (2024-10-27)
+
+
+### Features
+
+* Added login, registration and forgot password feature with improved response and exception management ([068ded2](https://github.com/iamkrish-coder/IntelliTrader/commit/068ded22d2a423aaa5caf267da85525aa3e7be83))
+
 ## [8.3.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.3.0...v8.3.1) (2024-10-18)
 
 
