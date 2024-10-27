@@ -212,3 +212,20 @@
     height: 40px;
   }
 }
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container .form-control {
+  padding-right: 40px; /* Add padding to the right for the icon */
+}
+
+.password-icon {
+  position: absolute;
+  right: 30px; /* Position the icon inside the input */
+  top: 50%;
+  transform: translateY(-50%); /* Center the icon vertically */
+  cursor: pointer;
+  pointer-events: all; /* Ensure the icon is clickable */
+}

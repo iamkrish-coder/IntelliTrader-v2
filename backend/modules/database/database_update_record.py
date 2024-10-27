@@ -6,8 +6,6 @@ from backend.utils.logging_utils import *
 from ...aws.DynamoDB.aws_dynamodb import DynamoDB
 
 """" Decorators """
-
-
 def restricted_access(allowed_activities):
     def decorator(func):
         def wrapper(self, *args, **kwargs):
@@ -15,9 +13,7 @@ def restricted_access(allowed_activities):
                 return func(self, *args, **kwargs)
             else:
                 return {}
-
         return wrapper
-
     return decorator
 
 
@@ -40,7 +36,7 @@ class DatabaseUpdateRecord:
         table = self.table
         data = self.data
         attribute_data = data.get("attributes")
-        attributes = attribute_data.get("row_data")
+        attributes = attribute_data.get("dataset_object")
         partition = attribute_data.get("partition_object")
         sort = attribute_data.get("sort_object")
         # Remove keys from update data

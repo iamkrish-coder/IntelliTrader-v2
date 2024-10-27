@@ -1,17 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Image, Button, Container } from 'react-bootstrap';
-import { IMAGES } from '../constants/Images'; 
 
 const Home = ({ assets }) => {
     const navigate = useNavigate()
-    const { IMAGES, ICONS } = assets;
-
+    const { IMAGES, SVG, ICONS, MESSAGES } = assets;
 
     return (
         <React.Fragment>
             <div className="home-page">
-
                 <div id="wrapper">
                     <header id="banner" className="scrollto clearfix" data-enllax-ratio=".5">
                         <div id="banner-content" className="row clearfix">

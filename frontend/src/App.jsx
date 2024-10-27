@@ -3,13 +3,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from 'sonner';
 import PageNotFound from './pages/PageNotFound';
 import ApplicationRoutes from './router/ApplicationRoutes.jsx';
-import IMAGES from './constants/Images.js';
-import ICONS from './constants/Icons.js';
+import IMAGES from './constants/images.js';
+import VECTORS from './constants/vectors.js';
+import ICONS from './constants/icons.js';
+import MESSAGES from './constants/messages.js';
 import './assets/scss/style.scss';
 
 const constants = {
     IMAGES : IMAGES,
-    ICONS: ICONS
+    VECTORS : VECTORS,
+    ICONS: ICONS,
+    MESSAGES: MESSAGES
 }
 
 function App() {
