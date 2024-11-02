@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.5.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.4.0...v8.5.0) (2024-11-02)
+
+
+### Features
+
+* Password Reset Feature added ([d7fd76c](https://github.com/iamkrish-coder/IntelliTrader/commit/d7fd76cdeee96fa976b33e580d5354794d49bd3a))
+
 ## [8.4.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.3.1...v8.4.0) (2024-10-27)
 
 
