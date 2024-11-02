@@ -33,7 +33,13 @@
   }
 }
 
-.header-logo {
+.header-logo-container {
+  align-items: center;
+  display: flex;
+  padding: 16px 0;
+}
+
+.header-logo-text {
   font-size: 24px;
   font-family: $ff-secondary;
   font-weight: 600;
@@ -46,16 +52,6 @@
   &:hover,
   &:focus { color: $dark; }
 
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 3.5px;
-    right: -8px;
-    width: 6px;
-    height: 6px;
-    border-radius: 100%;
-    background-color: $primary;
-  }
 }
 
 .header-main {

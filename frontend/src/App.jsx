@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from 'sonner';
-import PageNotFound from './pages/PageNotFound';
+import PageNotFound from './pages/authentication/PageNotFound';
 import ApplicationRoutes from './router/ApplicationRoutes.jsx';
 import IMAGES from './constants/images.js';
 import VECTORS from './constants/vectors.js';

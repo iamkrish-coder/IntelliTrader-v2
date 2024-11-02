@@ -137,15 +137,14 @@ class ForgotPassword(BaseService):
         Raises:
             ApiException: If there is an error generating the token.
         """
-        secret_key = SECRET_NAME
         expiration_time = datetime.now(timezone.utc) + timedelta(minutes=15)  # Token expires in 15 minutes
         payload = {
             'user_email': user_email,
-            'expires_at': int(expiration_time.timestamp())
+            'exp': expiration_time
         }
 
         try:
-            jwt_token = jwt.encode(payload, secret_key, algorithm='HS256')
+            jwt_token = jwt.encode(payload, SECRET_NAME, algorithm='HS256')
             return jwt_token
         except Exception as error:
             raise ApiException.internal_server_error(

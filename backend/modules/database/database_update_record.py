@@ -39,6 +39,7 @@ class DatabaseUpdateRecord:
         attributes = attribute_data.get("dataset_object")
         partition = attribute_data.get("partition_object")
         sort = attribute_data.get("sort_object")
+        
         # Remove keys from update data
         _keys = [partition.get("key")]
         if sort:

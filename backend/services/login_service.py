@@ -8,6 +8,7 @@ from backend.services.BaseService import BaseService
 from backend.core.exceptions import ApiException
 from backend.core.response import ApiResponse
 
+
 class Login(BaseService):
 
     def __init__(self, request):
@@ -28,15 +29,14 @@ class Login(BaseService):
 
         # Get User Login Credentials
         stored_password = self.get_user_login_credentials(user_email)
-        
-        # Generate JWT Token
-        token = self.generate_jwt_token(user_email)
 
-        # Validate Login Credentials
+        # Generate JWT Token
+        login_token = self.generate_jwt_token(user_email)
+
         if self.validate_password(stored_password, entered_password):
             return ApiResponse.success(
                 message = "SERVER_LOGIN_SUCCESSFUL", 
-                data = {"token": token}
+                data = {"token": login_token}
             )
         else:
             raise ApiException.validation_error(

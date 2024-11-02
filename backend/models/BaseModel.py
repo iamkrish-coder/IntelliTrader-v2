@@ -6,8 +6,9 @@ import time
 
 class BaseModel(ABC):
     def __init__(self):
-        self.created_by = "IntelliTrader"
-        self.modified_date = time.strftime("%Y-%m-%d %H:%M:%S")
+        pass
+        # self.created_by = "IntelliTrader"
+        # self.modified_date = time.strftime("%Y-%m-%d %H:%M:%S")
 
     def convert_table_rows_to_dict(self, table_configuration):
         """

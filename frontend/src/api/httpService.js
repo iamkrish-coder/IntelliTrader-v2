@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Create an instance of axios
-const _API_ = axios.create({
+const httpService = axios.create({
     baseURL: 'http://localhost:8000/api/v1',  
     timeout: 10000,  
     headers: {
@@ -10,7 +10,7 @@ const _API_ = axios.create({
 });
 
 // Add request/response interceptors for handling tokens, etc.
-_API_.interceptors.request.use(
+httpService.interceptors.request.use(
     (config) => {
         // Modify the request config before the request is sent
         // For example, add a token if needed:
@@ -23,7 +23,7 @@ _API_.interceptors.request.use(
     }
 );
 
-_API_.interceptors.response.use(
+httpService.interceptors.response.use(
     (response) => {
         // Handle responses globally
         console.log('API Response:', response);
@@ -36,4 +36,4 @@ _API_.interceptors.response.use(
     }
 );
 
-export default _API_;
+export default httpService;

@@ -40,7 +40,11 @@ const MESSAGES = {
     'SERVER_FORGOT_PASSWORD_TOKEN_GENERATION_FAILURE': 'Failed to generate forgot password token. Please try again or contact support.',
     'SERVER_FORGOT_PASSWORD_EMAIL_SENDING_FAILURE': 'Failed to send forgot password email. Please try again or contact support.',
     'SERVER_FORGOT_PASSWORD_EMAIL_SENT': 'We\'ve sent you an email with a link to reset your password.',
-    'SERVER_FORGOT_PASSWORD_TOKEN_SAVING_FAILURE': 'Failed to save forgot password token. Please try again or contact support.'
+    'SERVER_FORGOT_PASSWORD_TOKEN_SAVING_FAILURE': 'Failed to save forgot password token. Please try again or contact support.',
+    'SERVER_PASSWORD_RESET_TOKEN_EXPIRED': 'The password reset link has expired. Please request a new one.',
+    'SERVER_PASSWORD_RESET_INVALID_TOKEN': 'The password reset token provided was invalid. Please request a new one.',
+    'SERVER_DATABASE_UPDATE_FAILURE': 'Failed to update password. Please try again or contact support.',
+    'SERVER_PASSWORD_RESET_SUCCESSFUL': 'Password reset successful! You can now log in with your new password.'
 };
 
 export default MESSAGES;

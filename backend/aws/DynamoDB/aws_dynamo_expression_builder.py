@@ -63,8 +63,22 @@ class DynamoExpressionBuilder:
         self.item = item
         return self
 
-    def use_condition_expression(self, partition_key):
-        self.condition_expression = Attr(partition_key['key']).not_exists()
+    def use_condition_expression(self, operation, attribute_data):
+        if operation == "PUT":
+            self.condition_expression = Attr(attribute_data).not_exists()
+        elif operation == "UPDATE":
+            self.condition_expression = None
+            for attribute_name, new_value in attribute_data.items():
+                condition = Attr(attribute_name).exists() & Attr(attribute_name).ne(new_value)
+                
+                if self.condition_expression is None:
+                    self.condition_expression = condition
+                else:
+                    self.condition_expression &= condition
+        return self
+
+    def use_condition_expression_exists(self, attribute_name, new_value):
+        self.condition_expression = Attr(attribute_name).exists() & Attr(attribute_name).ne(new_value)
         return self
 
     def use_key_condition_expression(self, partition_key, sort_key):

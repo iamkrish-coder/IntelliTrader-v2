@@ -29,19 +29,19 @@ class DynamoDB:
         if self.partition_key is None or self.attribute_data is None:
             return response
 
-        expression = (
-            self.builder \
+        try:    
+            expression = (
+                self.builder \
                 .use_key_expression(self.partition_key, self.sort_key) \
                 .use_update_expression(self.attribute_data) \
                 .build()
-        )
+            )
 
-        try:
             response = self.dynamodb_table.update_item(**expression)
             if response['ResponseMetadata']['HTTPStatusCode'] == 200:
                 log_info("Item updated successfully!")
                 return response
-
+            
         except ClientError as error:
             error_code = error.response['Error']['Code']
             error_message = error.response['Error']['Message']
@@ -57,7 +57,7 @@ class DynamoDB:
 
         expression = (
             self.builder \
-                .use_condition_expression(self.partition_key) \
+                .use_condition_expression("PUT", self.partition_key['key']) \
                 .use_item(self.attribute_data) \
                 .build()
         )
@@ -67,6 +67,7 @@ class DynamoDB:
             if response['ResponseMetadata']['HTTPStatusCode'] == 200:
                 log_info("Item added successfully!")
                 return response
+            
         except ClientError as error:
             error_code = error.response['Error']['Code']
             error_message = error.response['Error']['Message']

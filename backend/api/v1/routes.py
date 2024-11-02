@@ -3,6 +3,7 @@ from backend.autorun import Algo
 from backend.services.register_service import Register
 from backend.services.login_service import Login
 from backend.services.forgot_password_service import ForgotPassword
+from backend.services.reset_password_service import ResetPassword
 from backend.core.exceptions import ApiException
 from backend.utils.logging_utils import *
 
@@ -70,6 +71,27 @@ async def forgot_password(request: Request):
         return error.to_http_exception()
     except Exception as error:
         return  ApiException.internal_server_error(str(error)).to_http_exception()
+
+@router.patch("/reset-password")
+async def reset_password(request: Request):
+    """
+    Handles the password reset process.
+
+    Args:
+        request (Request): The HTTP request containing the token and new password.
+
+    Returns:
+        HTTPResponse: The response object indicating the result of the password reset process.
+    """
+    try:
+        body = await request.json()
+        reset_password_object = ResetPassword(body)
+        response = reset_password_object.handle_request()
+        return response.to_http_response()
+    except ApiException as error:
+        return error.to_http_exception()
+    except Exception as error:
+        return ApiException.internal_server_error(str(error)).to_http_exception()
 
 @router.get("/autorun")
 async def trigger_algo():

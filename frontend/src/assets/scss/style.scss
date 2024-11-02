@@ -29,27 +29,27 @@
 // Bootstrap Framework
 @import "bootstrap/scss/bootstrap";
 
-// Components
-@import "components/accordion";
-@import "components/alerts";
-@import "components/avatars";
-@import "components/badge";
-@import "components/breadcrumbs";
-@import "components/buttons";
-@import "components/card";
-@import "components/dropdown";
-@import "components/images";
-@import "components/list-group";
-@import "components/markers";
-@import "components/modal";
-@import "components/nav";
-@import "components/offcanvas";
-@import "components/pagination";
-@import "components/popovers";
-@import "components/progress";
-@import "components/toasts";
-@import "components/tables";
-@import "components/forms";
+// Elements
+@import "elements/accordion";
+@import "elements/alerts";
+@import "elements/avatars";
+@import "elements/badge";
+@import "elements/breadcrumbs";
+@import "elements/buttons";
+@import "elements/card";
+@import "elements/dropdown";
+@import "elements/images";
+@import "elements/list-group";
+@import "elements/markers";
+@import "elements/modal";
+@import "elements/nav";
+@import "elements/offcanvas";
+@import "elements/pagination";
+@import "elements/popovers";
+@import "elements/progress";
+@import "elements/toasts";
+@import "elements/tables";
+@import "elements/forms";
 
 // Panels
 @import "panels/header";
@@ -59,14 +59,14 @@
 @import "panels/main";
 
 // Dashboard
-@import "dashboard/sales";
-@import "dashboard/analytics";
-@import "dashboard/crypto";
-@import "dashboard/finance";
-@import "dashboard/helpdesk";
-@import "dashboard/events";
-@import "dashboard/storage";
-@import "dashboard/product";
+@import "pages/dashboard/sales";
+@import "pages/dashboard/analytics";
+@import "pages/dashboard/crypto";
+@import "pages/dashboard/finance";
+@import "pages/dashboard/helpdesk";
+@import "pages/dashboard/events";
+@import "pages/dashboard/storage";
+@import "pages/dashboard/product";
 
 // Apps
 @import "apps/app";
@@ -80,13 +80,14 @@
 @import "apps/video";
 
 // Pages
+@import "pages/authentication/auth";
 @import "pages/home";
 @import "pages/user";
-@import "pages/auth";
 @import "pages/error";
 @import "pages/other";
 @import "pages/docs";
 @import "pages/landing";
+@import "pages/shared";
 
 // Plugins
 @import "plugins/scrollbar";
