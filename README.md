@@ -3,6 +3,7 @@
 **IntelliTrader** is a cutting-edge algorithmic trading application tailored for personal use, empowering users to automate and optimize their trading strategies. The application is designed using the Python programming language and seamlessly integrates with the KiteConnect API for robust connectivity to financial markets.
 
 ## Development Notes
+pip install -r requirements.txt
 
 ### Historical API Frequency and Limit on Number of Candles Fetched
 
@@ -48,101 +49,6 @@
 
 -----------------------------------------------------------------------------------------------------------------
 
-### Order Placement Example
-
-```python
-if transaction == 'buy':
-    transaction_type = self.prop['kite'].TRANSACTION_TYPE_BUY
-elif transaction == 'sell':
-    transaction_type = self.prop['kite'].TRANSACTION_TYPE_SELL
-else:
-    logging.error("The order placement does not have a specified action to buy or sell.")
-    exit()
-
-order_single = [{
-    "exchange": exchange,
-    "tradingsymbol": symbol,
-    "transaction_type": transaction_type,
-    "quantity": quantity,
-    "order_type": otype,
-    "product": product,
-    "price": price,
-}]
-
-order_oco = [{
-    "exchange": "NSE",
-    "tradingsymbol": "SBIN",
-    "transaction_type": transaction_type,
-    "quantity": 1,
-    "order_type": "LIMIT",
-    "product": "CNC",
-    "price": price
-}, {
-    "exchange": "NSE",
-    "tradingsymbol": "SBIN",
-    "transaction_type": self.prop['kite'].TRANSACTION_TYPE_SELL,
-    "quantity": 1,
-    "order_type": "LIMIT",
-    "product": "CNC",
-    "price": 480
-}]
-
-res = fetch.fetch_quote('NSE', 'AAVAS')
-res = fetch.fetch_ltp('NSE', 'AAVAS')
-res = fetch.fetch_positions()
-res = fetch.fetch_holdings()
-res = fetch.fetch_orders()
-logging.info(res)
-
-res = fetch.fetch_quote('NSE', 'AAVAS')
-res = fetch.fetch_ltp('NSE', 'AAVAS')
-res = fetch.fetch_positions()
-res = fetch.fetch_holdings()
-res = fetch.fetch_orders()
-logging.info(res)
-
-###############################################
-# ATM Options Sample Output
-###############################################
-
-# Call Option
-instrument_token: 12254978
-exchange_token: 47871
-tradingsymbol: NIFTY2381019500CE
-name: NIFTY
-last_price: 0.0
-expiry: 2023-08-10
-strike: 19500.0
-tick_size: 0.05
-lot_size: 50
-instrument_type: CE
-segment: NFO-OPT
-exchange: NFO
-time_to_expiry: 4
-
-# Put Option
-instrument_token: 12255234
-exchange_token: 47872
-tradingsymbol: NIFTY2381019500PE
-name: NIFTY
-last_price: 0.0
-expiry: 2023-08-10
-strike: 19500.0
-tick_size: 0.05
-lot_size: 50
-instrument_type: PE
-segment: NFO-OPT
-exchange: NFO
-time_to_expiry: 4
-
-# NSE historical data // Alternative zerodha historical subscription
-# Example usage:
-# symbol = 'TCS'
-# start_date = '2023-01-01'
-# end_date = '2023-12-31'
-# data = get_historical_data(symbol, start_date, end_date)
-# print(data)
-
 Architecture Flow:
 
 Publisher: Your Python application publishes a message to an SNS topic.
@@ -158,9 +64,9 @@ Diagram:
                          ^                         |
                          | Receives message        | (Subscriber)
                          |                         |
-+-------------------+      +-------------------+
++-------------------+       +-------------------+        +-------------------+
 | Subscriber App     |----->| SQS Queue (Polling) |----->| Message Processing |
-+-------------------+      +-------------------+      +-------------------+
++-------------------+       +-------------------+        +-------------------+
 Explanation:
 
 The publisher application sends a message to the SNS topic.

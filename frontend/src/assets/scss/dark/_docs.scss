@@ -1,0 +1,110 @@
+[data-skin="dark"] {
+  .main-title-text { color: rgba(#fff, .85); }
+  .main-subtitle { color: #fff; }
+
+  .main-footer-docs::before { border-top-color: $border-color-dark; }
+
+  .nav-docs {
+    label { color: rgba(#fff, .3); }
+
+    .nav-link {
+      color: inherit;
+      &.active { color: #fff; }
+    }
+
+    hr { opacity: .06; }
+  }
+
+  .card-example {
+    background-color: transparent;
+    border-color: $border-color-dark;
+
+    > .card-body::before {
+      background-color: $dark-primary;
+      color: rgba(#fff, .35);
+    }
+
+    > .card-footer {
+      background-color: $dark-highlight;
+      border-top-color: $border-color-dark;
+
+      pre { 
+        background-color: inherit !important; 
+      }
+
+      code {
+        text-shadow: none;
+        color: #fff;
+      }
+    }
+  }
+
+  .token.operator { background-color: transparent; }
+
+  .row-example span {
+    background-color: $dark-highlight;
+    border-color: $border-color-dark;
+  }
+
+  .offcanvas-demo {
+    background-color: $dark-primary;
+    border-color: $border-color-dark;
+
+    .offcanvas { border-right-color: $border-color-dark; }
+  }
+
+  .scrollspy-demo {
+    background-color: $dark-primary;
+    border-color: $border-color-dark;
+  }
+
+  .toast-demo { background-color: $dark-highlight; }
+
+  .icon-group {
+    background-color: $dark-primary;
+    border-color: $border-color-dark;
+
+    i, svg { color: inherit; }
+  }
+
+  .media-animate {
+    .nav-link {
+      background-color: $dark-highlight;
+      color: inherit;
+    }
+
+    .animate-title { text-shadow: none; }
+  }
+
+  .demo-border > span,
+  .demo-bordered > span {
+    background-color: transparent;
+  }
+
+  .demo-bordered span { border-color: lighten($border-color-dark, 5%); }
+
+  .demo-text p, .demo-text a {
+    background-color: $dark-highlight;
+  }
+
+  .demo-flex .bg-gray-300 {
+    background-color: $dark-highlight
+  }
+
+  .demo-flot {
+    .flot-y-axis > div,
+    .flot-x-axis > div { color: rgba(#fff, .6) !important; }
+
+    .legend > div {
+      background-color: transparent !important;
+    }
+
+    .legend table { color: rgba(#fff, .6) !important; }
+    .legend td { padding-right: 5px; }
+  }
+
+  .morris-donut {
+    path { stroke: rgba(#fff, .3); }
+    text { fill: #fff; }
+  }
+}

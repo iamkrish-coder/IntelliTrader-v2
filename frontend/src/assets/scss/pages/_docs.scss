@@ -1,0 +1,399 @@
+.main-docs {
+  position: relative;
+
+  @include media-breakpoint-up(xl) {
+    padding-right: 220px;
+  }
+
+  .container {
+    margin: auto;
+    padding: 20px;
+
+    @include media-breakpoint-up(lg) {
+      width: 680px;
+      padding: 30px;
+    }
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  + .main-footer {
+    margin-top: 0;
+    padding: 20px;
+    border-top-width: 0;
+    position: relative;
+
+    @include media-breakpoint-up(lg) {
+      margin-left: $sidebar-width;
+      padding: 20px 40px 40px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      right: 20px;
+      border-top: 1px solid rgba($border-color, .6);
+
+      @include media-breakpoint-up(lg) {
+        left: 40px;
+        right: 40px;
+      }
+    }
+  }
+}
+
+.doc-mobile-header {
+  background-color: $body-bg;
+
+  &.scroll {
+    background-color: #fff;
+  }
+}
+
+.nav-docs {
+  width: 200px;
+  position: fixed;
+  top: 30px;
+  right: 25px;
+  flex-direction: column;
+  display: none;
+
+  @include media-breakpoint-up(xl) {
+    display: flex;
+  }
+
+  label {
+    font-size: 11px;
+    font-family: $ff-secondary;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: $gray-500;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .nav-link {
+    color: $secondary;
+    padding: 0;
+    padding-left: 15px;
+    font-size: 13px;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 5px;
+      height: 1.5px;
+      background-color: $secondary;
+      @include transition(all 0.25s);
+    }
+
+    &.active {
+      color: $dark;
+
+      &::before {
+        width: 20px;
+        left: -15px;
+        background-color: $primary;
+      }
+    }
+
+    +.nav-link {
+      margin-top: 8px;
+    }
+  }
+
+  hr {
+    border-color: $gray-300;
+    opacity: .75;
+  }
+}
+
+.card-example {
+  border-radius: 0;
+  border-color: $gray-300;
+  background-color: inherit;
+  position: relative;
+  margin-top: 30px;
+
+  >.card-body {
+    padding: 20px;
+    position: relative;
+
+    &::before {
+      content: 'Example';
+      padding: 2px 5px;
+      background-color: $body-bg;
+      position: absolute;
+      top: -10px;
+      left: 15px;
+      font-size: 10px;
+      font-family: $ff-secondary;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: rgba($secondary, .6);
+      letter-spacing: 1px;
+    }
+  }
+
+  >.card-footer {
+    border-top-color: $gray-300;
+    background-color: #fff;
+    padding: 0;
+
+    pre {
+      margin-top: 0;
+      margin-bottom: 0;
+      background-color: inherit;
+      padding: 12px 15px;
+    }
+
+    code[class*="language-"],
+    pre[class*="language-"] {
+      font-size: 12px;
+      font-family: 'Roboto Mono', monospace;
+      letter-spacing: -.2px;
+    }
+  }
+}
+
+.row-example {
+  span {
+    display: block;
+    padding: 10px;
+    border: 1px solid $border-color;
+    background-color: #fff;
+    font-size: $font-size-sm;
+  }
+}
+
+.offcanvas-demo {
+  position: relative;
+  border: 1px solid $border-color;
+  background-color: $gray-100;
+
+  .offcanvas {
+    position: relative;
+    visibility: visible;
+    transform: none;
+    border-right-color: $border-color;
+    z-index: 0;
+  }
+
+  .offcanvas-start {
+    border-right-width: 1px;
+  }
+}
+
+.scrollspy-demo {
+  border: 1px solid $border-color;
+  background-color: #fff;
+  position: relative;
+  height: 250px;
+  overflow: auto;
+}
+
+.toast-demo {
+  padding: 15px;
+  background-color: $gray-200;
+
+  .toast-container {
+    position: relative;
+  }
+
+  .toast {
+    display: block;
+  }
+}
+
+.wizard-demo {
+  font-size: 13px;
+
+  &.wizard>.content>.title {
+    font-size: 15px;
+  }
+}
+
+.cc-group {
+  display: flex;
+  font-size: 24px;
+  color: $gray-500;
+}
+
+.media-animate {
+  display: flex;
+
+  .nav {
+    flex-direction: column;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: $secondary;
+    position: relative;
+    background-color: rgba($gray-200, .6);
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 150px;
+
+    +.nav-link {
+      margin-top: 1px;
+    }
+
+    &.active {
+      background-color: $gray-300;
+      color: $body-color;
+    }
+  }
+
+  .media-body {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .animate-title {
+    font-size: 36px;
+    font-weight: 600;
+    font-family: $ff-secondary;
+    display: inline-block;
+    line-height: 1;
+    color: $dark;
+    letter-spacing: -1px;
+    text-shadow: 3px 3px 2px $gray-400;
+  }
+}
+
+.demo-background {
+  display: flex;
+
+  >div+div {
+    margin-left: 1px;
+  }
+}
+
+.demo-border,
+.demo-bordered {
+  display: flex;
+
+  >span {
+    background-color: #fff;
+    display: block;
+    flex: 1;
+    height: 50px;
+
+    +span {
+      margin-left: 10px;
+    }
+  }
+}
+
+.demo-bordered>span {
+  border: 1px solid $border-color;
+}
+
+.demo-text {
+
+  p,
+  a {
+    display: block;
+    padding: 8px 10px;
+    margin-bottom: 0;
+    background-color: #fff;
+
+    +p,
+    +a {
+      margin-top: 1px;
+    }
+  }
+}
+
+.demo-flex {
+  .border {
+    padding: 2px;
+  }
+
+  .d-flex>div+div {
+    margin-left: 2px;
+  }
+
+  .flex-row-reverse>div+div {
+    margin-left: 0;
+    margin-right: 2px;
+  }
+}
+
+.table-spacing {
+  color: $secondary;
+
+  strong {
+    font-weight: 600;
+  }
+
+  td:not(:first-child) code {
+    font-family: $font-family-base;
+    font-size: $font-size-base;
+  }
+}
+
+.icon-group {
+  margin-top: 20px;
+  background-color: #fff;
+  border: 1px solid $border-color;
+  padding: 30px 20px;
+
+  .col {
+    text-align: center;
+  }
+
+  i {
+    font-size: 24px;
+    line-height: 1;
+    color: $gray-700;
+  }
+
+  svg {
+    color: $gray-700;
+  }
+}
+
+.main-footer-docs {
+  margin-top: 0;
+  padding: 20px;
+  border-top-width: 0;
+  position: relative;
+
+  @include media-breakpoint-up(lg) {
+    margin-left: $sidebar-width;
+    padding: 20px 40px 40px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    right: 20px;
+    border-top: 1px solid rgba($border-color, .6);
+
+    @include media-breakpoint-up(lg) {
+      left: 40px;
+      right: 40px;
+    }
+  }
+}
+
+.leaflet-wrapper {
+  .leaflet-container {
+    height: 250px;
+  }
+}

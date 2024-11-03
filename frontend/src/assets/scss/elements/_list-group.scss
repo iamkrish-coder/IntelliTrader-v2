@@ -1,0 +1,19 @@
+.list-group-item {
+  border-color: $gray-300;
+}
+
+.star-group {
+  display: flex;
+  grid-gap: 2px;
+  color: $primary;
+  font-size: 16px;
+  line-height: 0.7;
+
+  span:last-child {
+    color: $secondary;
+    font-size: $font-size-sm;
+    font-family: $font-family-sans-serif;
+    padding-left: 5px;
+    line-height: 0.9;
+  }
+}

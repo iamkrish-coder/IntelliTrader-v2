@@ -1,0 +1,214 @@
+.app-task {
+  .sidebar-right {
+    @include media-breakpoint-only(xl) { width: 270px; }
+  }
+
+  .react-datepicker {
+    width: 100%;
+    border-width: 0;
+    border-radius: 6px;
+    @include shadow-dreamy($gray-400);
+  }
+
+  .react-datepicker__header {
+    border-bottom-width: 0;
+    background-color: inherit;
+  }
+
+  .react-datepicker__week {
+    display: flex;
+  }
+
+  .react-datepicker__month-container {
+    float: none;
+  }
+
+  .react-datepicker__current-month {
+    padding: 5px 0;
+  }
+
+  .react-datepicker__navigation-icon {
+    top: 4px;
+  }
+
+  .react-datepicker__day, 
+  .react-datepicker__day:hover, 
+  .react-datepicker__day:active {
+    width: auto;
+    flex: 1;
+  }
+
+  .react-datepicker__day-names {
+    display: flex;
+  }
+
+  .react-datepicker__day-name {
+    width: auto;
+    flex: 1;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 11px;
+  }
+}
+
+.task-label {
+  display: block;
+  margin-bottom: 0;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  font-family: $ff-secondary;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.dropdown-task {
+  .dropdown-link {
+    font-size: $font-size-xs;
+    display: flex;
+    align-items: center;
+    color: $secondary;
+
+    &:hover { color: $primary; }
+
+    i {
+      font-size: 16px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+  }
+}
+
+.card-task {
+  border-width: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  @include shadow-dreamy($gray-400);
+  @include transition(all 0.25s);
+
+  &:hover { border-color: $gray-400; }
+
+  + .card-task { margin-top: 12px; }
+
+  .badge { font-size: 10px; }
+
+  .card-date {
+    font-size: $font-size-xs;
+    color: $secondary;
+    white-space: nowrap;
+    align-self: flex-start;
+  }
+
+  p { color: $secondary; }
+
+  .card-title {
+    margin-bottom: 0;
+    font-weight: $font-weight-semibold;
+    color: $dark;
+  }
+
+  .progress { height: 4px; }
+
+  .card-footer {
+    padding-top: 0;
+    border-top-width: 0;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .avatar {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nav-link {
+      color: $gray-500;
+      display: flex;
+      align-items: center;
+      font-size: $font-size-xs;
+      font-family: $font-family-sans-serif;
+      padding: 0;
+      grid-gap: 2px;
+
+      &:hover { color: $primary; }
+
+      i { font-size: 14px; }
+
+      + .nav-link { margin-left: 10px; }
+    }
+  }
+}
+
+.task-calendar {
+  .ui-datepicker-inline {
+    max-width: none;
+    border-width: 0;
+    border-radius: 6px;
+    @include shadow-dreamy($gray-400);
+  }
+
+  .ui-datepicker {
+    .ui-datepicker-calendar {
+      width: 100%;
+
+      th {
+        @include media-breakpoint-only(xl) {
+          padding-left: 12px;
+          padding-right: 4px;
+          text-align: right;
+        }
+      }
+
+      td {
+        border-color: $gray-300;
+        &:last-child { border-right: 1px solid $gray-300; }
+      }
+
+      td a {
+        font-family: $font-family-sans-serif;
+        font-size: $font-size-sm;
+
+        @include media-breakpoint-only(xl) {
+          padding-left: 0;
+          padding-right: 6px;
+        }
+
+        &:hover {
+          background-color: $gray-200;
+        }
+      }
+
+      .ui-datepicker-today a {
+        background-color: transparent;
+        color: $primary;
+
+        &:hover {
+          background-color: $gray-200;
+          color: $primary;
+        }
+      }
+    }
+  }
+}
+
+.task-category {
+  color: #fff;
+  border-radius: 6px;
+
+  .category-percent {
+    font-weight: $font-weight-medium;
+    font-family: $ff-numerals;
+
+    span {
+      font-size: 70%;
+      font-weight: 400;
+    }
+  }
+
+  > span {
+    display: block;
+    font-size: $font-size-sm;
+    opacity: .65;
+  }
+}

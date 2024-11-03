@@ -1,0 +1,287 @@
+[data-skin="dark"] {
+  ////////// Select2 //////////
+  .select2-container--default {
+    .select2-results__option--selected { background-color: $dark-primary; }
+
+    .select2-selection--single {
+      background-color: $dark-highlight;
+      border-color: $border-color-dark;
+
+      .select2-selection__rendered {
+        color: inherit;
+      }
+
+      .select2-selection__placeholder {
+        color: rgba(#fff, .3);
+      }
+
+      .select2-selection__clear {
+        color: rgba(#fff, .5);
+
+        &:hover { color: rgba(#fff, .75); }
+      }
+    }
+
+    .select2-selection--multiple {
+      background-color: $dark-highlight;
+      border-color: $border-color-dark;
+    }
+
+    &.select2-container--focus .select2-selection--multiple {
+      border-color: lighten($border-color-dark, 3%);
+    }
+
+    .select2-search--dropdown .select2-search__field {
+      border-color: transparent;
+      background-color: $dark-primary;
+      outline: none;
+
+      &::placeholder { color: rgba(#fff, .3); }
+    }
+
+    .select2-results__option--highlighted[aria-selected] {
+      background-color: $primary;
+    }
+
+    .select2-search--inline .select2-search__field {
+      &::placeholder {
+        color: rgba(#fff, .3);
+      }
+    }
+
+    &.select2-container--disabled {
+      .select2-selection--single { background-color: $dark-primary; }
+    }
+  }
+
+  .select2-container--open {
+    .select2-selection--single,
+    .select2-selection--multiple {
+      background-color: $dark-highlight;
+      border-color: $border-color-dark;
+    }
+  }
+
+  .select2-dropdown {
+    border-color: transparent;
+    background-color: lighten($dark-highlight, 5%);
+  }
+
+  ////////// Bootstrap Tagsinput //////////
+  .bootstrap-tagsinput {
+    background-color: $dark-highlight;
+    border-color: lighten($border-color-dark, 3%);
+  }
+
+  ////////// RangeSlider //////////
+  .irs--flat {
+    .irs-min,
+    .irs-max {
+      color: inherit;
+      background-color: lighten($dark-highlight, 5%);
+    }
+
+    .irs-line {
+      background-color: $border-color-dark;
+    }
+
+    .irs-grid-text { color: inherit; }
+    .irs-grid-pol { background-color: $border-color-dark; }
+  }
+
+  // round skin
+  .irs--round {
+    .irs-line { background-color: $border-color-dark; }
+
+    .irs-min,
+    .irs-max {
+      background-color: $dark-highlight;
+      color: inherit;
+    }
+
+    .irs-grid-text { color: inherit; }
+    .irs-grid-pol { background-color: $border-color-dark; }
+  }
+
+  // square skin
+  .irs--square {
+    .irs-line,
+    .irs-grid-pol { background-color: $border-color-dark; }
+
+    .irs-min,
+    .irs-max {
+      background-color: lighten($dark-highlight, 5%);
+      color: $secondary;
+    }
+
+    .irs-grid-text {
+      color: $secondary;
+    }
+
+    .irs-from,
+    .irs-to {
+      background-color: $primary;
+    }
+
+    .irs-handle { border-color: $primary; }
+    .irs-bar { background-color: $primary; }
+  }
+
+  ////////// Datepicker //////////
+  .ui-datepicker {
+    background-color: $dark-highlight;
+    border-color: lighten($border-color-dark, 3%);
+
+    .ui-datepicker-header {
+      .ui-datepicker-prev,
+      .ui-datepicker-next {
+        color: rgba(#fff, .6);
+      }
+    }
+
+    .ui-datepicker-title { color: #fff; }
+
+    .ui-datepicker-calendar {
+      th {
+        color: rgba(#fff, .6);
+        font-weight: 400;
+      }
+
+      td {
+        background-color: transparent;
+        border-color: $border-color-dark;
+
+        a {
+          color: rgba(#fff, .6);
+
+          &:hover,
+          &:focus {
+            background-color: lighten($dark-highlight, 3%);
+            color: #fff;
+          }
+        }
+
+        &.ui-datepicker-other-month .ui-state-default {
+          color: rgba(#fff, .3);
+        }
+      }
+    }
+
+    select.ui-datepicker-month,
+    select.ui-datepicker-year {
+      background-color: transparent;
+      border-color: $border-color-dark;
+      color: rgba(#fff, .65);
+    }
+  }
+
+  ////////// Colorpicker //////////
+  .sp-replacer {
+    background-color: $dark-primary;
+    border-color: $border-color-dark;
+
+    &:hover,
+    &:focus {
+      border-color: lighten($border-color-dark, 5%);
+    }
+  }
+
+  .sp-dd { color: rgba(#fff, .3); }
+
+  .sp-container {
+    background-color: lighten($dark-highlight, 3%);
+    border-color: lighten($border-color-dark, 6%);
+    box-shadow: none;
+  }
+
+  ////////// Form Wizard //////////
+  .wizard {
+    background-color: $dark-highlight;
+    border-color: lighten($border-color-dark, 3%);
+
+    > .content {
+      border-top-color: $border-color-dark;
+      border-bottom-color: $border-color-dark;
+
+      > .title { color: #fff; }
+    }
+
+    > .actions .disabled a,
+    > .actions .disabled a:hover,
+    > .actions .disabled a:focus {
+      background-color: lighten($dark-highlight, 5%);
+      color: rgba(#fff, .3);
+    }
+
+    > .steps .disabled a {
+      .number { border-color: lighten($border-color-dark, 5%); }
+
+      &:hover,
+      &:focus {
+        .number { border-color: lighten($border-color-dark, 10%); }
+      }
+    }
+
+    &.vertical {
+      > .steps ul li + li::before { border-color: $border-color-dark; }
+
+      > .content,
+      > .actions {
+        @include media-breakpoint-up(sm) {
+          border-left-color: $border-color-dark;
+        }
+      }
+
+      > .actions {
+        @include media-breakpoint-up(md) { border-top-color: $border-color-dark; }
+      }
+    }
+  }
+
+  .wizard-tab {
+    background-color: transparent;
+
+    > .actions { border-top-color: $border-color-dark; }
+
+    > .steps .disabled a {
+      background-color: $border-color-dark;
+    }
+  }
+
+  ////////// Quill Editor //////////
+  .ql-snow.ql-toolbar {
+    background-color: $dark-highlight;
+    border-color: $border-color-dark;
+
+    button {
+      &:hover,
+      &:focus { background-color: $border-color-dark; }
+
+      &.ql-active { background-color: $border-color-dark; }
+    }
+
+    .ql-picker { color: rgba(#fff, .6); }
+    .ql-stroke, { stroke: rgba(#fff, .6); }
+    .ql-fill { fill: rgba(#fff, .6); }
+
+    .ql-picker.ql-expanded .ql-picker-label {
+      background-color: $dark-highlight;
+      border-color: $border-color-dark;
+
+      &::before { color: rgba(#fff, .6); }
+    }
+
+    .ql-font.ql-picker {
+      &:hover,
+      &:focus {
+        background-color: $dark-highlight;
+      }
+    }
+  }
+
+  .ql-snow.ql-container { border-color: lighten($border-color-dark, 3%); }
+  .ql-editor {
+    background-color: $dark-primary;
+    color: inherit;
+  }
+}

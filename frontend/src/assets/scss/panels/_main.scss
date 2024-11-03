@@ -1,0 +1,143 @@
+
+
+.main {
+  min-height: 100vh;
+  margin-top: $height-header;
+  @include transition(all 0.25s);
+
+  @include media-breakpoint-up(lg) {
+    margin-left: $sidebar-width - 10px;
+    margin-top: 0;
+  }
+
+  @include media-breakpoint-up(xxl) { margin-left: $sidebar-width; }
+}
+
+.main-app {
+  margin-top: $height-header;
+}
+
+.main-title-label {
+  font-size: 11px;
+  font-family: $ff-secondary;
+  text-transform: uppercase;
+  color: $primary;
+  letter-spacing: .5px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.main-title {
+  text-indent: -1px;
+  margin-bottom: 30px;
+  color: $dark;
+  font-size: 20px;
+  letter-spacing: -.2px;
+
+  @include media-breakpoint-up(lg) { font-size: 21px; }
+}
+
+.main-title-text {
+  font-size: 16px;
+  color: $gray-700;
+}
+
+.main-separator {
+  margin: 40px 0;
+  background-color: $gray-300;
+  opacity: .12;
+}
+
+.main-subtitle {
+  color: $dark;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.main-mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $height-header;
+  padding: 0 23px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid transparent;
+  z-index: 800;
+  @include transition(all 0.3s);
+
+  @include media-breakpoint-up(lg) { display: none; }
+
+  &.scroll {
+    @include shadow-diffuse($gray-300);
+  }
+
+  .menu-link {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: $secondary;
+  }
+}
+
+.main-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 900;
+  background-color: rgba($gray-900, .6);
+  opacity: 0;
+  visibility: hidden;
+  @include transition(all 0.25s);
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: $font-weight-semibold;
+  color: $dark;
+}
+
+.section-title-sm { font-size: 14px; }
+
+.main-label-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: $font-size-sm;
+
+  label {
+    display: block;
+    margin-bottom: 0;
+    font-weight: $font-weight-medium;
+  }
+}
+
+.main-footer {
+  margin-top: 60px;
+  border-top: 1px solid rgba($border-color, .6);
+  padding-top: 20px;
+  font-size: $font-size-sm;
+  color: $secondary;
+
+  @include media-breakpoint-up(sm) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  span {
+    display: block;
+
+    + span {
+      margin-top: 5px;
+      @include media-breakpoint-up(sm) { margin-top: 0; }
+    }
+  }
+}

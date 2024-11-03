@@ -1,0 +1,89 @@
+.gridjs-head { margin-bottom: 10px; }
+.gridjs-footer { margin-top: 10px; }
+
+.gridjs-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gridjs-summary {
+  white-space: nowrap;
+  margin-right: 20px;
+}
+
+.gridjs-pages {
+  display: flex;
+}
+
+.gridjs-pages button {
+  @extend .btn;
+  border: 1px solid $gray-400;
+
+  + button { margin-left: 5px; }
+
+  &.gridjs-currentPage {
+    background-color: $primary;
+    border-color: transparent;
+    color: #fff;
+  }
+}
+
+.gridjs-input {
+  @extend .form-control;
+}
+
+.gridjs-th { position: relative; }
+
+.gridjs-th-sort {
+  .gridjs-th-content { float: left; }
+
+  .gridjs-sort {
+    position: relative;
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    width: 24px;
+    height: 24px;
+    float: right;
+
+    &::before,
+    &::after {
+      font-family: 'remixicon';
+      font-size: 14px;
+      position: absolute;
+      color: $gray-500;
+    }
+
+    &::before {
+      content: '\EA77';
+      top: -1px;
+    }
+
+    &::after {
+      content: '\EA4D';
+      bottom: -1px;
+    }
+  }
+
+  .gridjs-sort-asc {
+    &::before { top: 1px; }
+    &::after { display: none; }
+  }
+
+  .gridjs-sort-desc {
+    &::before { display: none; }
+    &::after { bottom: 1px; }
+  }
+}
+
+.gridjs-resizable {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 3px;
+  cursor: ew-resize;
+
+  &:hover { background-color: $gray-200; }
+}

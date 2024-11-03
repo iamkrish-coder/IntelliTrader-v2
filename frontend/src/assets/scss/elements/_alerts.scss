@@ -1,0 +1,57 @@
+.alert {
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  > i {
+    font-size: 24px;
+    line-height: .7;
+    margin-right: 10px;
+  }
+}
+
+.alert-link { font-weight: $font-weight-semibold; }
+
+.alert-outline {
+  background-color: transparent;
+  border-width: 1.5px;
+
+  &.alert-primary { @include alert-outline($primary, $primary); }
+  &.alert-success { @include alert-outline($success, $success); }
+  &.alert-warning { @include alert-outline($warning, $warning); }
+  &.alert-danger { @include alert-outline($danger, $danger); }
+  &.alert-info { @include alert-outline($info, $info); }
+
+  &.alert-secondary {
+    border-color: rgba($secondary, .6);
+    color: $secondary;
+  }
+
+  &.alert-light {
+    border: 1.5px solid $gray-400;
+    color: $gray-600;
+  }
+
+  &.alert-dark { border-color: $secondary; }
+}
+
+.alert-solid {
+  border-width: 0;
+  color: #fff;
+
+  &.alert-primary { background-color: $primary; }
+  &.alert-secondary { background-color: $secondary; }
+  &.alert-success { background-color: $success; }
+  &.alert-warning { background-color: $warning; }
+  &.alert-danger { background-color: $danger; }
+  &.alert-info { background-color: $info; }
+  &.alert-dark { background-color: $dark; }
+
+  &.alert-light {
+    background-color: #fff;
+    color: $secondary;
+  }
+}
+
+.alert-dismissible .btn-close {
+  padding: 15px;
+}

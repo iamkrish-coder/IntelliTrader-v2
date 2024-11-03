@@ -1,0 +1,32 @@
+{
+    "strategies": {
+        "table_key": "strategies",
+        "partition_key": "strategy_id",
+        "sort_key": ""
+    },
+    "topics": {
+        "table_key": "topics",
+        "partition_key": "topic_arn",
+        "sort_key": ""
+    },
+    "queues": {
+        "table_key": "queues",
+        "partition_key": "queue_arn",
+        "sort_key": ""
+    },
+    "signals": {
+        "table_key": "signals",
+        "partition_key": "signal_id",
+        "sort_key": ""
+    },
+    "trades": {
+        "table_key": "trades",
+        "partition_key": "trade_id",
+        "sort_key": ""
+    },
+    "users": {
+        "table_key": "users",
+        "partition_key": "user_email",
+        "sort_key": ""
+    }
+}

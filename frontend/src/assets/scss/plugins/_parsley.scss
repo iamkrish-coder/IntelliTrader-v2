@@ -1,0 +1,49 @@
+
+input.parsley-error,
+textarea.parsley-error {
+  &,
+  &:focus {
+    box-shadow: none !important;
+    border-color: $red;
+  }
+}
+
+input.parsley-success,
+textarea.parsley-success {
+  &,
+  &:focus {
+    box-shadow: none !important;
+    border-color: $green;
+  }
+}
+
+.parsley-checkbox {
+  &.parsley-error,
+  &.parsley-success {
+    display: inline-block;
+    padding: 10px;
+    @include border-radius();
+  }
+
+  &.parsley-error { border: 1px solid $red; }
+  &.parsley-success { border: 1px solid $green; }
+}
+
+.form-select {
+  &.parsley-error,
+  &.parsley-success { box-shadow: none !important; }
+
+  &.parsley-error { border-color: $red; }
+  &.parsley-success { border-color: $green; }
+}
+
+
+.parsley-errors-list {
+  color: $red;
+  list-style: none;
+  font-size: 12px;
+  padding: 0;
+  margin-bottom: 0;
+
+  li { margin: 5px 0 0; }
+}

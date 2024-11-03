@@ -1,0 +1,19 @@
+.offcanvas-start { border-right-width: 0; }
+.offcanvas-end { border-left-width: 0; }
+.offcanvas-top { border-bottom-width: 0; }
+.offcanvas-bottom { border-top-width: 0; }
+
+.offcanvas-header {
+  .close {
+    color: $secondary;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 0;
+    opacity: .6;
+
+    &:hover,
+    &:focus { opacity: 1; }
+  }
+}
+
+.offcanvas-backdrop { background-color: darken($dark, 8%); }

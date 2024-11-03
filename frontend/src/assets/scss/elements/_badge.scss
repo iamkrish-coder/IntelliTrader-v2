@@ -1,0 +1,21 @@
+.badge {
+  font-weight: 400;
+  font-size: 11px;
+  font-family: $font-family-sans-serif;
+  border-radius: 2px;
+
+  &:hover,
+  &:focus { color: #fff; }
+
+  &.bg-warning,
+  &.bg-light { color: $dark; }
+}
+
+.badge-pill { border-radius: 10px; }
+
+.badge-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+}

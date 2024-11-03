@@ -1,6 +1,0 @@
-This favicon was generated using the following font:
-
-- Font Title: Atomic Age
-- Font Author: Copyright (c) 2013 - 2016, Sorkin Type Co (www.sorkintype.com) with Reserved Font Name 'Atomic Age'.
-- Font Source: http://fonts.gstatic.com/s/atomicage/v27/f0Xz0eug6sdmRFkYZZGL58Ht9a8GYeA.ttf
-- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

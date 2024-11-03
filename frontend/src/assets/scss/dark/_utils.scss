@@ -1,0 +1,20 @@
+[data-skin="dark"] {
+  .text-dark { color: #fff !important; }
+  .text-secondary { color: rgba(#fff, .65) !important; }
+
+  .border { border-color: lighten($border-color-dark, 5%) !important; }
+  .border-top { border-top-color: lighten($border-color-dark, 5%) !important; }
+  .border-bottom { border-bottom-color: lighten($border-color-dark, 5%) !important; }
+  .border-start { border-left-color: lighten($border-color-dark, 5%) !important; }
+  .border-end { border-right-color: lighten($border-color-dark, 5%) !important; }
+
+  .border-primary { border-color: $primary !important; }
+  .border-secondary { border-color: $secondary !important; }
+  .border-success { border-color: $success !important; }
+  .border-warning { border-color: $warning !important; }
+  .border-danger { border-color: $danger !important; }
+  .border-info { border-color: $info !important; }
+  .border-light { border-color: $light !important; }
+  .border-dark { border-color: $dark !important; }
+  .border-white { border-color: #fff !important; }
+}

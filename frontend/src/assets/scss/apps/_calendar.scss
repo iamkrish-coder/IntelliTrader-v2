@@ -1,0 +1,439 @@
+.app-calendar {
+  .react-datepicker {
+    width: 100%;
+    border-width: 0;
+    border-radius: 6px;
+    @include shadow-dreamy($gray-400);
+  }
+
+  .react-datepicker__header {
+    border-bottom-width: 0;
+    background-color: inherit;
+  }
+
+  .react-datepicker__week {
+    display: flex;
+  }
+
+  .react-datepicker__month-container {
+    float: none;
+  }
+
+  .react-datepicker__current-month {
+    padding: 5px 0;
+  }
+
+  .react-datepicker__navigation-icon {
+    top: 4px;
+  }
+
+  .react-datepicker__day, 
+  .react-datepicker__day:hover, 
+  .react-datepicker__day:active {
+    width: auto;
+    flex: 1;
+  }
+
+  .react-datepicker__day-names {
+    display: flex;
+  }
+
+  .react-datepicker__day-name {
+    width: auto;
+    flex: 1;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 11px;
+  }
+}
+
+.main-calendar {
+  min-height: inherit;
+  height: calc(100vh - #{$height-header});
+  margin-top: $height-header;
+  position: relative;
+
+  &.show {
+    @include media-breakpoint-down(xl) {
+      .calendar-sidebar { left: 0; }
+      .calendar-body {
+        transform: translateX(300px);
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.calendar-sidebar {
+  position: absolute;
+  top: 0;
+  left: -300px;
+  bottom: 0;
+  width: 300px;
+  @include transition(all 0.25s);
+
+  @include media-breakpoint-up(xl) {
+    left: 0;
+  }
+
+  .sidebar-header {
+    height: 86px;
+    border-bottom-width: 0;
+  }
+
+  .form-search { width: 100%; }
+
+  .sidebar-body {
+    height: 100%;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+
+    .mutual-badge ul .avatar {
+      width: 20px;
+      height: 20px;
+    }
+
+    .event-body h6 { margin-bottom: 5px; }
+    
+    .event-body h6 a {
+      color: $dark;
+      &:hover { color: $primary; }
+    }
+  }
+
+  .ui-datepicker .ui-datepicker-calendar th {
+    padding-left: 6px;
+    padding-right: 6px;
+
+    @include media-breakpoint-up(xl) {
+      padding-left: 9px;
+      padding-right: 9px;
+    }
+  }
+
+  .ui-datepicker .ui-datepicker-calendar td a {
+    padding-left: 0;
+    @include media-breakpoint-up(xl) { padding-left: 6px; }
+  }
+}
+
+.nav-calendar {
+  flex-direction: column;
+
+  .nav-link {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    color: $body-color;
+
+    + .nav-link { margin-top: 10px; }
+
+    &.calendar span {
+      background-color: $primary;
+      box-shadow: 0 0 0 2px $primary;
+    }
+
+    &.birthday span {
+      background-color: $success;
+      box-shadow: 0 0 0 2px $success;
+    }
+
+    &.holiday span {
+      background-color: $danger;
+      box-shadow: 0 0 0 2px $danger;
+    }
+
+    &.discover span {
+      background-color: $info;
+      box-shadow: 0 0 0 2px $info;
+    }
+
+    &.meetup span {
+      background-color: $warning;
+      box-shadow: 0 0 0 2px $warning;
+    }
+
+    &.other span {
+      background-color: $purple;
+      box-shadow: 0 0 0 2px $purple;
+    }
+  }
+
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    border: 2px solid #fff;
+    margin-right: 10px;
+  }
+}
+
+.calendar-body {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  @include transition(all 0.25s);
+
+  @include media-breakpoint-up(xl) {
+    left: 300px;
+    padding-left: 0;
+  }
+
+  .fc {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .fc-toolbar-chunk { display: flex; }
+
+  .fc-header-toolbar {
+    display: block;
+
+    @include media-breakpoint-up(md) {
+      display: flex;
+    }
+
+    .fc-toolbar-chunk:first-child {
+      justify-content: space-between;
+      margin-bottom: 15px;
+
+      @include media-breakpoint-up(md) { margin-bottom: 0; }
+    }
+
+    .fc-toolbar-chunk:nth-child(2) {
+      float: left;
+      margin-top: 7px;
+
+      @include media-breakpoint-up(sm) { margin-top: 5px; }
+
+      @include media-breakpoint-up(md) {
+        float: none;
+        margin-top: 0;
+      }
+    }
+
+    .fc-toolbar-chunk:last-child {
+      float: right;
+      @include media-breakpoint-up(md) { float: none; }
+    }
+  }
+
+  .fc-button {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    height: $height-base;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  // calendar left menu
+  .fc-custom1-button {
+    padding-left: 6.5px;
+    padding-right: 6.5px;
+
+    @include media-breakpoint-up(xl) {
+      display: none;
+
+      + .fc-button-group { margin-left: 0; }
+    }
+
+    .fc-icon::before {
+      content: '\EA60';
+      font-family: 'remixicon';
+    }
+  }
+
+  .fc-prev-button,
+  .fc-next-button {
+    width: $height-base;
+    height: $height-base;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .fc-icon {
+    line-height: 1;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .fc-button-primary {
+    background-color: #fff;
+    color: $secondary;
+    border-color: $border-color;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: #fff;
+      color: $secondary;
+      border-color: darken($border-color, 5%);
+      box-shadow: none;
+    }
+
+    &:disabled {
+      background-color: #fff;
+      color: $secondary;
+      border-color: $border-color;
+    }
+
+    &:not(:disabled).fc-button-active,
+    &:not(:disabled):active {
+      background-color: rgba($primary, .1);
+      color: $primary;
+      border-color: lighten($primary, 10%);
+      position: relative;
+      z-index: 5;
+    }
+
+    &:not(:disabled).fc-button-active:focus,
+    &:not(:disabled):active:focus {
+      box-shadow: none;
+    }
+  }
+
+  .fc-toolbar-title {
+    font-weight: 600;
+    font-size: 18px;
+    color: $dark;
+    letter-spacing: -.2px;
+    max-width: 140px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include media-breakpoint-up(sm) {
+      font-size: 22px;
+      max-width: none;
+      overflow: inherit;
+      text-overflow: inherit;
+    }
+  }
+
+  .fc-scrollgrid {
+    border-color: $border-color;
+    background-color: #fff;
+  }
+
+
+  .fc-col-header th {
+    border-color: $border-color;
+    font-size: 12px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    a {
+      color: $gray-700;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  }
+
+  .fc-daygrid-day { border-color: $border-color; }
+
+  .fc-daygrid-day-number {
+    font-family: $font-family-sans-serif;
+    color: $body-color;
+    padding: 5px 8px;
+  }
+
+  .fc-h-event .fc-event-main {
+    color: $body-color;
+  }
+
+  .fc-daygrid-block-event .fc-event-time,
+  .fc-daygrid-block-event .fc-event-title {
+    padding-left: 5px;
+  }
+
+  .fc-daygrid-dot-event .fc-event-title {
+    color: $body-color;
+    font-weight: $font-weight-medium;
+  }
+
+  .fc-daygrid-event {
+    color: $secondary;
+    border-radius: 2px;
+
+    &:hover { background-color: $gray-300; }
+  }
+
+  .fc-daygrid-day.fc-day-today {
+    background-color: rgba($primary, .08);
+
+    .fc-daygrid-day-number { color: $primary; }
+  }
+
+  .fc-event-title { 
+    cursor: pointer; 
+    color: $dark;
+  }
+
+  .fc-timegrid-event .fc-event-time {
+    color: $gray-700;
+    font-family: $font-family-sans-serif;
+  }
+}
+
+.modal-event {
+  .modal-header {
+    padding: 15px 20px 0;
+    border-bottom-width: 0;
+
+    .btn-close {
+      transform: scale(0.9);
+
+      &:focus { box-shadow: none; }
+    }
+  }
+
+  .modal-title {
+    font-size: 18px;
+    font-weight: $font-weight-semibold;
+    color: $dark;
+  }
+
+  .modal-body {
+    padding: 20px;
+    position: relative;
+  }
+
+  .modal-footer {
+    padding: 0 20px 20px;
+    border-top-width: 0;
+  }
+
+  .form-label {
+    color: $secondary;
+    margin-bottom: 5px;
+    font-size: 13px;
+  }
+
+  .date-item {
+    display: flex;
+    align-items: center;
+
+    i {
+      font-size: 18px;
+      line-height: 1;
+      margin-right: 5px;
+      opacity: .75;
+    }
+
+    + .date-item { margin-top: 10px; }
+
+    span {
+      font-weight: $font-weight-medium;
+      color: $dark;
+    }
+  }
+
+  p { color: $dark; }
+}

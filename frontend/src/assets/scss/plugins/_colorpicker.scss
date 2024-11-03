@@ -1,0 +1,52 @@
+
+.sp-replacer {
+  border-color: $gray-400;
+  background-color: #fff;
+
+  &:hover,
+  &.sp-active { border-color: $gray-500; }
+}
+
+.sp-container {
+  background-color: #fff;
+  border-color: $gray-400;
+  margin-top: 2px;
+  @include shadow-sharp($gray-400);
+
+  button,
+  button:hover,
+  button:focus,
+  button:active,
+  a {
+    display: inline-block;
+    background-color: $secondary;
+    background-image: none;
+    border: 0;
+    font-family: $font-family-sans-serif;
+    font-size: 13px;
+    text-shadow: none;
+    text-transform: capitalize;
+    color: #fff;
+    padding: 8px 10px;
+    line-height: 1;
+    border-radius: 3px;
+  }
+
+  button:hover,
+  button:focus {
+    background-color: darken($secondary, 5%);
+  }
+
+  .sp-cancel {
+    background-color: $gray-200;
+    color: $secondary !important;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      background-color: $gray-300;
+    }
+  }
+}
+
+.sp-picker-container { border-left-width: 0; }

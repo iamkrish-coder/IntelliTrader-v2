@@ -1,0 +1,9 @@
+.modal-content {
+  border-width: 0;
+}
+
+.modal-backdrop {
+  background-color: darken($gray-900, 5%);
+
+  &.show { opacity: .8; }
+}

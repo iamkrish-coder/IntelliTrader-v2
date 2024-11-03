@@ -1,0 +1,113 @@
+/// **IntelliTrader Styling**
+///
+/// This Sass file houses the Custom styles and overrides for the IntelliTrader project.
+///
+/// **Author:** Srikrishnan
+/// **Date:** October 13, 2024
+/// **Version:** 1.0.0
+///
+/// **Description:**
+/// - Imports necessary fonts and Bootstrap styles.
+/// - Defines project-specific variables and mixins.
+/// - Includes styles for individual pages.
+///
+/// **Usage:**
+/// - Import this file into your main HTML file or other relevant Sass files.
+
+// Fonts
+/* Global Styles  */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+// Variables & Mixins
+@import "variables";
+@import "mixins";
+
+// Bootstrap Framework
+@import "bootstrap/scss/bootstrap";
+
+// Elements
+@import "elements/accordion";
+@import "elements/alerts";
+@import "elements/avatars";
+@import "elements/badge";
+@import "elements/breadcrumbs";
+@import "elements/buttons";
+@import "elements/card";
+@import "elements/dropdown";
+@import "elements/images";
+@import "elements/list-group";
+@import "elements/markers";
+@import "elements/modal";
+@import "elements/nav";
+@import "elements/offcanvas";
+@import "elements/pagination";
+@import "elements/popovers";
+@import "elements/progress";
+@import "elements/toasts";
+@import "elements/tables";
+@import "elements/forms";
+
+// Panels
+@import "panels/header";
+@import "panels/sidebar";
+@import "panels/sidebar-prime";
+@import "panels/sidebar-dark";
+@import "panels/main";
+
+// Dashboard
+@import "pages/dashboard/sales";
+@import "pages/dashboard/analytics";
+@import "pages/dashboard/crypto";
+@import "pages/dashboard/finance";
+@import "pages/dashboard/helpdesk";
+@import "pages/dashboard/events";
+@import "pages/dashboard/storage";
+@import "pages/dashboard/product";
+
+// Apps
+@import "apps/app";
+@import "apps/file-manager";
+@import "apps/email";
+@import "apps/chat";
+@import "apps/contact";
+@import "apps/calendar";
+@import "apps/tasks";
+@import "apps/music";
+@import "apps/video";
+
+// Pages
+@import "pages/authentication/auth";
+@import "pages/home";
+@import "pages/user";
+@import "pages/error";
+@import "pages/other";
+@import "pages/docs";
+@import "pages/landing";
+@import "pages/shared";
+
+// Plugins
+@import "plugins/scrollbar";
+@import "plugins/gridjs";
+@import "plugins/select2";
+@import "plugins/tagsinput";
+@import "plugins/rangeslider";
+@import "plugins/jqueryui";
+@import "plugins/colorpicker";
+@import "plugins/wizards";
+@import "plugins/parsley";
+@import "plugins/prismjs";
+@import "plugins/quill";
+@import "plugins/leaflet";
+@import "plugins/vmap";
+@import "plugins/react-datepicker";
+@import "plugins/attribution";
+
+// Utilities
+@import "utils";
+
+// Skin
+@import "dark";

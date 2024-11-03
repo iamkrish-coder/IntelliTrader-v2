@@ -1,5 +1,293 @@
 # Changelog
 
+## [8.5.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.4.0...v8.5.0) (2024-11-02)
+
+
+### Features
+
+* Password Reset Feature added ([d7fd76c](https://github.com/iamkrish-coder/IntelliTrader/commit/d7fd76cdeee96fa976b33e580d5354794d49bd3a))
+
+## [8.4.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.3.1...v8.4.0) (2024-10-27)
+
+
+### Features
+
+* Added login, registration and forgot password feature with improved response and exception management ([068ded2](https://github.com/iamkrish-coder/IntelliTrader/commit/068ded22d2a423aaa5caf267da85525aa3e7be83))
+
+## [8.3.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.3.0...v8.3.1) (2024-10-18)
+
+
+### Bug Fixes
+
+* updated login and registration pages with react form validations ([ace8a5b](https://github.com/iamkrish-coder/IntelliTrader/commit/ace8a5b8e9c41e8fc15699d69f3bfc2574b86b75))
+
+## [8.3.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.2.0...v8.3.0) (2024-10-17)
+
+
+### Features
+
+* Added a landing page, login and signup page UI ([d05d9bb](https://github.com/iamkrish-coder/IntelliTrader/commit/d05d9bb5b1f65e39908f84b42ef20edd82e26c53))
+* Added Home Page, Login Page, Signup Page, Page Not Found Page ([fc55872](https://github.com/iamkrish-coder/IntelliTrader/commit/fc558728878a9efbd609f45b59a2e911ef98c14b))
+
+
+### Bug Fixes
+
+* improved landing page ([004d800](https://github.com/iamkrish-coder/IntelliTrader/commit/004d800a39069880879bc9ec679a33c306582bee))
+
+## [8.2.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.1.0...v8.2.0) (2024-10-13)
+
+
+### Features
+
+* Added frontend assets from scratch. ([e5a6952](https://github.com/iamkrish-coder/IntelliTrader/commit/e5a6952d8aad0c1d1e007bc8700cd685b36d9930))
+
+## [8.1.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.0.3...v8.1.0) (2024-10-02)
+
+
+### Features
+
+* Implemented User Registration ([33d77fb](https://github.com/iamkrish-coder/IntelliTrader/commit/33d77fb7b9a6c4c1c64e79440aa34260bdca52ed))
+
+## [8.0.3](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.0.2...v8.0.3) (2024-09-21)
+
+
+### Bug Fixes
+
+* prepare frontend project package for development ([b40d4c8](https://github.com/iamkrish-coder/IntelliTrader/commit/b40d4c8c030b31d4035b18dbfc3db223eb76f3c8))
+* Updated css ([d62d69e](https://github.com/iamkrish-coder/IntelliTrader/commit/d62d69e55bcb275519eb8bb5e56614e948a45cf5))
+
+## [8.0.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.0.1...v8.0.2) (2024-09-21)
+
+
+### Bug Fixes
+
+* prepare frontend project package for development ([d7d8330](https://github.com/iamkrish-coder/IntelliTrader/commit/d7d8330178777b3a8d10ce55f226631bf5dc9cf4))
+
+## [8.0.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.0.0...v8.0.1) (2024-09-21)
+
+
+### Bug Fixes
+
+* removed residual files ([91ae3d5](https://github.com/iamkrish-coder/IntelliTrader/commit/91ae3d54dfda65c3eee592df14aa38450a71a329))
+
+## [8.0.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v7.0.2...v8.0.0) (2024-09-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Refactored backend and frontend source code
+
+### Features
+
+* Refactored backend and frontend source code ([11adcb7](https://github.com/iamkrish-coder/IntelliTrader/commit/11adcb7aa092ea132033a4085519a460bbf39d6f))
+
+## [7.0.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v7.0.1...v7.0.2) (2024-09-18)
+
+
+### Bug Fixes
+
+* Renamed files ([e5390f3](https://github.com/iamkrish-coder/IntelliTrader/commit/e5390f354dbc2d94ff6c8582342622fd2d5c52cb))
+
+## [7.0.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v7.0.0...v7.0.1) (2024-09-18)
+
+
+### Bug Fixes
+
+* Modified UI to keep required views and removed unnecessary elements ([c77523d](https://github.com/iamkrish-coder/IntelliTrader/commit/c77523d3bfdf34d097c143c1b8ff9bf4e6ae3a1f))
+
+## [7.0.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v6.1.1...v7.0.0) (2024-09-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* Added admin dashboard for managing frontend
+
+### Features
+
+* Added admin dashboard for managing frontend ([3b0fcad](https://github.com/iamkrish-coder/IntelliTrader/commit/3b0fcadf1846d1b479d5084786d6bbec912a4fbf))
+
+## [6.1.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v6.1.0...v6.1.1) (2024-09-14)
+
+
+### Bug Fixes
+
+* landing page added using react and vendor assets ([96cd5d6](https://github.com/iamkrish-coder/IntelliTrader/commit/96cd5d6479aca7b97c793637eb5a0c0a2a68192d))
+
+## [6.1.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v6.0.0...v6.1.0) (2024-09-13)
+
+
+### Features
+
+* add option trading order placement and saving order to table ([9e61a78](https://github.com/iamkrish-coder/IntelliTrader/commit/9e61a78abd21640e26e897edd69b7d9cc304f88b))
+
+## [6.0.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v5.3.0...v6.0.0) (2024-09-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* feat! add ability to add stock and index options to basket for Options Trading
+
+### Features
+
+* feat! add ability to add stock and index options to basket for Options Trading ([9b01287](https://github.com/iamkrish-coder/IntelliTrader/commit/9b01287a1d833377a7c35104090bf60c11339d22))
+
+## [5.3.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v5.2.0...v5.3.0) (2024-09-11)
+
+
+### Features
+
+* Added react to the project for Frontend development ([25c236f](https://github.com/iamkrish-coder/IntelliTrader/commit/25c236fa768f733f78642f3759732171b4c2a13d))
+
+## [5.2.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v5.1.0...v5.2.0) (2024-09-10)
+
+
+### Features
+
+* save trades to database ([78654dc](https://github.com/iamkrish-coder/IntelliTrader/commit/78654dccf05368c91faf967e76b67f316bce0665))
+
+## [5.1.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v5.0.2...v5.1.0) (2024-09-09)
+
+
+### Features
+
+* Implemented auto cancelling of pending and open orders after a ageing period of 5minutes ([cc53fe2](https://github.com/iamkrish-coder/IntelliTrader/commit/cc53fe21751ee47049c01b29339e9729fa207d63))
+
+## [5.0.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v5.0.1...v5.0.2) (2024-09-08)
+
+
+### Bug Fixes
+
+* refactored controllers ([cd8606f](https://github.com/iamkrish-coder/IntelliTrader/commit/cd8606f65ccb396b15778767fc0a9792771e0b31))
+
+## [5.0.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v5.0.0...v5.0.1) (2024-09-07)
+
+
+### Bug Fixes
+
+* Renamed files for consistent naming conventions ([343681f](https://github.com/iamkrish-coder/IntelliTrader/commit/343681fb5744ba1fd0612ae24d960fbe79e32ecf))
+
+## [5.0.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v4.1.0...v5.0.0) (2024-09-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* Breaking changes, introducing Market and Limit Order placement, revamped configurations, updated enum usage
+
+### Features
+
+* Breaking changes, introducing Market and Limit Order placement, revamped configurations, updated enum usage ([84cea47](https://github.com/iamkrish-coder/IntelliTrader/commit/84cea47cbfac7c66bea262e099c92d8061c20754))
+
+## [4.1.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v4.0.0...v4.1.0) (2024-09-04)
+
+
+### Features
+
+* Added Trade Controller - retrieves the signals from database and updates them on processing, refactored file and controller names ([88a1ac0](https://github.com/iamkrish-coder/IntelliTrader/commit/88a1ac0b479e792a0bfef756a6140e05821d6161))
+
+## [4.0.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.11...v4.0.0) (2024-09-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* Refactored action controller to more meaningful signal processor
+
+### Code Refactoring
+
+* Refactored action controller to more meaningful signal processor ([bc78651](https://github.com/iamkrish-coder/IntelliTrader/commit/bc78651206a1dea1560a980da04851155e3436f9))
+
+## [3.12.11](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.10...v3.12.11) (2024-09-01)
+
+
+### Features
+
+* Added the ability to store signals into a table for further order processing ([3cb6e91](https://github.com/iamkrish-coder/IntelliTrader/commit/3cb6e9129c47112c8724265aef82d738c54ce35c))
+* Added the ability to store signals into a table for further order processing ([7d5eaa7](https://github.com/iamkrish-coder/IntelliTrader/commit/7d5eaa7a7de909a43e92198cefa9f765c9977d1a))
+
+## [3.12.10](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.9...v3.12.10) (2024-08-23)
+
+
+### Features
+
+* Implement Secondary Checks before processing alerts for Buy Sell signal ([aa4b9e8](https://github.com/iamkrish-coder/IntelliTrader/commit/aa4b9e8af8a038e2ebd0dcbbcc3fa6db80ab9621))
+
+## [3.12.9](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.8...v3.12.9) (2024-08-21)
+
+
+### Bug Fixes
+
+* Fix parsing issues with candle data not showing index correctly ([6df6a82](https://github.com/iamkrish-coder/IntelliTrader/commit/6df6a828a55e925fc772f070df1df4cc7e2f54c4))
+
+## [3.12.8](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.7...v3.12.8) (2024-08-15)
+
+
+### Bug Fixes
+
+* Updated Strategy Parsing techniques to be more structured and robust ([6b4e588](https://github.com/iamkrish-coder/IntelliTrader/commit/6b4e58821d497ae1ac89176782628f8a6bf901f1))
+* Updated Strategy Parsing techniques to be more structured and robust ([f1f9d2c](https://github.com/iamkrish-coder/IntelliTrader/commit/f1f9d2c1a50e0041588e8ce1e9ac6fa2cb655381))
+
+## [3.12.7](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.6...v3.12.7) (2024-08-13)
+
+
+### Features
+
+* Load and Parse Dynamic strategy using configuration files ([bd019a1](https://github.com/iamkrish-coder/IntelliTrader/commit/bd019a162c83bb58a3c395b78ffea36edc5f496d))
+
+## [3.12.6](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.5...v3.12.6) (2024-08-04)
+
+
+### Bug Fixes
+
+* Action alerts Processing and saving the watchlist of alerts ([41d0bbe](https://github.com/iamkrish-coder/IntelliTrader/commit/41d0bbe723ccbb7450d994db1aa1a01c4c147684))
+
+## [3.12.5](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.4...v3.12.5) (2024-07-28)
+
+
+### Bug Fixes
+
+* AWS Subscriber can now receive messages and other minor enhancements ([d7df6ff](https://github.com/iamkrish-coder/IntelliTrader/commit/d7df6ff01e4b619718225c641448d12a1c9265ff))
+
+## [3.12.4](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.3...v3.12.4) (2024-07-10)
+
+
+### Bug Fixes
+
+* SNS and SQS Fan out of stock alerts published, minor fixes and enhancements ([3678c11](https://github.com/iamkrish-coder/IntelliTrader/commit/3678c11f58694c4aafe735b4c8c8517190b549bf))
+
+## [3.12.3](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.2...v3.12.3) (2024-07-07)
+
+
+### Bug Fixes
+
+* nightly build 3.12.3, Added access policies, SNS Topic registration improvements ([71a5e6c](https://github.com/iamkrish-coder/IntelliTrader/commit/71a5e6c9ee60a1e6bd6f8a6b69a9f48700aef07a))
+
+## [3.12.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.1...v3.12.2) (2024-07-07)
+
+
+### Bug Fixes
+
+* nightly build 3.12.2 ([6be4a44](https://github.com/iamkrish-coder/IntelliTrader/commit/6be4a4412f34d2acb0aeef665ee5cb49f4d1c6b8))
+
+## [3.12.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.12.0...v3.12.1) (2024-07-04)
+
+
+### Bug Fixes
+
+* modified publisher code to be more consistent for both Queue and Topics ([55bf705](https://github.com/iamkrish-coder/IntelliTrader/commit/55bf705e03267ad5670e703a2a9e8b97065aece8))
+
+## [3.12.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.11.1...v3.12.0) (2024-06-30)
+
+
+### Features
+
+* major refactoring, clean up, improve import and formatting ([0d9a937](https://github.com/iamkrish-coder/IntelliTrader/commit/0d9a93722f935533b11438a7e6e5435e64d61f54))
+
+## [3.11.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.11.0...v3.11.1) (2024-06-05)
+
+
+### Features
+
+* Modified Strategy module and Database Module to be independent ([a558964](https://github.com/iamkrish-coder/IntelliTrader/commit/a5589645677e93ebeb074acb95a61856509ac654))
+
 ## [3.11.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v3.10.0...v3.11.0) (2024-05-22)
 
 

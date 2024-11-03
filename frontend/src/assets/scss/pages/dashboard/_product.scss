@@ -1,0 +1,153 @@
+
+.card-product {
+  .card-icon {
+    border-radius: 100%;
+    background-color: rgba($primary, .1);
+    color: $primary;
+    display: flex;
+    align-items: center;
+  }
+
+  .card-label {
+    display: block;
+    color: $secondary;
+    margin-bottom: 3px;
+  }
+}
+
+.card-product-inventory {
+  .flot-chart {
+    height: 250px;
+
+    @include media-breakpoint-up(xl) { height: 100%; }
+  }
+}
+
+.product-wrapper {
+  border-radius: 4px;
+  background-color: $gray-100;
+  overflow: auto;
+
+  + .product-wrapper { margin-top: 5px; }
+
+  .table {
+    margin-bottom: 0;
+    white-space: nowrap;
+    min-width: 620px;
+  }
+
+  .table td {
+    border-width: 0;
+    vertical-align: middle;
+
+    &:first-child { width: 5%; }
+    &:nth-child(2) { width: 40%; }
+    &:nth-child(3) { width: 14%; }
+  }
+}
+
+.product-thumb {
+  width: 40px;
+  height: 45px;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 5px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.revenue-item {
+  position: relative;
+
+  + .revenue-item { margin-top: 20px; }
+
+  .progress {
+    height: 5px;
+    border-radius: 2px;
+  }
+}
+
+.revenue-item-body {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  span:first-child { flex: 1; }
+
+  span:nth-child(2) {
+    font-weight: $font-weight-medium;
+    font-family: $ff-numerals;
+    text-align: right;
+    color: $dark;
+  }
+
+  span:last-child {
+    font-family: $ff-numerals;
+    text-align: right;
+    width: 45px;
+    margin-left: 10px;
+  }
+}
+
+.card-purchases {
+  .flot-chart {
+    position: relative;
+    height: 180px;
+    width: calc(100% + 8px);
+    left: -4px;
+  }
+}
+
+.total-sales-body {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 20px;
+  @include gradient-y(#fff, rgba(#fff, .1));
+  z-index: 5;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.product-review-footer {
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
+
+  a {
+    display: flex;
+    color: $secondary;
+    font-size: 13px;
+    position: relative;
+
+    &:hover { color: $primary; }
+
+    + a {
+      padding-left: 10px;
+
+      &::before {
+        content: '';
+        border-left: 1px dotted $gray-500;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+      }
+    }
+  }
+
+  i {
+    font-size: 16px;
+    line-height: 1.2;
+  }
+}
+
+.apex-chart-twelve {
+  position: relative;
+  margin-left: -15px;
+}

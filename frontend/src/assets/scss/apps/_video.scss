@@ -1,0 +1,262 @@
+.app-video {
+  .btn-upload {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: $ff-secondary;
+    font-size: 11px;
+    font-weight: $font-weight-medium;
+    height: $height-base;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-width: 1.5px;
+    grid-gap: 5px;
+
+    @include media-breakpoint-up(lg) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    i { font-size: 14px; }
+  }
+
+  .carousel {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: auto;
+    top: auto;
+    bottom: 25px;
+  }
+
+  .carousel-control-prev {
+    left: auto;
+    right: 60px;
+  }
+
+  .carousel-control-next { right: 20px; }
+
+  .main-label-group label {
+    font-size: 15px;
+    font-weight: $font-weight-semibold;
+    color: $dark;
+  }
+
+  .row-wrapper {
+    margin-left: -20px;
+    margin-right: -5px;
+    overflow-x: auto;
+    padding: 0 20px 20px;
+
+    @include media-breakpoint-up(xl) {
+      overflow: inherit;
+      margin-left: 0;
+      margin-right: 0;
+      padding: 0;
+    }
+
+    > .row {
+      width: 900px;
+      @include media-breakpoint-up(xl) { width: auto; }
+    }
+  }
+}
+
+.video-headline {
+  height: 420px;
+  position: relative;
+  @include shadow-dreamy($gray-400);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.video-headline-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: #fff;
+  text-shadow: 1px 1px 4px rgba($dark, .6);
+  @include gradient-y(rgba(darken($dark, 10%), .0), darken($dark, 10%));
+
+  > div {
+    @include media-breakpoint-up(md) { width: 75%; }
+    @include media-breakpoint-up(xl) { width: 50%; }
+  }
+
+  .video-title {
+    font-weight: 400;
+    color: inherit;
+  }
+
+  label {
+    display: block;
+    font-size: $font-size-sm;
+    margin-bottom: 5px;
+    opacity: .75;
+  }
+
+  h3 {
+    margin-bottom: 0;
+    font-weight: 400;
+    font-family: $ff-numerals;
+  }
+
+  .btn-icon {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 100%;
+    border-width: 1.5px;
+  }
+}
+
+.card-video {
+  border-radius: 6px;
+  border-width: 0;
+  @include shadow-dreamy($gray-400);
+
+  .card-title {
+    font-weight: $font-weight-semibold;
+
+    a {
+      color: $dark;
+      &:hover { color: $primary; }
+    }
+  }
+}
+
+.video-player {
+  position: relative;
+  height: 200px;
+
+  @include media-breakpoint-up(sm) { height: 260px; }
+  @include media-breakpoint-up(md) { height: 320px; }
+  @include media-breakpoint-up(xl) { height: 280px; }
+
+  .progress {
+    position: absolute;
+    bottom: 42px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: 0;
+  }
+
+  .nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba($dark, .16);
+
+    @include media-breakpoint-up(sm) { padding: 10px 15px; }
+  }
+
+  .nav-link {
+    padding: 0;
+    color: rgba(#fff, .75);
+    display: block;
+    line-height: 1;
+    font-size: $font-size-xs;
+
+    &:hover { color: #fff; }
+
+    i {
+      font-size: 21px;
+      position: relative;
+      top: 1px;
+    }
+
+    + .nav-link { margin-left: 10px; }
+  }
+}
+
+.video-player-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.card-movie {
+  border-width: 0;
+  border-radius: 6px;
+  @include shadow-dreamy($gray-400);
+
+  img {
+    border-radius: 4px;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+
+    @include media-breakpoint-up(sm) { height: 100%; }
+  }
+
+  .card-label {
+    display: block;
+    font-size: $font-size-xs;
+    font-family: $font-family-sans-serif;
+    color: $primary;
+    margin-bottom: 3px;
+  }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: $font-weight-semibold;
+
+    a {
+      color: $dark;
+      &:hover { color: $primary; }
+    }
+  }
+}
+
+.card-video-item {
+  border-width: 0;
+  border-radius: 6px;
+  @include shadow-dreamy($gray-400);
+
+  .card-title {
+    width: 100%;
+    margin-bottom: 2px;
+    font-weight: $font-weight-semibold;
+
+    a { color: $dark; }
+  }
+
+  .card-author { font-size: $font-size-sm; }
+
+  .card-text {
+    margin-top: 10px;
+    font-size: $font-size-xs;
+    font-family: $font-family-sans-serif;
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    color: $secondary;
+  }
+}
+
+.card-poster {
+  border-width: 0;
+  border-radius: 6px;
+  @include shadow-dreamy($gray-400);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+}

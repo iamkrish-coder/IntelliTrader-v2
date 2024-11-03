@@ -1,0 +1,353 @@
+[data-skin="dark"] {
+  .page-app {
+    .dropdown-menu { box-shadow: none; }
+  }
+
+  ////////// Media Gallery //////////
+  .music-title a { color: #fff; }
+  .music-text { color: inherit; }
+
+  .app-music {
+    .main-label-group label { color: #fff; }
+    .sidebar-right .nav-link { color: inherit; }
+  }
+
+  .card-album { box-shadow: none; }
+
+  .table-music tbody tr { box-shadow: none; }
+  .table-music tbody td { background-color: $dark-highlight; }
+
+  .music-player {
+    background-color: $dark-highlight;
+    box-shadow: none;
+  }
+
+  .nav-player .nav-link { color: inherit; }
+  .music-volume a { color: inherit; }
+  .media-music h6 a { color: #fff; }
+  .media-music span { color: inherit; }
+
+  .music-range .progress { background-color: $border-color-dark; }
+  .music-volume .progress { background-color: $border-color-dark; }
+
+  .card-video {
+    box-shadow: none;
+    .card-title a { color: #fff; }
+  }
+
+  .app-video .main-label-group label { color: #fff; }
+
+  .card-video-item {
+    box-shadow: none;
+    .card-title a { color: #fff; }
+  }
+
+  .card-movie {
+    box-shadow: none;
+    .card-title a { color: #fff; }
+  }
+
+  .card-poster { box-shadow: none; }
+
+  ////////// Task Manager //////////
+  .card-task {
+    box-shadow: none;
+
+    &:hover,
+    &:focus {
+      border-color: $primary;
+    }
+
+    .card-title { color: #fff; }
+  }
+
+  .task-calendar {
+    .ui-datepicker-inline { box-shadow: none; }
+    .ui-datepicker .ui-datepicker-calendar td {
+      border-color: lighten($border-color-dark, 3%);
+
+      a:hover,
+      a:focus,
+      &.ui-datepicker-today a:hover,
+      &.ui-datepicker-today a:focus {
+        background-color: $border-color-dark;
+      }
+    }
+  }
+
+  ////////// Contacts //////////
+  .contact-body {
+    background-color: $dark-highlight;
+    box-shadow: none;
+  }
+
+  .contact-list {
+    @include media-breakpoint-up(md) { border-right-color: lighten($border-color-dark, 3%); }
+  }
+
+  .contact-list-header {
+    background-color: inherit;
+    border-bottom-color: lighten($border-color-dark, 3%);
+
+    .sidebar-title { color: #fff; }
+  }
+
+  .contact-sidebar {
+    .nav-sidebar .nav-link:not(.active) {
+      color: inherit;
+
+      &:hover,
+      &:focus {
+        background-color: $dark-highlight;
+        color: #fff;
+      }
+    }
+  }
+
+  .contact-group {
+    .contact-item:not(.selected) {
+      &:hover,
+      &:focus {
+        background-color: lighten($dark-highlight, 3%);
+      }
+    }
+    .contact-item-body h6 { color: #fff; }
+  }
+
+  .contact-content {
+    hr { opacity: 0.1; }
+
+    .nav-sidebar .nav-link {
+      color: inherit;
+
+      &:hover,
+      &:focus {
+        background-color: lighten($dark-highlight, 3%);
+        color: #fff;
+      }
+    }
+  }
+
+  ////////// Chat //////////
+  .chat-panel {
+    background-color: $dark-highlight;
+    box-shadow: none;
+  }
+
+  .chat-sidebar {
+    background-color: transparent;
+
+    @include media-breakpoint-up(md) {
+      border-right-color: lighten($border-color-dark, 3%);
+    }
+
+    .sidebar-header {
+      background-color: transparent;
+      border-bottom-color: lighten($border-color-dark, 3%);
+    }
+
+    .sidebar-title { color: #fff; }
+  }
+
+  .chat-group {
+    .chat-item:not(.selected) {
+      &:hover,
+      &:focus {
+        background-color: lighten($dark-highlight, 3%);
+      }
+
+    }
+
+    .chat-item-body h6 { color: #fff; }
+  }
+
+  .chat-body-header {
+    background-color: transparent;
+    border-bottom-color: lighten($border-color-dark, 3%);
+
+    .chat-item-body h6 { color: #fff; }
+  }
+
+  .msg-bubble { background-color: lighten($dark-highlight, 3%); }
+
+  .chat-body-footer {
+    border-top-color: lighten($border-color-dark, 3%);
+    background-color: transparent;
+  }
+
+  .msg-box .form-control {
+    background-color: lighten($dark-highlight, 3%);
+
+    &:focus {
+      background-color: lighten($dark-highlight, 6%);
+      border-color: transparent;
+    }
+  }
+
+  ////////// Calendar //////////
+  .calendar-sidebar {
+    .sidebar-body .event-body h6 a { color: #fff; }
+  }
+
+  .nav-calendar .nav-link {
+    color: inherit;
+
+    &:hover,
+    &:focus { color: #fff; }
+  }
+
+  .calendar-body {
+    .fc-col-header th a { color: rgba(#fff, .65); }
+
+    .fc-button-primary {
+      background-color: transparent;
+      border-color: lighten($border-color-dark, 3%);
+
+      &:hover,
+      &:focus {
+        background-color: lighten($dark-highlight, 3%);
+        border-color: lighten($border-color-dark, 6%);
+        color: #fff;
+      }
+
+      &:disabled {
+        background-color: transparent;
+        color: rgba(#fff, .3);
+        border-color: $border-color-dark;
+      }
+    }
+
+    .fc-toolbar-title { color: #fff; }
+
+    .fc-scrollgrid {
+      background-color: $dark-highlight;
+      border-color: lighten($border-color-dark, 3%);
+    }
+
+    .fc-col-header th { border-color: lighten($border-color-dark, 3%); }
+    .fc-daygrid-day { border-color: lighten($border-color-dark, 3%); }
+
+    .fc-daygrid-dot-event {
+      color: rgba(#fff, .65);
+
+      .fc-event-title { color: rgba(#fff, .6); }
+
+      &:hover,
+      &:focus {
+        background-color: lighten($dark-highlight, 5%);
+        color: #fff;
+
+        .fc-event-title { color: #fff; }
+      }
+    }
+
+    .fc-daygrid-day-number {
+      color: rgba(#fff, .65);
+    }
+  }
+
+  .fc-theme-standard th,
+  .fc-theme-standard td {
+    border-color: lighten($border-color-dark, 3%);
+  }
+
+  .task-calendar .ui-datepicker {
+    .ui-datepicker-calendar td:last-child {
+      border-color: lighten($border-color-dark, 3%);
+    }
+  }
+
+  .modal-event .date-item span { color: #fff; }
+  .modal-event p { color: #fff; }
+
+  ////////// Email //////////
+  .email-sidebar {
+    @include media-breakpoint-up(md) {
+      border-right-color: $border-color-dark;
+    }
+
+    hr { opacity: .1; }
+  }
+
+  .email-list {
+    @include media-breakpoint-up(md) {
+      border-right-color: $border-color-dark;
+    }
+  }
+
+  .email-list-header {
+    border-bottom-color: $border-color-dark;
+
+    h5 { color: #fff; }
+  }
+
+  .email-list-label { border-bottom-color: $border-color-dark; }
+
+  .email-item {
+    border-bottom-color: $border-color-dark;
+
+    &:hover,
+    &:focus {
+      background-color: lighten($dark-primary, 2%);
+    }
+
+    &.unread {
+      background-color: $dark-highlight;
+
+      .email-item-sender { color: #fff; }
+      .email-item-summary { color: #fff; }
+    }
+
+    &.selected {
+      background-color: lighten($dark-highlight, 3%);
+    }
+  }
+
+  .email-content-empty { color: inherit; }
+
+  .email-content-header {
+    border-bottom-color: $border-color-dark;
+
+    .nav-link { color: inherit; }
+  }
+
+  .email-content-body hr { opacity: .1; }
+
+  .card-attachment {
+    box-shadow: none;
+
+    .card-content h6 a { color: #fff; }
+  }
+
+  .compose-wrapper .ql-editor {
+    box-shadow: none;
+  }
+
+  ////////// File Manager //////////
+  .file-sidebar {
+    @include media-breakpoint-up(lg) {
+      border-right-color: $border-color-dark;
+    }
+  }
+
+  .card-file {
+    box-shadow: none;
+
+    .card-body h6 a { color: #fff; }
+    .card-file-icon { background-color: $border-color-dark; }
+  }
+
+  .card-folder {
+    box-shadow: none;
+
+    .card-body h6 a { color: #fff; }
+  }
+
+  .table-files tbody tr {
+    box-shadow: none;
+
+    td { background-color: $dark-highlight; }
+  }
+
+  .table-files .file-name a { color: #fff; }
+}

@@ -1,0 +1,85 @@
+.card-daily-trends {
+  position: relative;
+  overflow: hidden;
+  padding: 20px 10px;
+
+  .card-body {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 5;
+  }
+
+  .card-value {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 0;
+    letter-spacing: -1px;
+
+    span {
+      display: block;
+      font-size: 18px;
+      letter-spacing: normal;
+      color: $secondary;
+      margin-left: 3px;
+      margin-bottom: 6px;
+    }
+  }
+
+  .flot-chart {
+    position: relative;
+    height: 235px;
+    margin-top: 20px;
+
+    @include media-breakpoint-up(md) { height: 100%; }
+  }
+}
+
+.chart-donut-three {
+  position: relative;
+  height: 230px;
+
+  @include media-breakpoint-only(lg) { height: 210px; }
+}
+
+.card-article {
+  .card-body { padding: 20px; }
+  .card-title {
+    color: $dark;
+    font-weight: $font-weight-semibold;
+
+    @include media-breakpoint-up(xxl) { font-size: 24px; }
+  }
+}
+
+.storage-item {
+  display: flex;
+  align-items: center;
+
+  + .storage-item { margin-top: 20px; }
+
+  .storage-icon {
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 6px;
+    margin-right: 15px;
+    background-color: $gray-200;
+
+    i { font-size: 32px; }
+  }
+}
+
+.apex-chart-eleven {
+  position: relative;
+  left: -25px;
+  width: calc(100% + 40px);
+  height: 250px;
+
+  @include media-breakpoint-up(xl) { height: 100%; }
+}

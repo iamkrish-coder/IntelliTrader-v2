@@ -1,0 +1,100 @@
+
+.performance-value {
+  display: flex;
+  align-items: baseline;
+  font-family: $ff-numerals;
+  letter-spacing: -.2px;
+}
+
+.progress-one {
+  border-radius: 3px;
+
+  .progress-bar + .progress-bar { border-left: 1.5px solid #fff; }
+}
+
+.table-three {
+  margin-bottom: 0;
+
+  tbody td {
+    vertical-align: middle;
+    border-color: $gray-200;
+    padding: 5px;
+
+    &:first-child { padding-left: 0; }
+    &:last-child { padding-right: 0; }
+
+    &:nth-child(2),
+    &:nth-child(3) {
+      font-weight: $font-weight-medium;
+      color: $dark;
+    }
+
+    &:nth-child(3),
+    &:last-child {
+      text-align: right;
+      font-family: $ff-numerals;
+    }
+  }
+
+  .badge-dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    position: relative;
+    transform: translateY(1px);
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 100%;
+      background-color: #fff;
+      z-index: 5;
+      top: 3px;
+      left: 3px;
+    }
+  }
+}
+
+.vmap-one {
+  height: 200px;
+
+  @include media-breakpoint-up(md) { height: 300px; }
+  @include media-breakpoint-up(xl) { height: 350px; }
+
+  .jvectormap-zoomin,
+  .jvectormap-zoomout {
+    display: none;
+  }
+}
+
+.table-four {
+  margin-bottom: 0;
+
+  thead th {
+    background-color: $gray-100;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  thead tr:first-child th { text-align: center; }
+  thead tr:last-child th:not(:first-child) { text-align: right; }
+
+  tbody td {
+    padding-left: 10px;
+    padding-right: 10px;
+    white-space: nowrap;
+
+    &:not(:first-child) {
+      font-family: $ff-numerals;
+      text-align: right;
+    }
+  }
+}
+
+.apex-chart-nine {
+  position: relative;
+  left: -15px;
+  width: calc(100% + 15px);
+}

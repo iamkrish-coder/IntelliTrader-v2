@@ -1,0 +1,261 @@
+.card-one {
+  height: 100%;
+  border-width: 0;
+  border-radius: 6px;
+  @include shadow-dreamy($gray-400);
+
+  .card-header {
+    border-bottom-color: rgba($gray-300, .55);
+    background-color: transparent;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+
+    .card-title {
+      font-weight: $font-weight-semibold;
+      font-size: 15px;
+      color: $dark;
+      margin-bottom: 0;
+      line-height: 1.4;
+    }
+
+    .nav-icon { margin-right: -4px; }
+  }
+
+  .nav-icon {
+    .nav-link {
+      opacity: .6;
+      &:hover { opacity: 1; }
+    }
+  }
+
+  .nav-pills {
+    font-size: $font-size-sm;
+
+    .nav-link {
+      border-radius: 3px;
+      color: $secondary;
+      padding: 4px 15px;
+
+      &.active {
+        background-color: $gray-300;
+        color: $gray-700;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 15px;
+    position: relative;
+  }
+
+  small {
+    color: $secondary;
+    font-family: $font-family-sans-serif;
+    font-size: 12px;
+  }
+
+  .legend {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 1.25;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      position: relative;
+      font-size: $font-size-xs;
+
+      &::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        margin-right: 5px;
+      }
+
+      + li { margin-left: 10px; }
+
+      &:first-child::before { background-color: #506fd9; }
+      &:nth-child(2)::before { background-color: #dbdffd; }
+      &:last-child::before { background-color: #85b6ff; }
+    }
+  }
+
+  .card-icon {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border-radius: 4px;
+
+    i {
+      font-size: 24px;
+      line-height: 1;
+    }
+  }
+
+  .people-item {
+    padding: 10px 15px;
+
+    + .people-item {
+      margin-top: 0;
+      border-top: 1px solid $gray-200;
+    }
+
+    .avatar {
+      margin-right: 8px;
+    }
+
+    .nav-link + .nav-link { margin-left: 5px; }
+  }
+
+  .card-footer {
+    padding: 15px;
+    background-color: transparent;
+    border-top-color: $gray-200;
+  }
+
+  .list-group-item { border-color: $gray-200; }
+}
+
+.card-value {
+  font-family: $ff-numerals;
+  font-weight: $font-weight-medium;
+  color: $dark;
+  display: flex;
+  align-items: center;
+  grid-gap: 2px;
+  letter-spacing: -.2px;
+
+  span { font-weight: 400; }
+
+  i {
+    margin-right: 5px;
+    text-indent: -3px;
+    color: $primary;
+  }
+}
+
+.flot-chart {
+  width: 100%;
+
+  &.ht-80 { height: 80px; }
+  &.ht-180 { height: 180px; }
+  &.ht-280 { height: 280px; }
+  &.ht-290 { height: 290px; }
+
+  .flot-tick-label { font-family: $ff-numerals; }
+
+  .flot-x-axis .flot-tick-label {
+    font-size: 10px;
+    font-weight: 500;
+    color: $secondary;
+  }
+
+  .flot-y-axis .flot-tick-label {
+    font-size: 10px;
+    color: $gray-500;
+  }
+}
+
+.chart-bar-one {
+  height: 350px;
+
+  @include media-breakpoint-up(md) { height: 100%; }
+}
+
+.table-one {
+  margin-bottom: 0;
+
+  thead th,
+  tbody td {
+    padding-left: 0;
+    padding-right: 0;
+    vertical-align: middle;
+
+    &:not(:first-child) { text-align: right; }
+  }
+
+  tbody td { border-color: $gray-200; }
+
+  tbody tr:last-child td {
+    border-bottom-width: 0;
+    padding-bottom: 0;
+  }
+
+  tbody td:not(:first-child) {
+    font-family: $ff-numerals;
+  }
+}
+
+.table-two {
+  white-space: nowrap;
+
+  thead th,
+  tbody td {
+    vertical-align: middle;
+
+    &:not(:first-child) { text-align: right; }
+
+    &:first-child { padding-left: 0; }
+    &:last-child { padding-right: 0; }
+  }
+
+  tbody td {
+    border-color: $gray-200;
+    font-family: $ff-numerals;
+  }
+}
+
+.earning-item {
+  h4 {
+    margin-bottom: 3px;
+    font-family: $ff-numerals;
+    font-weight: $font-weight-medium;
+    color: $dark;
+    letter-spacing: -.5px;
+
+    span {
+      font-weight: 400;
+      color: $body-color;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 0;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $secondary;
+  }
+}
+
+.earning-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.apex-chart-one {
+  position: relative;
+  left: -12px;
+  width: calc(100% + 20px);
+}
+
+.card-vmap {
+  .jvectormap-zoomin,
+  .jvectormap-zoomout {
+    display: none;
+  }
+}

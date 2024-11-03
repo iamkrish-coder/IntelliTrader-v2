@@ -1,0 +1,62 @@
+.btn:focus { box-shadow: none; }
+
+.btn-secondary,
+.btn-success {
+  color: #fff;
+
+  &:hover,
+  &:focus { color: #fff; }
+}
+
+.btn-gray {
+  background-color: rgba($gray-300, .75);
+  color: $secondary;
+}
+
+.btn-outline-tertiary {
+  border-color: $color-ui-02;
+  color: $color-ui-02;
+
+  &:hover,
+  &:focus {
+    background-color: $color-ui-02;
+    color: #fff;
+  }
+}
+
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus { color: #fff; }
+
+.btn-outline-info:hover,
+.btn-outline-info:focus { color: #fff; }
+
+.btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+  width: $height-base;
+  height: $height-base;
+}
+
+.btn-white {
+  border: 1px solid $gray-400;
+  background-color: #fff;
+
+  &:hover,
+  &:focus {
+    border-color: darken($gray-400, 5%);
+    background-color: $gray-100;
+  }
+}
+
+.btn-outline-white {
+  border: 1px solid rgba(#fff, .75);
+  color: rgba(#fff, .75);
+
+  &:hover {
+    border-color: #fff;
+    color: #fff;
+  }
+}

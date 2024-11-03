@@ -1,0 +1,94 @@
+.form-control {
+  padding-left: .6rem;
+  padding-right: .6rem;
+
+  &:active,
+  &:focus {
+    border-color: $gray-400;
+    box-shadow: 0 1px 1px rgba($gray-300, 0.25),
+      0 2px 2px rgba($gray-300, 0.20),
+      0 4px 4px rgba($gray-300, 0.15),
+      0 8px 8px rgba($gray-300, 0.10);
+  }
+
+  &::placeholder {
+    color: $gray-500;
+  }
+}
+
+.form-control-lg {
+  border-radius: 6px;
+}
+
+.form-select {
+
+  &:active,
+  &:focus {
+    border-color: $gray-400;
+    box-shadow: 0 1px 1px rgba($gray-300, 0.25),
+      0 2px 2px rgba($gray-300, 0.20),
+      0 4px 4px rgba($gray-300, 0.15),
+      0 8px 8px rgba($gray-300, 0.10);
+  }
+}
+
+.form-select-sm {
+  padding-left: 4px;
+}
+
+.form-select-lg {
+  padding-left: 8px;
+}
+
+.form-check-input {
+  border-color: rgba($gray-900, .3);
+
+  &[type="checkbox"] {
+    border-radius: 2.5px;
+  }
+
+  &[role="switch"] {
+    border-radius: 10px;
+  }
+}
+
+.form-switch {
+  .form-check-input {
+    border-radius: 20px;
+  }
+}
+
+.form-search {
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: #fff;
+  padding: 3px 10px;
+  @include shadow-dreamy($gray-400);
+  @include transition(all 0.15s);
+
+  &.onfocus {
+    border-color: $primary;
+  }
+
+  >i {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .form-control {
+    border-radius: 0;
+    border-width: 0;
+    background-color: transparent;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: $gray-500;
+    }
+  }
+}

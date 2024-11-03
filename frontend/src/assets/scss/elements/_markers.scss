@@ -1,0 +1,208 @@
+.marker {
+  font-size: 12px;
+  padding: 5px 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  position: absolute;
+
+  &.top-left {
+    top: 5px;
+    left: 5px;
+  }
+
+  &.top-right {
+    top: 5px;
+    right: 5px;
+  }
+
+  &.bottom-right {
+    bottom: 5px;
+    right: 5px;
+  }
+
+  &.bottom-left {
+    bottom: 5px;
+    left: 5px;
+  }
+
+  &.marker-primary {
+    background-color: $primary;
+    color: #fff;
+  }
+
+  &.marker-success {
+    background-color: $success;
+    color: #fff;
+  }
+
+  &.marker-danger {
+    background-color: $danger;
+    color: #fff;
+  }
+
+  &.marker-warning {
+    background-color: $warning;
+    color: $dark;
+  }
+
+  &.marker-info {
+    background-color: $info;
+    color: $dark;
+  }
+
+  &.marker-dark {
+    background-color: $dark;
+    color: #fff;
+  }
+}
+
+.marker-icon {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  overflow: hidden;
+  border-radius: inherit;
+
+  &::before {
+    content: '';
+    width: 80px;
+    height: 80px;
+    background-color: #fff;
+    position: absolute;
+    transform: rotate(45deg);
+  }
+
+  i {
+    position: relative;
+    color: $dark;
+    font-size: 16px;
+  }
+
+  &.top-left {
+    top: 0;
+    left: 0;
+    padding-left: 6px;
+    padding-top: 2px;
+
+    &::before {
+      top: -45px;
+      left: -45px;
+    }
+  }
+
+  &.top-right {
+    top: 0;
+    right: 0;
+    text-align: right;
+    padding-right: 6px;
+    padding-top: 2px;
+
+    &::before {
+      top: -45px;
+      right: -45px;
+    }
+  }
+
+  &.bottom-left {
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2px;
+    padding-left: 6px;
+
+    &::before {
+      bottom: -45px;
+      left: -45px;
+    }
+  }
+
+  &.bottom-right {
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding-bottom: 2px;
+    padding-right: 7px;
+
+    &::before {
+      bottom: -45px;
+      right: -45px;
+    }
+  }
+
+  &.marker-primary {
+    &::before { background-color: $primary; }
+    i { color: #fff; }
+  }
+
+  &.marker-success {
+    &::before { background-color: $success; }
+    i { color: #fff; }
+  }
+
+  &.marker-danger {
+    &::before { background-color: $danger; }
+    i { color: #fff; }
+  }
+
+  &.marker-warning {
+    &::before { background-color: $warning; }
+    i { color: $dark; }
+  }
+
+  &.marker-info {
+    &::before { background-color: $info; }
+    i { color: $dark; }
+  }
+
+  &.marker-dark {
+    &::before { background-color: $dark; }
+    i { color: #fff; }
+  }
+}
+
+.marker-ribbon {
+  position: absolute;
+  font-size: 12px;
+  padding: 5px 10px;
+  background-color: #fff;
+  border: 1px solid rgba($dark, .3);
+  top: 5px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -11px;
+  }
+
+  &.top-left {
+    left: -10px;
+
+    &::before {
+      left: -10px;
+      border-right: 10px solid rgba($dark, .3);
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid transparent;
+    }
+  }
+
+  &.top-right {
+    right: -10px;
+
+    &::before {
+      right: -10px;
+      border-left: 10px solid rgba($dark, .3);
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid transparent;
+    }
+  }
+
+  &.marker-primary { @include marker-ribbon-variant($primary, #fff); }
+  &.marker-success { @include marker-ribbon-variant($success, #fff); }
+  &.marker-danger { @include marker-ribbon-variant($danger, #fff); }
+  &.marker-warning { @include marker-ribbon-variant($warning, $dark); }
+  &.marker-info { @include marker-ribbon-variant($info, $dark); }
+  &.marker-dark { @include marker-ribbon-variant($dark, #fff); }
+}

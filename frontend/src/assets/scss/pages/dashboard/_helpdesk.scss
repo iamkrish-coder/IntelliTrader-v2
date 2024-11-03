@@ -1,0 +1,132 @@
+.helpdesk-icon {
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+
+  i { font-size: 36px; }
+}
+
+.chartjs-one {
+  height: 250px;
+  position: relative;
+}
+
+.chartjs-two {
+  height: 250px;
+
+  @include media-breakpoint-up(xl) { height: 100%; }
+}
+
+.peity-two {
+  position: relative;
+
+  > div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.table-ratings {
+  tbody td {
+    font-family: $ff-numerals;
+    vertical-align: middle;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-color: $gray-200;
+
+    &:first-child { padding-left: 0; }
+    &:last-child { padding-right: 0; }
+
+    strong {
+      font-weight: $font-weight-medium;
+      color: $gray-800;
+    }
+
+    i { line-height: 1; }
+
+    &:nth-child(3),
+    &:last-child {
+      text-align: right;
+    }
+
+    &:nth-child(3) {
+      font-weight: $font-weight-medium;
+      color: $dark;
+    }
+  }
+
+  tbody tr:last-child td {
+    border-bottom-width: 0;
+    padding-bottom: 0;
+  }
+}
+
+.table-agent {
+  white-space: nowrap;
+
+  thead th {
+    vertical-align: middle;
+    font-size: $font-size-sm;
+
+    &:first-child { width: 3%; }
+    &:nth-child(2) { width: 9%; }
+    &:nth-child(3) { width: 28%; }
+  }
+
+  tbody td {
+    vertical-align: middle;
+    border-color: $gray-200;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  tbody tr:last-child td {
+    border-bottom-width: 0;
+  }
+
+  .form-check { margin-bottom: 0; }
+
+  .link-more {
+    display: flex;
+    font-size: 18px;
+    line-height: 1;
+    color: $secondary;
+  }
+
+  .badge { display: block; }
+
+  h6 { color: $gray-800; }
+}
+
+.apex-donut-one {
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  > div:last-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}

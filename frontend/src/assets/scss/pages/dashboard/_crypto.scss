@@ -1,0 +1,161 @@
+
+.table-five {
+  margin-bottom: 0;
+
+  tbody td {
+    vertical-align: center;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 0;
+    border-color: $gray-200;
+
+    &:first-child { padding-left: 0; }
+
+    &:not(:first-child) {
+      font-family: $ff-numerals;
+      text-align: right;
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
+      grid-gap: 5px;
+    }
+  }
+
+  tbody tr:last-child td { border-bottom-width: 0; }
+}
+
+.chart-donut-one {
+  height: 180px;
+
+  @include media-breakpoint-up(xl) { height: 215px; }
+}
+
+.list-group-one {
+  .list-group-item {
+    border-left-width: 0;
+    border-right-width: 0;
+
+    &:first-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top-width: 0;
+      padding-top: 0;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-width: 0;
+    }
+  }
+
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+}
+
+.bg-litecoin { background-color: #325a98; }
+
+.news-item {
+  position: relative;
+
+  @include media-breakpoint-up(sm) {
+    display: flex;
+  }
+
+  + .news-item {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid $gray-200;
+  }
+}
+
+.news-img {
+  width: 100%;
+  height: 140px;
+  flex-shrink: 0;
+  margin-bottom: 15px;
+
+  @include media-breakpoint-up(sm) {
+    width: 150px;
+    height: 100px;
+    margin-bottom: 0;
+    margin-right: 15px;
+  }
+
+  img {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.news-body { flex: 1; }
+
+.news-title {
+  line-height: 1.3;
+  font-size: 15px;
+}
+
+.crypto-item {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 21px;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.crypto-body {
+  flex: 1;
+
+  .card-label {
+    display: block;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-medium;
+    margin-bottom: 2px;
+    color: $secondary;
+  }
+
+  .card-value {
+    margin-bottom: 0;
+    font-size: 15px;
+  }
+}
+
+.card-footer-crypto {
+  border-top-width: 0;
+  display: flex;
+  align-items: center;
+  grid-gap: 15px;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  color: $secondary;
+
+  strong {
+    font-weight: $font-weight-semibold;
+    font-family: $ff-numerals;
+    color: $dark;
+  }
+}
+
+.apex-chart-ten {
+  position: relative;
+  //left: -10px;
+}

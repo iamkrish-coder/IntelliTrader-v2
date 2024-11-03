@@ -1,0 +1,48 @@
+.card {
+  border-color: $gray-300;
+}
+
+.card-bless {
+  border-width: 0;
+  border-radius: 6px;
+  @include shadow-dreamy($gray-400);
+}
+
+.card-header {
+  background-color: $gray-100;
+  border-bottom-color: $gray-300;
+}
+
+.card-footer {
+  border-top-color: $gray-300;
+  background-color: $gray-100;
+}
+
+.card-primary,
+.card-secondary,
+.card-success,
+.card-danger,
+.card-warning,
+.card-info,
+.card-dark {
+  border-width: 0;
+  color: rgba(#fff, .8);
+
+  .card-header {
+    background-color: transparent;
+    border-bottom-color: rgba(#fff, .2);
+  }
+}
+
+.card-primary { background-color: $primary; }
+.card-secondary { background-color: $secondary; }
+.card-success { background-color: $success; }
+.card-danger { background-color: $danger; }
+.card-warning { background-color: $warning; }
+.card-info { background-color: $info; }
+.card-dark { background-color: $dark; }
+
+.card-light {
+  border-width: 1px;
+  .card-header { background-color: transparent; }
+}

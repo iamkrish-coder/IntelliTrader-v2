@@ -1,0 +1,16 @@
+.breadcrumb-custom1 {
+  .breadcrumb-item {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+}
+
+.breadcrumb-custom2 {
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: '\EA6E';
+    font-family: 'remixicon';
+    position: relative;
+    top: 1.5px;
+  }
+}

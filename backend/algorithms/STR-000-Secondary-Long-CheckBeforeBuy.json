@@ -1,0 +1,37 @@
+{
+  "strategy": {
+    "buy": {
+      "conditions": [
+        {
+          "type": "OR",
+          "rules": [
+            {
+              "type": "OR",
+              "rules": [
+                {
+                  "candle": "1minute",
+                  "shift": -1,
+                  "value": "is green"
+                },
+                {
+                  "candle": "2minute",
+                  "shift": -1,
+                  "value": "is green"
+                }
+              ]
+            },
+            {
+              "candle": "1minute",
+              "shift": -1,
+              "value": "is higher high"
+            }
+          ]
+        }
+      ]
+    },
+    "sell": "",
+    "exit": "",
+    "stop_loss": "",
+    "take_profit": ""
+  }
+}

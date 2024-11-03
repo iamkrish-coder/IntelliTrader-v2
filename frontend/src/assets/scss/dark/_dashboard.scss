@@ -1,0 +1,119 @@
+[data-skin="dark"] {
+  ////////// Sales Monitoring //////////
+  .card-one {
+    box-shadow: none;
+
+    .card-header {
+      border-bottom-color: $border-color-dark;
+      .card-title { color: #fff; }
+    }
+
+    small { color: inherit; }
+
+    .people-item + .people-item {
+      border-top-color: $border-color-dark;
+    }
+
+    .card-footer { border-top-color: $border-color-dark; }
+
+    .list-group-item { border-color: lighten($border-color-dark, 3%); }
+  }
+
+  .card-value { color: #fff; }
+
+  .earning-item {
+    h4 {
+      color: #fff;
+      span { color: rgba(#fff, .65); }
+    }
+
+    label { color: inherit; }
+  }
+
+  .table-one tbody td,
+  .table-two tbody td { border-color: $border-color-dark; }
+
+  ////////// Website Analytics //////////
+  .progress-one .progress-bar + .progress-bar { border-left-color: $dark-highlight; }
+
+  .table-three tbody td:nth-child(2),
+  .table-three tbody td:nth-child(3) { color: #fff; }
+
+  .table-three tbody td {
+    border-color: lighten($border-color-dark, 3%);
+
+    &:nth-child(2),
+    &:nth-child(3) { color: #fff; }
+  }
+
+  .table-four thead th { background-color: $dark-primary; }
+
+  ////////// Cryptocurrency //////////
+  .card-footer-crypto strong { color: #fff; }
+  .table-five tbody td { border-color: lighten($border-color-dark, 3%); }
+
+  .news-item + .news-item { border-top-color: lighten($border-color-dark, 3%); }
+
+  ////////// Finance Monitoring //////////
+  .finance-info { background-image: none; }
+  .finance-value { color: #fff; }
+  .finance-value span { color: rgba(#fff, .75); }
+
+  .card-wallet {
+    .card-value { color: #fff; }
+    .badge-dot { background-color: #fff; }
+    .card-body h5 { color: #fff; }
+  }
+
+  .flot-chart-eight,
+  .flot-chart-nine {
+    .flot-tick-label { color: rgba(#fff, .6); }
+  }
+
+  .finance-item-circle {
+    background-color: lighten($dark-highlight, 6%);
+
+    h1 { color: #fff; }
+    label { color: rgba(#fff, .75); }
+  }
+
+  ////////// Helpdesk Service //////////
+  .table-ratings {
+    tbody td { border-color: lighten($border-color-dark, 3%); }
+    tbody td strong { color: #fff; }
+    tbody td:nth-child(3) { color: rgba(#fff, .75); }
+  }
+
+  .table-agent {
+    tbody td { border-color: lighten($border-color-dark, 3%); }
+    h6 { color: #fff; }
+  }
+
+  ////////// Events Management //////////
+  .events-reviews li { border-top-color: lighten($border-color-dark, 3%); }
+  .events-reviews p { color: inherit; }
+
+  .events-body .ev-item {
+    background-color: $border-color-dark;
+    border-left-color: lighten($border-color-dark, 10%);
+
+    h6 { color: #fff; }
+    p { color: inherit; }
+  }
+
+  .event-date {
+    background-color: lighten($dark-highlight, 10%);
+    color: #fff;
+  }
+
+  ////////// Storage Management //////////
+  .flot-chart-fourteen .flot-tick-label { color: rgba(#fff, .65); }
+  .storage-item .storage-icon { background-color: $border-color-dark; }
+  .card-article .card-title { color: #fff; }
+
+  ////////// Product Management //////////
+  .product-wrapper { background-color: $border-color-dark; }
+  .revenue-item-body span:nth-child(2) { color: #fff; }
+
+  .total-sales-body { background-image: none; }
+}

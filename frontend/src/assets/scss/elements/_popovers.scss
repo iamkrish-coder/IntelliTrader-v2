@@ -1,0 +1,19 @@
+.popover {
+  border-color: $gray-400;
+}
+
+.bs-popover-top > .popover-arrow {
+  bottom: calc(-.5rem);
+
+  &::before { border-top-color: $gray-400; }
+}
+
+.bs-popover-right > .popover-arrow::before { border-right-color: $gray-400; }
+.bs-popover-left > .popover-arrow::before { border-left-color: $gray-400; }
+.bs-popover-bottom > .popover-arrow::before { border-bottom-color: $gray-400; }
+
+.popover-header {
+  padding: 10px 12px;
+  background-color: $gray-200;
+  border-color: $gray-400;
+}

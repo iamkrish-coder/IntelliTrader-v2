@@ -1,0 +1,199 @@
+[data-skin="dark"] {
+  ////////// User Profile //////////
+  .media-profile {
+    .media-name { color: #fff; }
+  }
+
+  .profile-item-body p { color: #fff; }
+  .profile-item-body span { color: inherit; }
+
+  .post-bar {
+    border: 1px solid lighten($border-color-dark, 3%);
+    background-color: $dark-highlight;
+    box-shadow: none;
+  }
+
+  .post-bar-item {
+    + .post-bar-item { border-left-color: lighten($border-color-dark, 3%); }
+
+    a { color: inherit; }
+  }
+
+  .card-post {
+    box-shadow: none;
+
+    .card-header { border-bottom-color: lighten($border-color-dark, 3%); }
+    .card-title { color: #fff; }
+
+    .link-more {
+      color: inherit;
+      &:hover,&:focus { color: #fff; }
+    }
+
+    .card-footer {
+      border-top-color: lighten($border-color-dark, 3%);
+
+      .nav-link { color: inherit; }
+    }
+  }
+
+  .post-content {
+    h6 { color: #fff; }
+    span { color: inherit; }
+  }
+
+  .post-date { color: inherit; }
+  .post-preview {
+    background-color: lighten($dark-highlight, 5%);
+
+    h5 { color: #fff; }
+    p { color: inherit; }
+
+    span {
+      color: inherit;
+      opacity: .65;
+    }
+  }
+
+  .experience-body h5,
+  .interest-body h6 { color: #fff; }
+
+  .profile-mutual h6 { color: #fff; }
+  .mutual-group .avatar { box-shadow: 0 0 0 2px $dark-primary; }
+  .people-body h6 a { color: #fff; }
+
+  ////////// People & Groups //////////
+  .card-people {
+    box-shadow: none;
+
+    h6 a { color: #fff; }
+    p { color: inherit; }
+  }
+
+  ////////// Activity Log //////////
+  .activity-group { border-left-color: $border-color-dark; }
+  .activity-date::before { border-top-color: $border-color-dark; }
+
+  .card-comment {
+    box-shadow: none;
+    color: inherit;
+
+    strong { color: #fff; }
+  }
+
+  ////////// Events //////////
+  .card-event {
+    box-shadow: none;
+
+    h6 a { color: #fff; }
+  }
+
+  .event-body h6 a { color: #fff; }
+  .event-body p { color: inherit; }
+
+  .mutual-badge ul .avatar { border-color: $dark-primary; }
+
+  ////////// Settings //////////
+  .card-settings {
+    box-shadow: none;
+
+    .card-title { color: #fff; }
+    .card-text { color: inherit; }
+    .card-header { border-bottom-color: lighten($border-color-dark, 3%); }
+  }
+
+  .setting-item {
+    h6 { color: #fff; }
+    p { color: inherit; }
+
+    + .setting-item { border-top-color: lighten($border-color-dark, 3%); }
+
+    .table td { border-color: lighten($border-color-dark, 3%); }
+  }
+
+  .card-app { box-shadow: none; }
+
+  ////////// Authentication Pages //////////
+  .authentication-container {
+    background-color: lighten($dark-highlight, 3%);
+    @include media-breakpoint-up(sm) { background-color: $dark-primary; }
+
+    &.d-block .col-wrapper {
+      background-color: lighten($dark-highlight, 3%);
+    }
+
+    .header-logo-text { color: #fff; }
+  }
+
+  .authentication-card {
+    box-shadow: none;
+    background-color: lighten($dark-highlight, 3%);
+
+    .card-title { color: #fff; }
+    .card-text { color: inherit; }
+  }
+
+  .card-auth {
+    background-color: transparent;
+
+    .card-title { color: #fff; }
+    .card-text { color: inherit; }
+  }
+
+  ////////// Error Pages //////////
+  .page-error .header-logo-text { color: #fff; }
+  .error-title { color: #fff; }
+  .error-number { color: #fff; }
+  .error-text { color: inherit; }
+
+  ////////// Pricing //////////
+  .pricing-title { color: #fff; }
+  .pricing-text { color: inherit; }
+  .pricing-price { color: #fff; }
+
+  .table-pricing {
+    thead th > small { color: inherit; }
+
+    .title td {
+      border-bottom-color: lighten($border-color-dark, 5%);
+      &:first-child { color: #fff; }
+    }
+
+    tbody td:first-child {
+      color: #fff;
+      small { color: rgba(#fff, .65); }
+    }
+
+    thead th.selected,
+    tbody td.selected { background-color: rgba($primary, .1); }
+  }
+
+  ////////// FAQ //////////
+  .main-faq .nav-classic .nav-link { color: inherit; }
+
+  .accordion-faq {
+    .accordion-item {
+      background-color: $dark-highlight;
+      box-shadow: none;
+    }
+
+    .accordion-button {
+      &.collapsed { color: #fff; }
+      &::after { opacity: 1; }
+    }
+  }
+
+  ////////// Landing //////////
+  .headline-content::before { display: none; }
+
+  .landing-header {
+    .menu-link { color: #fff; }
+    .nav-icon .nav-link { color: #fff; }
+  }
+
+  .landing-body .dropdown-link {
+    background-color: $dark-highlight;
+    border-color: lighten($border-color-dark, 5%);
+    color: #fff;
+  }
+}

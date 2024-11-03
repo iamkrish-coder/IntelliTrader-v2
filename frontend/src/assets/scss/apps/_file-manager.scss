@@ -1,0 +1,345 @@
+.main-file-manager {
+  min-height: 0;
+  height: calc(100vh - #{$height-header});
+  margin-top: $height-header;
+  position: relative;
+
+  &.show {
+    @include media-breakpoint-down(lg) {
+      .file-sidebar {
+        left: 0;
+        border-right: 1px solid rgba($border-color, .6);
+      }
+
+      .file-content { transform: translateX(230px); }
+    }
+  }
+}
+
+.file-sidebar {
+  position: absolute;
+  top: 0;
+  left: -230px;
+  bottom: 0;
+  width: 230px;
+  overflow: hidden;
+  padding: 20px;
+  @include transition(all 0.25s);
+
+  @include media-breakpoint-up(lg) {
+    left: 0;
+    border-right: 1px solid rgba($border-color, .6);
+  }
+
+  .nav-link {
+    border-radius: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &:hover { background-color: $gray-200; }
+
+    &.active { background-color: rgba($primary, .1); }
+
+    + .nav-link { margin-top: 1px; }
+  }
+
+  .sidebar-label { padding: 0; }
+}
+
+.sidebar-storage {
+  display: flex;
+  align-items: center;
+
+  > i {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .storage-info {
+    font-size: $font-size-xs;
+    font-family: $font-family-sans-serif;
+    display: block;
+    color: $secondary;
+    margin-bottom: 2px;
+  }
+
+  .progress { height: 3px; }
+}
+
+.file-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  @include transition(all 0.25s);
+
+  @include media-breakpoint-up(lg) {
+    left: 230px;
+  }
+
+  .table-responsive {
+    margin: 0 -15px;
+    padding: 0 15px;
+  }
+}
+
+.card-file,
+.card-folder {
+  .dropdown-file {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .dropdown-link {
+    font-size: 16px;
+    color: $secondary;
+  }
+
+  .dropdown-item {
+    font-size: $font-size-sm;
+    padding-left: 8px;
+  }
+}
+
+.card-file {
+  border-width: 0;
+  border-radius: 6px;
+  @include shadow-dreamy($gray-400);
+  padding: 10px;
+  position: relative;
+  height: 100%;
+
+  .card-file-icon {
+    width: 100%;
+    height: 120px;
+    background-color: $gray-200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    border-radius: 3px;
+
+    &.danger {
+      color: $danger;
+      background-color: rgba($danger, .08);
+    }
+
+    &.primary {
+      color: $primary;
+      background-color: rgba($primary, .08);
+    }
+
+    &.info {
+      color: $info;
+      background-color: rgba($info, .08);
+    }
+
+    &.success {
+      color: $success;
+      background-color: rgba($success, .08);
+    }
+  }
+
+  .card-body {
+    padding: 0;
+    margin-top: 10px;
+
+    h6 {
+      margin-bottom: 5px;
+      font-size: $font-size-sm;
+
+      @include media-breakpoint-up(sm) { font-size: $font-size-base; }
+
+      a { color: $dark; }
+    }
+
+    span {
+      display: block;
+      font-size: $font-size-xs;
+      font-family: $font-family-sans-serif;
+      color: $secondary;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+  }
+
+  .card-footer {
+    background-color: transparent;
+    border-top-width: 0;
+    font-size: $font-size-xs;
+    font-family: $font-family-sans-serif;
+    padding: 0;
+    color: $secondary;
+  }
+}
+
+.card-folder {
+  border-width: 0;
+  border-radius: 6px;
+  @include shadow-dreamy($gray-400);
+  position: relative;
+
+  .dropdown-file {
+    top: 2px;
+    right: 0;
+  }
+
+  .card-body {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+
+    @include media-breakpoint-up(sm) { padding: 10px; }
+
+    > i {
+      font-size: 40px;
+      line-height: .75;
+      color: $primary;
+      margin-right: 8px;
+
+      @include media-breakpoint-up(sm) {
+        font-size: 48px;
+        margin-right: 10px;
+      }
+    }
+
+    h6 {
+      margin-bottom: 2px;
+      font-size: $font-size-sm;
+      width: inherit;
+
+      @include media-breakpoint-up(sm) { font-size: $font-size-base; }
+
+      a {
+        color: $dark;
+        display: block;
+        width: inherit;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+
+    span {
+      display: block;
+      font-size: 11px;
+      font-family: $font-family-sans-serif;
+      color: $secondary;
+
+      @include media-breakpoint-up(sm) { font-size: $font-size-xs; }
+    }
+  }
+
+  .card-content {
+    flex: 1;
+    max-width: calc(100% - 55px);
+
+    @include media-breakpoint-up(sm) { max-width: calc(100% - 60px); }
+  }
+}
+
+.table-files {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+  font-size: $font-size-sm;
+  min-width: 520px;
+
+  thead th,
+  tbody td {
+    &:nth-child(2),
+    &:nth-child(3) { text-align: right; }
+  }
+
+  thead th {
+    font-weight: 400;
+    font-size: $font-size-sm;
+    color: $secondary;
+    padding-top: 0;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 0;
+
+    &:first-child { width: 55%; }
+    &:nth-child(2) { width: 20%; }
+    &:nth-child(3) { width: 15%; }
+    &:last-child { width: 10%; }
+  }
+
+  tbody {
+    tr {
+      border-radius: 6px;
+      @include shadow-dreamy($gray-400);
+
+      td {
+        border-bottom: 0;
+        background-color: #fff;
+        padding: 10px;
+        vertical-align: middle;
+        border: 1px solid transparent;
+
+        &:not(:first-child) { border-left-width: 0; }
+        &:not(:last-child) { border-right-width: 0; }
+
+        &:first-child {
+          border-top-left-radius: inherit;
+          border-bottom-left-radius: inherit;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3) { text-align: right; }
+
+        &:last-child {
+          text-align: right;
+          border-top-right-radius: inherit;
+          border-bottom-right-radius: inherit;
+        }
+      }
+    }
+  }
+
+  .dropdown-link {
+    line-height: 1;
+    font-size: 18px;
+    color: $secondary;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .media {
+    display: flex;
+    align-items: center;
+  }
+
+  .media-icon {
+    margin-right: 10px;
+    font-size: 24px;
+    color: $secondary;
+    line-height: 1;
+
+    &.primary { color: $primary; }
+    &.success { color: $success; }
+    &.orange { color: $orange; }
+    &.danger { color: $danger; }
+  }
+
+  .file-name {
+    margin-bottom: 0;
+
+    a { color: $dark; }
+  }
+}
+
+.menu-file-manager {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: $secondary;
+  margin-right: 10px;
+
+  @include media-breakpoint-up(lg) { display: none; }
+}
