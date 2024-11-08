@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.6.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.5.0...v8.6.0) (2024-11-08)
+
+
+### Features
+
+* Migrating DB from Dynamo DB to PostgreSQL ([1fa0c07](https://github.com/iamkrish-coder/IntelliTrader/commit/1fa0c07d526e1221603c122f710abcc9743be8ce))
+
 ## [8.5.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.4.0...v8.5.0) (2024-11-02)
 
 
