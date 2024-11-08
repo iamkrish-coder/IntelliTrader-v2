@@ -9,7 +9,7 @@ from backend.core.exceptions import ApiException
 from backend.core.response import ApiResponse
 
 
-class Login(BaseService):
+class LoginService(BaseService):
 
     def __init__(self, request):
         super().__init__()

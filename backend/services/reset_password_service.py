@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 from jwt import ExpiredSignatureError, InvalidTokenError
 
 
-class ResetPassword(BaseService):
+class ResetPasswordService(BaseService):
 
     def __init__(self, request):
         super().__init__()

@@ -36,6 +36,7 @@ HISTORICAL_DATA_PATH_15M = os.path.join(BASE_DIR, 'backend', 'data', 'historical
 HISTORICAL_DATA_PATH_30M = os.path.join(BASE_DIR, 'backend', 'data', 'historical', '30minute')
 HISTORICAL_DATA_PATH_60M = os.path.join(BASE_DIR, 'backend', 'data', 'historical', '60minute')
 HISTORICAL_DATA_PATH_1D = os.path.join(BASE_DIR, 'backend', 'data', 'historical', '1day')
+PROCEDURES_DIR = os.path.join(BASE_DIR, 'backend', 'database', 'procedures')
 APP_CONFIGURATION_FILE = 'app_configuration.json'
 TABLE_CONFIGURATION_FILE = 'table_configuration.json'
 MINUTE_1M = '1minute'
