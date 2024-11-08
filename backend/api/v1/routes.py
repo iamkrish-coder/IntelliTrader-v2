@@ -1,9 +1,9 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Request, Depends
 from backend.autorun import Algo
-from backend.services.register_service import Register
-from backend.services.login_service import Login
-from backend.services.forgot_password_service import ForgotPassword
-from backend.services.reset_password_service import ResetPassword
+from backend.services.register_service import RegisterService
+from backend.services.login_service import LoginService
+from backend.services.forgot_password_service import ForgotPasswordService
+from backend.services.reset_password_service import ResetPasswordService
 from backend.core.exceptions import ApiException
 from backend.utils.logging_utils import *
 
@@ -22,8 +22,8 @@ async def register(request: Request):
     """
     try:
         body = await request.json()
-        register_object = Register(body)
-        response = register_object.handle_request()
+        register_object = RegisterService(body)
+        response = await register_object.handle_request()
         return response.to_http_response()
     except ApiException as error:
         return error.to_http_exception()
@@ -43,7 +43,7 @@ async def login(request: Request):
     """
     try:
         body = await request.json()
-        login_object = Login(body)
+        login_object = LoginService(body)
         response = login_object.handle_request()
         return response.to_http_response()
     except ApiException as error:
@@ -64,7 +64,7 @@ async def forgot_password(request: Request):
     """
     try:
         body = await request.json()
-        forgot_password_object = ForgotPassword(body)
+        forgot_password_object = ForgotPasswordService(body)
         response = forgot_password_object.handle_request()
         return response.to_http_response()
     except ApiException as error:
@@ -85,7 +85,7 @@ async def reset_password(request: Request):
     """
     try:
         body = await request.json()
-        reset_password_object = ResetPassword(body)
+        reset_password_object = ResetPasswordService(body)
         response = reset_password_object.handle_request()
         return response.to_http_response()
     except ApiException as error:

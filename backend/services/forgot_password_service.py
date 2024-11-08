@@ -9,7 +9,7 @@ from backend.core.response import ApiResponse
 from datetime import datetime, timedelta, timezone 
 
 
-class ForgotPassword(BaseService):
+class ForgotPasswordService(BaseService):
 
     def __init__(self, request):
         super().__init__()

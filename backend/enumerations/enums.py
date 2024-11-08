@@ -258,3 +258,18 @@ class AverageTrueRange(Enum):
     AVERAGETRUERANGE_100 = 100
     AVERAGETRUERANGE_200 = 200
 
+
+class Modules(Enum):
+    AUTHENTICATION = "AU"
+    DASHBOARD = "DA"
+    ORDERS = "OR"
+    POSITIONS = "PO"
+    STRATEGIES = "ST"
+    REPORTS = "RE"
+    SETTINGS = "SE"
+    TRADES = "TR"
+
+
+class Procedures(Enum):
+    SAVE_USER_REGISTRATION_SP = "it_au_save_user_registration_sp"
+
