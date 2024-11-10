@@ -14,6 +14,7 @@ class EmailService:
         self.smtp_server = "smtp.gmail.com"
         self.smtp_port = 587
 
+    # Send Email
     def send_email(self, recipient_email, template, **kwargs):
         """
         Sends an email with the provided details.
@@ -54,6 +55,8 @@ class EmailService:
                 "error": str(error)
             }
                  
+
+    # Get Mail Subject
     def get_mail_subject(self, template):
 
         subjects = {
@@ -61,6 +64,8 @@ class EmailService:
         }
         return subjects[template]
 
+
+    # Get Mail Body
     def get_mail_body(self, template, **kwargs):
 
         templates = {

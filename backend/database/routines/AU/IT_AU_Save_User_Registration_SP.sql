@@ -11,12 +11,13 @@
     Exceptions:
     - Raises 'DB_USER_ALREADY_EXISTS' if the email is already registered.
 */
+DROP PROCEDURE IF EXISTS IT_AU_Save_User_Registration_SP;
 
 CREATE OR REPLACE PROCEDURE IT_AU_Save_User_Registration_SP (
-    IN param_user_full_name VARCHAR(255),
-    IN param_user_email VARCHAR(255),
-    IN param_user_hashed_password VARCHAR(255),
-    IN param_user_password_salt VARCHAR(255)
+    IN param_user_full_name VARCHAR(50),
+    IN param_user_email VARCHAR(50),
+    IN param_user_hashed_password VARCHAR(100),
+    IN param_user_password_salt VARCHAR(100)
 )
 AS $$
 DECLARE 
@@ -43,7 +44,6 @@ BEGIN
             param_user_hashed_password, 
             param_user_password_salt
         );
-
     END IF;
 
     EXCEPTION

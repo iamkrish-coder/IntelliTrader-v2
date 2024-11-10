@@ -24,7 +24,7 @@ const MESSAGES = {
     'SERVER_EMAIL_NOT_FOUND': 'Email not found.',
     'SERVER_INVALID_USER_ID_EMAIL_TYPE': 'Invalid User ID or Email type.',
     'SERVER_INVALID_EMAIL_FORMAT': 'Please enter a valid email address.',
-    'SERVER_JWT_GENERATION_FAILED': 'Failed to generate JWT token.',
+    'SERVER_GENERATE_JWT_FAILURE': 'Failed to generate JWT token.',
     'SERVER_PASSWORD_HASH_FAILURE': 'Could not process password. Try again.',
     'SERVER_SAVE_USER_DB_FAILURE': 'Error saving your account. Please try again.',
     'SERVER_GET_USER_DB_FAILURE': 'Error fetching your account. Please try again.',

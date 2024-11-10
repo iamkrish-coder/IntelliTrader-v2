@@ -44,7 +44,7 @@ async def login(request: Request):
     try:
         body = await request.json()
         login_object = LoginService(body)
-        response = login_object.handle_request()
+        response = await login_object.handle_request()
         return response.to_http_response()
     except ApiException as error:
         return error.to_http_exception()
@@ -65,7 +65,7 @@ async def forgot_password(request: Request):
     try:
         body = await request.json()
         forgot_password_object = ForgotPasswordService(body)
-        response = forgot_password_object.handle_request()
+        response = await forgot_password_object.handle_request()
         return response.to_http_response()
     except ApiException as error:
         return error.to_http_exception()

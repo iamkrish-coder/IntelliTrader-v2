@@ -2,7 +2,7 @@ import uvicorn
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.database.database import Database, sqlalchemy_engine, Base
+from backend.database.database_manager import DatabaseManager, sqlalchemy_engine, Base
 from backend.api.v1.routes import router as api_router
 
 app = FastAPI()
@@ -16,7 +16,7 @@ app.add_middleware(
 )
 
 # Database instance
-database = Database.get_instance()
+database = DatabaseManager.get_instance()
 
 @app.on_event("startup")
 async def on_startup():
@@ -27,7 +27,7 @@ async def on_startup():
         await conn.run_sync(Base.metadata.create_all)
 
     # Initialize all stored procedures
-    await database.initialize_all_procedures()
+    await database.check_for_upgrade()
 
 @app.on_event("shutdown")
 async def on_shutdown():
