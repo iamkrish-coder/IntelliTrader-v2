@@ -13,5 +13,19 @@ services:
     volumes:
       - IntelliTrader_data:/var/lib/postgresql/data
 
+  mysql:
+    image: mysql:latest
+    container_name: IntelliTrader-MySQL
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - IntelliTrader_mysql_data:/var/lib/mysql
+
 volumes:
   IntelliTrader_data: 
+  IntelliTrader_mysql_data: 

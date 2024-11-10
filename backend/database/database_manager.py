@@ -5,12 +5,20 @@ import asyncpg
 import threading
 import logging
 import importlib
+import hashlib
+import json
 
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from typing import Any, List
+
+from backend.database.database_upgrade import DatabaseUpgrade
+
 from backend.utils.logging_utils import *
-from backend.constants.const import PROCEDURES_DIR
+from backend.enumerations.enums import *
+from backend.constants.const import *
+
+
 
 # DSN for asyncpg (stored procedures and direct SQL execution)
 DATABASE_URL = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
@@ -28,7 +36,7 @@ SessionLocal = sessionmaker(
 
 Base = declarative_base()
 
-class Database:
+class DatabaseManager:
     _lock = threading.Lock()
     _instance = None
 
@@ -38,7 +46,15 @@ class Database:
         self.asyncpg_connection = None
         self.sqlalchemy_engine = None
         self.sqlalchemy_session_local = None
+        self.db_updates_dir = DB_UPDATES_DIR
+        self.db_routines_dir = DB_ROUTINES_DIR
 
+    @classmethod
+    def get_instance(cls):
+        with cls._lock:
+            if cls._instance is None:
+                cls._instance = cls(dsn=DATABASE_URL, sqlalchemy_dsn=SQLALCHEMY_DATABASE_URL)
+        return cls._instance
 
     async def connect(self):
         """Set up the asyncpg connection and SQLAlchemy session engine."""
@@ -54,61 +70,46 @@ class Database:
             expire_on_commit=False
         )
 
-
     async def disconnect(self):
         await self.asyncpg_connection.close()
         await self.sqlalchemy_engine.dispose()
 
-    
     async def get_session(self) -> AsyncSession:
         """Create and return an SQLAlchemy session."""
         session = self.sqlalchemy_session_local()
         return session
 
-
     async def execute_stored_procedure(self, sp_name: str, *params) -> List[Any]:
         """Executes a stored procedure with the provided name and parameters."""
         async with self.asyncpg_connection.transaction():
 
-            # Create a string of placeholders for the parameters
             placeholders = ', '.join(f'${i + 1}' for i in range(len(params)))
-            result = await self.asyncpg_connection.fetch(
-                f'CALL {sp_name}({placeholders})',
-                *params
-            )
+            query = f'CALL {sp_name}({placeholders})'
+            result = await self.asyncpg_connection.fetch(query, *params)
         return result
 
+    async def execute_function(self, fn_name: str, *params, multiple: bool = True) -> List[Any] | Any:
+        """Executes a function with the provided name and parameters."""
+        async with self.asyncpg_connection.transaction():
 
-    async def initialize_all_procedures(self) -> List[Any]:
-        """Executes all stored procedures found in the backend.database.procedures directory."""
-        results = []
+            placeholders = ', '.join(f'${i + 1}' for i in range(len(params)))
+            query = f'SELECT * FROM {fn_name}({placeholders})'
 
-        for module_name in os.listdir(PROCEDURES_DIR):
-            module_path = os.path.join(PROCEDURES_DIR, module_name)
-            if os.path.isdir(module_path):
-                for filename in os.listdir(module_path):
-                    if filename.endswith('.sql'):
-                        file_path = os.path.join(module_path, filename)
-                        with open(file_path, 'r') as file:
-                            sql_command = file.read()
+            if multiple:
+                result = await self.asyncpg_connection.fetch(query, *params)
+            else:
+                result = await self.asyncpg_connection.fetchrow(query, *params)
 
-                        # Modify the SQL command with module prefix (lowercase for PostgreSQL)
-                        sql_command = sql_command.replace('CALL', f'CALL {module_name.lower()}.')
+            # Flatten if the result is nested
+            if result and isinstance(result[0], asyncpg.Record):
+                flattened_result = [
+                    record[fn_name] if fn_name in record else record for record in result
+                ]
+                return flattened_result if multiple else flattened_result[0]
+            
+        return result
 
-                        try:
-                            # Execute the SQL command
-                            result = await self.asyncpg_connection.execute(sql_command)
-                            results.append((file_path, result))
-                        except Exception as error:
-                            # Log error without halting the startup
-                            log_error(f"Error executing {file_path}: {error}")
-
-        return results
-
-
-    @classmethod
-    def get_instance(cls):
-        with cls._lock:
-            if cls._instance is None:
-                cls._instance = cls(dsn=DATABASE_URL, sqlalchemy_dsn=SQLALCHEMY_DATABASE_URL)
-        return cls._instance
+    async def check_for_upgrade(self):
+        # Call the check_for_updates method when needed
+        database_upgrade = DatabaseUpgrade(self.asyncpg_connection, self.db_updates_dir, self.db_routines_dir)
+        await database_upgrade.check_for_updates()
