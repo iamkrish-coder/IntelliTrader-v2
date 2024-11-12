@@ -1,5 +1,12 @@
 # Changelog
 
+## [8.6.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.6.0...v8.6.1) (2024-11-12)
+
+
+### Bug Fixes
+
+* Password reset  functionality added ([32c147b](https://github.com/iamkrish-coder/IntelliTrader/commit/32c147bb275dc5fd7403afcecaf976d820fc677e))
+
 ## [8.6.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.5.0...v8.6.0) (2024-11-08)
 
 
