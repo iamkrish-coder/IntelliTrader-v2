@@ -272,7 +272,9 @@ class Modules(Enum):
 
 class Procedures(Enum):
     SAVE_USER_REGISTRATION_SP = "it_au_save_user_registration_sp"
-    SAVE_USER_FORGOT_PASSWORD_TOKEN_SP = "it_au_save_user_forgot_password_token_sp"
+    SAVE_USER_PASSWORD_RESET_TOKEN_SP = "it_au_save_user_password_reset_token_sp"
+    SAVE_USER_PASSWORD_SP = "it_au_save_user_password_sp"
+
 
 class Functions(Enum):
     GET_USER_REGISTRATION_FN = "it_au_get_user_registration_fn" 

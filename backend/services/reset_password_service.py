@@ -2,61 +2,51 @@ import bcrypt
 import jwt
 
 from backend.models.users_model import UsersModel
-from backend.utils.logging_utils import *
+from backend.database.schemas.authentication_schema import ResetPasswordSchema
+
 from backend.services.BaseService import BaseService
+
 from backend.core.exceptions import ApiException
 from backend.core.response import ApiResponse
+
 from datetime import datetime, timedelta, timezone
 from jwt import ExpiredSignatureError, InvalidTokenError
+
+from backend.utils.logging_utils import *
+from backend.enumerations.enums import *
+from backend.constants.const import *
 
 
 class ResetPasswordService(BaseService):
 
     def __init__(self, request):
         super().__init__()
-        self.request_parameters = request
+        self.request_parameters = ResetPasswordSchema(**request)
 
-    def handle_request(self):
-        """
-        Handles the password reset request by verifying the token and updating the user's password.
-
-        Raises:
-            ApiException: If the token is invalid or expired.
-        """
+    async def handle_request(self):
         # Extract Input Parameters
-        password_reset_token = self.request_parameters.get('token')
-        new_password = self.request_parameters.get('userPassword')
+        password_reset_token = self.request_parameters.token
+        new_password = self.request_parameters.user_password
 
         # Verify Token Validity
         decoded_token = self.verify_token_validity(password_reset_token)
         user_email = decoded_token['user_email']
 
         # Hash Password
-        hashed_password, salt = self.hash_user_password(new_password)
+        user_hashed_password, user_password_salt = self.hash_user_password(new_password)
 
         # Update User Password in Database
-        self.update_user_password_in_database(user_email, hashed_password, salt)
+        update_password_response = await self.update_user_password_in_database(user_email, user_hashed_password, user_password_salt)
 
-        return ApiResponse.success(
-            message = "SERVER_PASSWORD_RESET_SUCCESSFUL", 
-            data = {}
-        )
+        if update_password_response["success"]:
+            return ApiResponse.success(
+                message = "SERVER_PASSWORD_RESET_SUCCESSFUL", 
+                data = {}
+            )
 
 
     # Hash Password
     def hash_user_password(self, user_password):
-        """
-        Hashes the user's password and generates a salt.
-
-        Args:
-            user_password (str): The user's new password to be hashed.
-
-        Returns:
-            tuple: A tuple containing the hashed password and the salt used.
-
-        Raises:
-            ApiException: If there is an error during the hashing process.
-        """
         try:
             salt = bcrypt.gensalt()
             hashed_password = bcrypt.hashpw(user_password.encode('utf-8'), salt)
@@ -69,21 +59,9 @@ class ResetPasswordService(BaseService):
 
     # Verify Token Validity
     def verify_token_validity(self, token):
-        """
-        Verifies the validity of the provided password reset token.
-
-        Args:
-            token (str): The password reset token to be verified.
-
-        Returns:
-            dict: The decoded token if valid.
-
-        Raises:
-            ApiException: If the token is expired or invalid.
-        """
         try:
             decoded_token = jwt.decode(token, SECRET_NAME, algorithms=["HS256"])
-            expiration = datetime.fromtimestamp(decoded_token['exp'])
+            expiration = datetime.datetime.fromtimestamp(decoded_token['exp'])
             return decoded_token
         except ExpiredSignatureError:
             raise ApiException.internal_server_error(
@@ -95,35 +73,18 @@ class ResetPasswordService(BaseService):
             )
 
     # Update User Password in Database
-    def update_user_password_in_database(self, user_email, hashed_password, salt):
-        """
-        Updates the user's password in the database.
-
-        Args:
-            user_email (str): The email of the user to be updated.
-            hashed_password (str): The hashed password to be updated.
-            salt (str): The salt used to hash the password.
-
-        Raises:
-            ApiException: If there is an error during the database update.
-        """
-        dataset = {
-            "user_email": user_email,
-            "user_password": hashed_password,
-            "user_password_salt": salt
-        }
-
-        update_user_password = self.prepare_request_parameters(
-            event=Events.UPDATE.value,
-            table=Tables.TABLE_USERS.value,
-            model=UsersModel,
-            dataset=dataset
-        )
+    async def update_user_password_in_database(self, user_email, user_hashed_password, user_password_salt):
         try:
-            result = self.database.database_request(update_user_password)
-            return result
+            await self.database.execute_stored_procedure(
+                            Procedures.SAVE_USER_PASSWORD_SP.value,
+                            user_email,
+                            user_hashed_password,
+                            user_password_salt,
+            )
+            return {"success": True, "data": None}
+
         except Exception as error:
             raise ApiException.internal_server_error(
-                message="SERVER_DATABASE_UPDATE_FAILURE",
+                message="SERVER_RESET_PASSWORD_DB_FAILURE",
                 data=str(error)
             )

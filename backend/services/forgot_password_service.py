@@ -31,19 +31,19 @@ class ForgotPasswordService(BaseService):
         await self.verify_registered_user(user_email)
 
         # Generate a secure token
-        forgot_password_token = self.generate_forgot_password_token(user_email)
+        user_password_reset_token = self.generate_password_reset_token(user_email)
         
         # Save the token 
-        await self.save_forgot_password_token(user_email, forgot_password_token)
+        await self.save_password_reset_token(user_email, user_password_reset_token)
 
         # Send an email with the token 
-        send_email = self.send_forgot_password_email(user_email, forgot_password_token)
+        send_email = self.send_password_reset_email(user_email, user_password_reset_token)
 
         # Return Response
         if send_email["success"]:
             return ApiResponse.success(
                 message = "SERVER_FORGOT_PASSWORD_EMAIL_SENT", 
-                data = {"token": forgot_password_token}
+                data = {"token": user_password_reset_token}
             )
         else:
             raise ApiException.internal_server_error(
@@ -53,7 +53,7 @@ class ForgotPasswordService(BaseService):
 
 
     # Generate Forgot Password Token
-    def generate_forgot_password_token(self, user_email):
+    def generate_password_reset_token(self, user_email):
         expiration_time = datetime.datetime.now(timezone.utc) + timedelta(minutes=15)
         payload = {
             'user_email': user_email,
@@ -86,25 +86,25 @@ class ForgotPasswordService(BaseService):
 
 
     # Save Forgot Password Token
-    async def save_forgot_password_token(self, user_email, forgot_password_token):     
+    async def save_password_reset_token(self, user_email, user_password_reset_token):     
         try:
             await self.database.execute_stored_procedure(
-                Procedures.SAVE_USER_FORGOT_PASSWORD_TOKEN_SP.value, 
+                Procedures.SAVE_USER_PASSWORD_RESET_TOKEN_SP.value, 
                 user_email, 
-                forgot_password_token
+                user_password_reset_token
             )
         except Exception as error:
             raise ApiException.internal_server_error(
-                message="SERVER_FORGOT_PASSWORD_TOKEN_SAVING_FAILURE", data=str(error)
+                message="SERVER_PASSWORD_RESET_TOKEN_DB_FAILURE", data=str(error)
             )
 
 
     # Send Forgot Password Email
-    def send_forgot_password_email(self, user_email, forgot_password_token):
+    def send_password_reset_email(self, user_email, user_password_reset_token):
         email_object = EmailService()
         send_email = email_object.send_email(
             recipient_email = user_email, 
             template = "forgot_password", 
-            reset_link = f"http://localhost:5173/reset-password/token={forgot_password_token}"
+            reset_link = f"http://localhost:5173/reset-password/token={user_password_reset_token}"
         )
         return send_email
