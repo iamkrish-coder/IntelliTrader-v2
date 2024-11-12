@@ -14,3 +14,8 @@ class LoginSchema(BaseModel):
 
 class ForgotPasswordSchema(BaseModel):
     user_email: EmailStr = Field(..., alias="userEmail")
+
+
+class ResetPasswordSchema(BaseModel):
+    token: str = Field(..., alias="token")
+    user_password: str = Field(..., alias="userPassword")

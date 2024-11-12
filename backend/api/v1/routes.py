@@ -86,7 +86,7 @@ async def reset_password(request: Request):
     try:
         body = await request.json()
         reset_password_object = ResetPasswordService(body)
-        response = reset_password_object.handle_request()
+        response = await reset_password_object.handle_request()
         return response.to_http_response()
     except ApiException as error:
         return error.to_http_exception()
