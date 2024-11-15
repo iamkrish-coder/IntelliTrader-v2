@@ -2,6 +2,7 @@
 
 import bcrypt
 import jwt
+import datetime
 
 from backend.database.models.users_model import UsersModel
 from backend.database.schemas.authentication_schema import LoginSchema
@@ -21,8 +22,16 @@ class LoginService(BaseService):
         super().__init__()
         self.request_parameters = LoginSchema(**request)
 
-
     async def handle_request(self):
+        """
+        Handle the login request by validating user credentials and generating a JWT token.
+
+        Returns:
+            ApiResponse: Success response with JWT token if credentials are valid.
+
+        Raises:
+            ApiException: If credentials are invalid or any other error occurs.
+        """
         # Extract Input Parameters
         user_email = self.request_parameters.user_email
         entered_credentials = self.request_parameters.user_password
@@ -41,9 +50,20 @@ class LoginService(BaseService):
         else:
             raise ApiException.validation_error(message="SERVER_INVALID_CREDENTIALS")
 
-
     # Get Registered User Details
     async def get_registered_user_details(self, user_email):
+        """
+        Retrieve registered user details from the database.
+
+        Args:
+            user_email (str): The email of the user to retrieve details for.
+
+        Returns:
+            dict: Registered user details.
+
+        Raises:
+            ApiException: If user is not found or any other database error occurs.
+        """
         try:
             registered_user_details = await self.database.execute_function(
                 Functions.GET_USER_REGISTRATION_FN.value, user_email, multiple=False
@@ -51,17 +71,33 @@ class LoginService(BaseService):
             return registered_user_details
         except Exception as error:
             if str(error) == "DB_USER_NOT_FOUND":
-                raise ApiException.validation_error(message="SERVER_LOGIN_EMAIL_INCORRECT")
+                raise ApiException.validation_error(
+                    message="SERVER_LOGIN_EMAIL_INCORRECT"
+                )
             else:
                 raise ApiException.internal_server_error(
                     message="SERVER_GET_USER_DB_FAILURE", data=str(error)
                 )
 
-
     # Generate JWT Token
     def generate_jwt_token(self, user_email):
-        try:    
-            payload = {"userEmail": user_email}
+        """
+        Generate a JWT token for the given user email with an expiry time.
+
+        Args:
+            user_email (str): The email of the user to generate the token for.
+
+        Returns:
+            str: Generated JWT token.
+
+        Raises:
+            ApiException: If any error occurs during token generation.
+        """
+        try:
+            payload = {
+                "userEmail": user_email,
+                "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+            }
             jwt_token = jwt.encode(payload, SECRET_NAME, algorithm="HS256")
             return jwt_token
         except Exception as error:
@@ -69,9 +105,21 @@ class LoginService(BaseService):
                 message="SERVER_GENERATE_JWT_FAILURE", data=str(error)
             )
 
-
     # Validate Password
     def validate_password(self, saved_user_credentials, entered_credentials):
+        """
+        Validate the entered password against the saved user credentials.
+
+        Args:
+            saved_user_credentials (dict): The saved user credentials from the database.
+            entered_credentials (str): The entered password to validate.
+
+        Returns:
+            bool: True if the password is valid, False otherwise.
+
+        Raises:
+            ApiException: If any error occurs during password validation.
+        """
         try:
             saved_user_password = saved_user_credentials["user_password"]
             return bcrypt.checkpw(

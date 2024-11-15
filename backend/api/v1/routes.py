@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Request, Depends
-from backend.autorun import Algo
+from backend.algorithm import Algorithm
 from backend.services.register_service import RegisterService
 from backend.services.login_service import LoginService
 from backend.services.forgot_password_service import ForgotPasswordService
@@ -102,7 +102,7 @@ async def trigger_algo():
         dict: A message indicating the success or failure of the algorithm start.
     """
     try:
-        application = Algo()
+        application = ALGORITHM_PATH()
         await application.autorun()
         return {"message": "Algo started successfully"}
     except Exception as error:

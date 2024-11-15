@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+
 import { Row, Card, Button, Form, Container } from 'react-bootstrap';
 import { toast } from 'sonner';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { TbRosetteDiscountCheck } from "react-icons/tb";
+
 import { registrationService } from '../../api';
 import { LoadingSpinner, BackgroundGradient, HeaderLogo } from '../../components';
 import { handleSuccess, handleError } from '../../utils';

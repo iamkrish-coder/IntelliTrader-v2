@@ -26,7 +26,7 @@ import Gradient15 from '../assets/images/Grad_15.png'
 import Gradient16 from '../assets/images/Grad_16.png'
 import Gradient17 from '../assets/images/Grad_17.png'
 import Gradient18 from '../assets/images/Grad_18.png'
-
+import Avatar1 from '../assets/images/Avatar_01.png'
 
 const IMAGES = {
     Background1 : Bg1,
@@ -56,6 +56,7 @@ const IMAGES = {
     Gradient16 : Gradient16,
     Gradient17 : Gradient17,
     Gradient18 : Gradient18,
+    Avatar1 : Avatar1,
 }
 
 export default IMAGES

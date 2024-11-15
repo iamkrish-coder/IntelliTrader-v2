@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+
 import ICONS from '../../../constants/icons.js';
 
 const HeaderLogo = () => {
