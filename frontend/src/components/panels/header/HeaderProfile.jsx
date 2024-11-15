@@ -1,5 +1,7 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
+
+import HeaderLogo from './HeaderLogo';
 
 import { Dropdown } from "react-bootstrap";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -9,16 +11,17 @@ import { MdOutlineLightMode, MdOutlineEditNote, MdOutlineManageAccounts, MdOutli
 
 import IMAGES from '../../../constants/images.js';
 
-const HeaderProfile = ({ onSkin }) => {
+const HeaderProfile = ({ onSkinChange, currentSkin }) => {
     const navigate = useNavigate();
+    const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
     useEffect(() => {
         const storedSkin = localStorage.getItem('skin-mode');
         if (storedSkin) {
             document.querySelector("html").setAttribute("data-skin", storedSkin);
-            onSkin(storedSkin);
+            onSkinChange(storedSkin);
         }
-    }, [onSkin]);
+    }, [onSkinChange]);
 
     const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
         <Link to="" ref={ref} className="dropdown-link" onClick={(e) => {
@@ -29,8 +32,16 @@ const HeaderProfile = ({ onSkin }) => {
         </Link>
     ));
 
+    const toggleSkinMode = (e) => {
+        e.preventDefault();
+        const newSkin = e.target.textContent.toLowerCase();
+        onSkinChange(newSkin);
+    };
+
     const toggleSidebar = (e) => {
         e.preventDefault();
+        setIsSidebarVisible(prev => !prev);
+        
         let isOffset = document.body.classList.contains("sidebar-offset");
         if (isOffset) {
             document.body.classList.toggle("sidebar-show");
@@ -42,25 +53,6 @@ const HeaderProfile = ({ onSkin }) => {
             }
         }
     }
-
-    const toggleSkinMode = (e) => {
-        e.preventDefault();
-        e.target.classList.add("active");
-
-        let node = e.target.parentNode.firstChild;
-        while (node) {
-            if (node !== e.target && node.nodeType === Node.ELEMENT_NODE)
-                node.classList.remove("active");
-            node = node.nextElementSibling || node.nextSibling;
-        }
-
-        let skin = e.target.textContent.toLowerCase();
-        let HTMLTag = document.querySelector("html");
-
-        HTMLTag.setAttribute("data-skin", skin);
-        localStorage.setItem("skin-mode", skin);
-        onSkin(skin);
-    };
 
     const toggleSidebarSkin = (e) => {
         e.preventDefault();
@@ -93,58 +85,64 @@ const HeaderProfile = ({ onSkin }) => {
     };
 
     return (
-        <div className="header-main px-3 px-lg-4">
+        <div className="header-main d-flex justify-content-between align-items-center px-3 px-lg-4">
             <Link onClick={toggleSidebar} className="menu-link me-3 me-lg-4"><GiHamburgerMenu /></Link>
 
-            <div className="form-search me-auto">
+            {!isSidebarVisible && <HeaderLogo />}
+
+            <div className="form-search mx-auto">
                 <input type="text" className="form-control" placeholder="Search" />
                 <CiSearch />
             </div>
 
-            <Dropdown className="dropdown-skin" align="end">
-                <Dropdown.Toggle as={CustomToggle}>
-                    <MdOutlineLightMode />
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="mt-10-f">
-                    <label>Skin Mode</label>
-                    <nav className="nav nav-skin">
-                        <Link onClick={toggleSkinMode} className={localStorage.getItem("skin-mode") === "light" ? "nav-link active" : "nav-link"}>Light</Link>
-                        <Link onClick={toggleSkinMode} className={localStorage.getItem("skin-mode") === "dark" ? "nav-link active" : "nav-link"}>Dark</Link>
-                    </nav>
-                    <hr />
-                    <label>Sidebar Skin</label>
-                    <nav id="toggleSidebarSkin" className="nav nav-skin">
-                        <Link onClick={toggleSidebarSkin} className={!(localStorage.getItem("sidebar-skin")) ? "nav-link active" : "nav-link"}>Default</Link>
-                        <Link onClick={toggleSidebarSkin} className={(localStorage.getItem("sidebar-skin") === "prime") ? "nav-link active" : "nav-link"}>Prime</Link>
-                        <Link onClick={toggleSidebarSkin} className={(localStorage.getItem("sidebar-skin") === "dark") ? "nav-link active" : "nav-link"}>Dark</Link>
-                    </nav>
-                </Dropdown.Menu>
-            </Dropdown>
-
-            <Dropdown className="dropdown-profile ms-3 ms-xl-4" align="end">
-                <Dropdown.Toggle as={CustomToggle}>
-                    <div className="avatar online">
-                        <img src={IMAGES.Avatar1} alt="" />
-                    </div>
-                </Dropdown.Toggle>
-                <Dropdown.Menu className="mt-10-f">
-                    <div className="dropdown-menu-body">
-                        <div className="avatar avatar-xl online mb-3"><img src={IMAGES.Avatar1} alt="" /></div>
-                        <h5 className="mb-1 text-dark fw-semibold">Srikrishnan P</h5>
-                        <p className="fs-sm text-secondary">IntelliTrader User</p>
-
-                        <nav className="nav">
-                            <Link to=""><RiProfileLine className="mr-2" /> View Profile</Link>
+            <div className="d-flex align-items-center">
+                <Dropdown className="dropdown-skin" align="end">
+                    <Dropdown.Toggle as={CustomToggle}>
+                        <MdOutlineLightMode />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="mt-10-f">
+                        <label>Skin Mode</label>
+                        <nav className="nav nav-skin">
+                            <Link onClick={toggleSkinMode} className={currentSkin === "light" ? "nav-link active" : "nav-link"}>Light</Link>
+                            <Link onClick={toggleSkinMode} className={currentSkin === "dark" ? "nav-link active" : "nav-link"}>Dark</Link>
                         </nav>
+                        
                         <hr />
-                        <nav className="nav">
-                            <Link to=""><MdOutlineHelpOutline className="mr-2" /> Help Center</Link>
-                            <Link to=""><MdOutlineManageAccounts className="mr-2" /> Account Settings</Link>
-                            <Link to="" onClick={handleLogout}><MdOutlineLogout className="mr-2" /> Log Out</Link>
+
+                        <label>Sidebar Skin</label>
+                        <nav id="toggleSidebarSkin" className="nav nav-skin">
+                            <Link onClick={toggleSidebarSkin} className={!(localStorage.getItem("sidebar-skin")) ? "nav-link active" : "nav-link"}>Default</Link>
+                            <Link onClick={toggleSidebarSkin} className={(localStorage.getItem("sidebar-skin") === "prime") ? "nav-link active" : "nav-link"}>Prime</Link>
+                            <Link onClick={toggleSidebarSkin} className={(localStorage.getItem("sidebar-skin") === "dark") ? "nav-link active" : "nav-link"}>Dark</Link>
                         </nav>
-                    </div>
-                </Dropdown.Menu>
-            </Dropdown>
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                <Dropdown className="dropdown-profile ms-3 ms-xl-4" align="end">
+                    <Dropdown.Toggle as={CustomToggle}>
+                        <div className="avatar online">
+                            <img src={IMAGES.Avatar1} alt="" />
+                        </div>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu className="mt-10-f">
+                        <div className="dropdown-menu-body">
+                            <div className="avatar avatar-xl online mb-3"><img src={IMAGES.Avatar1} alt="" /></div>
+                            <h5 className="mb-1 text-dark fw-semibold">Srikrishnan P</h5>
+                            <p className="fs-sm text-secondary">IntelliTrader User</p>
+
+                            <nav className="nav">
+                                <Link to=""><RiProfileLine className="mr-2" /> View Profile</Link>
+                            </nav>
+                            <hr />
+                            <nav className="nav">
+                                <Link to=""><MdOutlineHelpOutline className="mr-2" /> Help Center</Link>
+                                <Link to=""><MdOutlineManageAccounts className="mr-2" /> Account Settings</Link>
+                                <Link to="" onClick={handleLogout}><MdOutlineLogout className="mr-2" /> Log Out</Link>
+                            </nav>
+                        </div>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
         </div>
     )
 }

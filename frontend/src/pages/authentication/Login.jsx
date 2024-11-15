@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import { loginService } from '../../api';
-import { LoadingSpinner, BackgroundGradient, HeaderLogo, HeaderNav } from '../../components';
+import { LoadingSpinner, BackgroundGradient, HeaderLogo } from '../../components';
 import { handleSuccess, handleError } from '../../utils';
 
 const Login = ({ assets }) => {
