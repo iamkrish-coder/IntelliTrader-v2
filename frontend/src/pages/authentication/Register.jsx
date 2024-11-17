@@ -7,7 +7,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { TbRosetteDiscountCheck } from "react-icons/tb";
 
 import { registrationService } from '../../api';
-import { LoadingSpinner, BackgroundGradient, HeaderLogo } from '../../components';
+import { LoadingSpinner, BackgroundGradient, Logo } from '../../components';
 import { handleSuccess, handleError } from '../../utils';
 
 const Register = ({ assets }) => {
@@ -105,7 +105,7 @@ const Register = ({ assets }) => {
             <Container className="authentication-container">
                 <Card className="authentication-card shadow-2xl">
                     <Card.Header>
-                        <HeaderLogo />
+                        <Logo />
                         <Card.Title>Sign Up</Card.Title>
                         <Card.Text>It's free to signup and only takes a minute.</Card.Text>
                     </Card.Header>

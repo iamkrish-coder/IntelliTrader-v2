@@ -137,13 +137,16 @@
     border-bottom: 1px solid $gray-200;
 
     &.show {
-      .nav-label::after { content: '\EA4E'; }
+      // .nav-label::after { content: '\f054'; }
       .nav-sidebar { display: block; }
     }
   }
 
   .nav-label {
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
     padding: 12px 20px;
     font-size: 11px;
     font-family: $ff-secondary;
@@ -151,7 +154,6 @@
     color: $gray-600;
     letter-spacing: .7px;
     position: relative;
-    cursor: pointer;
 
     &:hover,
     &:focus {
@@ -159,8 +161,7 @@
     }
 
     &::after {
-      content: '\EA6E';
-      font-family: 'remixicon';
+      font-family: 'FontAwesome';
       font-size: 14px;
       font-weight: 400;
       position: absolute;

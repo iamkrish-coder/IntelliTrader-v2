@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import { loginService } from '../../api';
-import { LoadingSpinner, BackgroundGradient, HeaderLogo } from '../../components';
+import { LoadingSpinner, BackgroundGradient, Logo } from '../../components';
 import { handleSuccess, handleError } from '../../utils';
 
 const Login = ({ assets }) => {
@@ -87,7 +87,7 @@ const Login = ({ assets }) => {
             <Container className="authentication-container">
                 <Card className="authentication-card shadow-2xl">
                     <Card.Header>
-                        <HeaderLogo />
+                        <Logo />
                         <Card.Title>Sign In</Card.Title>
                         <Card.Text>Welcome back! Please sign-in to continue.</Card.Text>
                     </Card.Header>

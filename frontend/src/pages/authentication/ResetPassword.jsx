@@ -6,7 +6,7 @@ import { toast } from 'sonner';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import { resetPasswordService } from '../../api';
-import { LoadingSpinner, BackgroundGradient, HeaderLogo } from '../../components';
+import { LoadingSpinner, BackgroundGradient, Logo } from '../../components';
 import { handleSuccess, handleError } from '../../utils';
 
 const ResetPassword = ({ assets }) => {
@@ -91,7 +91,7 @@ const ResetPassword = ({ assets }) => {
             <Container className="authentication-container">
                 <Card className="authentication-card shadow-2xl">
                     <Card.Header>
-                        <HeaderLogo />
+                        <Logo />
                         <Card.Title>Reset Password</Card.Title>
                         <Card.Text>Let's choose a new password for your account.</Card.Text>
                     </Card.Header>
