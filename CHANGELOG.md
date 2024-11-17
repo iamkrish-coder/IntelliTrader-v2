@@ -1,5 +1,18 @@
 # Changelog
 
+## [8.7.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.6.1...v8.7.0) (2024-11-17)
+
+
+### Features
+
+* Added Initial changes for Header, fixed logout and token storage for authorization, fixed skin mode toggle and navigation menu ([34e5ebc](https://github.com/iamkrish-coder/IntelliTrader/commit/34e5ebc3fe1ca44e9c1cb1d5eb7ebb0574a749fc))
+
+
+### Bug Fixes
+
+* updated menu and header ([a0c3b97](https://github.com/iamkrish-coder/IntelliTrader/commit/a0c3b9771b0bc90c49c0d307afa39f121bcd5cd9))
+* updated the menu and sidebar for the dashboard view ([b5d2efe](https://github.com/iamkrish-coder/IntelliTrader/commit/b5d2efee3c9b675302e1eb0f542c7cd6e20f4e91))
+
 ## [8.6.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v8.6.0...v8.6.1) (2024-11-12)
 
 
