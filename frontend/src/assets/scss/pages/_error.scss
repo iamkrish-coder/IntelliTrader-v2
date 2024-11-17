@@ -1,10 +1,15 @@
 .page-error {
+
   .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 85vh;
+
     .container {
       min-height: calc(100vh - 72px);
       padding: 40px 20px;
-      display: flex;
-      align-items: center;
 
       @include media-breakpoint-up(lg) {
         padding: 50px 0;
@@ -71,4 +76,14 @@
   font-size: 12px;
   font-family: $ff-secondary;
   letter-spacing: 1px;
+}
+
+.error-svg {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    z-index: 0;
+    width: 40%;
+    height: auto;
+    transform: translateY(-50%);
 }

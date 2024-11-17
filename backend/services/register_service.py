@@ -22,7 +22,6 @@ class RegisterService(BaseService):
         super().__init__()
         self.request_parameters = UsersSchema(**request)
 
-
     async def handle_request(self):
         # Extract Input Parameters
         user_full_name = self.request_parameters.user_full_name
@@ -48,9 +47,17 @@ class RegisterService(BaseService):
                 data={"token": registration_token},
             )
 
-
     # Generate JWT Token
     def generate_jwt_token(self, user_email):
+        """
+        Generates a JWT token for the given user email.
+        Args:
+            user_email (str): The email of the user for whom the JWT token is to be generated.
+        Returns:
+            str: The generated JWT token.
+        Raises:
+            ApiException: If there is an error during the token generation process.
+        """
         try:
             payload = {"userEmail": user_email}
             jwt_token = jwt.encode(payload, SECRET_NAME, algorithm="HS256")
@@ -60,9 +67,17 @@ class RegisterService(BaseService):
                 message="SERVER_GENERATE_JWT_FAILURE", data=str(error)
             )
 
-
     # Hash Passwords
     def hash_user_password(self, user_password):
+        """
+        Hashes the user's password using bcrypt.
+        Args:
+            user_password (str): The plain text password to be hashed.
+        Returns:
+            tuple: A tuple containing the hashed password and the salt used, both as strings.
+        Raises:
+            ApiException: If there is an error during the hashing process, an ApiException is raised with an appropriate message.
+        """
         try:
             salt = bcrypt.gensalt()
             hashed_password = bcrypt.hashpw(user_password.encode("utf-8"), salt)
@@ -72,9 +87,25 @@ class RegisterService(BaseService):
                 message="SERVER_PASSWORD_HASH_FAILURE", data=str(hashing_error)
             )
 
-
     # Save User Registration
-    async def save_user_registration(self, user_full_name, user_email, user_hashed_password, user_password_salt):
+    async def save_user_registration(
+        self, user_full_name, user_email, user_hashed_password, user_password_salt
+    ):
+        """
+        Save user registration details to the database.
+        This method executes a stored procedure to save the user's full name, email, hashed password,
+        and password salt to the database. If the user already exists, it raises a conflict error.
+        If any other error occurs, it raises an internal server error.
+        Args:
+            user_full_name (str): The full name of the user.
+            user_email (str): The email address of the user.
+            user_hashed_password (str): The hashed password of the user.
+            user_password_salt (str): The salt used for hashing the user's password.
+        Returns:
+            dict: A dictionary with a success key indicating the operation result.
+        Raises:
+            ApiException: If the user already exists or if there is a database error.
+        """
         try:
             await self.database.execute_stored_procedure(
                 Procedures.SAVE_USER_REGISTRATION_SP.value,

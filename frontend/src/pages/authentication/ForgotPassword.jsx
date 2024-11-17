@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
+
 import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { toast } from 'sonner';
+
 import { forgotPasswordService } from '../../api';
-import { LoadingSpinner, BackgroundGradient, HeaderLogo } from '../../components';
+import { LoadingSpinner, BackgroundGradient, Logo } from '../../components';
 import { handleSuccess, handleError } from '../../utils';
 
 const ForgotPassword = ({ assets }) => {
@@ -71,7 +73,7 @@ const ForgotPassword = ({ assets }) => {
             <Container className="authentication-container">
                 <Card className="authentication-card shadow-2xl">
                     <Card.Header>
-                        <HeaderLogo />
+                        <Logo />
                         <Card.Title>Forgot Password</Card.Title>
                         <Card.Text>No worries! Just type in your email and we'll send you a password reset link.</Card.Text>
                     </Card.Header>

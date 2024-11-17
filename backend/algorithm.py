@@ -20,7 +20,7 @@ from backend.controllers.trade_controller import TradeController
 # utils Import
 from backend.utils.logging_utils import *
 
-class Algo:
+class Algorithm:
     def __init__(self):
         self.strategy_controller_instance = None
         self.signal_controller_instance = None

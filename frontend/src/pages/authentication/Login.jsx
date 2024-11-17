@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from "react-router-dom";
+
 import { Container, Button, Card, Col, Form, Row } from "react-bootstrap";
 import { toast } from 'sonner';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+
 import { loginService } from '../../api';
-import { LoadingSpinner, BackgroundGradient, HeaderLogo, HeaderNav } from '../../components';
+import { LoadingSpinner, BackgroundGradient, Logo } from '../../components';
 import { handleSuccess, handleError } from '../../utils';
 
 const Login = ({ assets }) => {
@@ -20,6 +22,14 @@ const Login = ({ assets }) => {
         userEmail: '',
         userPassword: '',
     });
+
+    // Check for existing token on component mount
+    useEffect(() => {
+        const token = localStorage.getItem('authorizationToken');
+        if (token) {
+            navigate('/dashboard/overview');
+        }
+    }, [navigate]);
 
     // Change Handlers
     const handleMouseDown = () => setShowPassword(true);
@@ -60,8 +70,10 @@ const Login = ({ assets }) => {
         setLoading(true);
         try {
             const loginResponse = await loginService(formData);
+            // Store token in local storage
+            localStorage.setItem('authorizationToken', loginResponse.success.data.token);
+            navigate('/dashboard/overview');
             handleSuccess(loginResponse);
-            // navigate('/home');
         } catch (error) {
             handleError(error);
         } finally {
@@ -75,7 +87,7 @@ const Login = ({ assets }) => {
             <Container className="authentication-container">
                 <Card className="authentication-card shadow-2xl">
                     <Card.Header>
-                        <HeaderLogo />
+                        <Logo />
                         <Card.Title>Sign In</Card.Title>
                         <Card.Text>Welcome back! Please sign-in to continue.</Card.Text>
                     </Card.Header>

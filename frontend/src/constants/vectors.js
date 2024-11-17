@@ -1,8 +1,10 @@
 
-import ForgotPassword from '../assets/vectors/forgot-password.svg'
+import ErrorPage from '../assets/vectors/error-page.svg'
+import IntelliTraderLogo from '../assets/vectors/intelliTrader-logo.svg'
 
 const VECTORS = {
-    ForgotPassword : ForgotPassword,
+    ErrorPage : ErrorPage,
+    IntelliTraderLogo : IntelliTraderLogo,
 }
 
 export default VECTORS

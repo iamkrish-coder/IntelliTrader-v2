@@ -37,6 +37,8 @@
   align-items: center;
   display: flex;
   padding: 16px 0;
+  position: relative;
+  z-index: 10;
 }
 
 .header-logo-text {
