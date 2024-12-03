@@ -1,98 +1,43 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request
 from backend.algorithm import Algorithm
-from backend.services.register_service import RegisterService
-from backend.services.login_service import LoginService
-from backend.services.forgot_password_service import ForgotPasswordService
-from backend.services.reset_password_service import ResetPasswordService
+from backend.services.oauth_service import OAuthService
 from backend.core.exceptions import ApiException
 from backend.utils.logging_utils import *
+from backend.database.database_manager import DatabaseManager
 
 router = APIRouter()
 
-@router.post("/register")
-async def register(request: Request):
+@router.post("/oauth/save")
+async def handle_oauth(request: Request):
     """
-    Handles user registration.
-
+    Handle OAuth user data storage.
+    
     Args:
-        request (Request): The HTTP request containing user registration data.
-
+        request: The incoming request
+        
     Returns:
-        HTTPResponse: The response object containing the result of the registration process.
+        HTTP response with operation result
     """
     try:
         body = await request.json()
-        register_object = RegisterService(body)
-        response = await register_object.handle_request()
+        db = DatabaseManager.get_instance()
+        oauth_service = OAuthService(db, body)
+        response = await oauth_service.handle_request()
         return response.to_http_response()
     except ApiException as error:
+        log_error(f"OAuth handling error: {str(error)}")
         return error.to_http_exception()
-    except Exception as error:
-        return  ApiException.internal_server_error(str(error)).to_http_exception()
+    except Exception as e:
+        log_error(f"Unexpected error in OAuth handler: {str(e)}")
+        raise ApiException.internal_server_error(
+            message="Unexpected error processing OAuth request",
+            data=str(e)
+        )
 
-@router.post("/login")
-async def login(request: Request):
-    """
-    Handles user login.
 
-    Args:
-        request (Request): The HTTP request containing user login data.
-
-    Returns:
-        HTTPResponse: The response object containing the result of the login process.
-    """
-    try:
-        body = await request.json()
-        login_object = LoginService(body)
-        response = await login_object.handle_request()
-        return response.to_http_response()
-    except ApiException as error:
-        return error.to_http_exception()
-    except Exception as error:
-        return  ApiException.internal_server_error(str(error)).to_http_exception()
-
-@router.post("/forgot-password")
-async def forgot_password(request: Request):
-    """
-    Handles the forgot password process.
-
-    Args:
-        request (Request): The HTTP request containing user email for password recovery.
-
-    Returns:
-        HTTPResponse: The response object containing the result of the password recovery process.
-    """
-    try:
-        body = await request.json()
-        forgot_password_object = ForgotPasswordService(body)
-        response = await forgot_password_object.handle_request()
-        return response.to_http_response()
-    except ApiException as error:
-        return error.to_http_exception()
-    except Exception as error:
-        return  ApiException.internal_server_error(str(error)).to_http_exception()
-
-@router.patch("/reset-password")
-async def reset_password(request: Request):
-    """
-    Handles the password reset process.
-
-    Args:
-        request (Request): The HTTP request containing the token and new password.
-
-    Returns:
-        HTTPResponse: The response object indicating the result of the password reset process.
-    """
-    try:
-        body = await request.json()
-        reset_password_object = ResetPasswordService(body)
-        response = await reset_password_object.handle_request()
-        return response.to_http_response()
-    except ApiException as error:
-        return error.to_http_exception()
-    except Exception as error:
-        return ApiException.internal_server_error(str(error)).to_http_exception()
-
+# API endpoint to trigger the autorun algorithm
+# Triggers the autorun trading algorithm.
+# @return A message indicating the success or failure of the algorithm start.
 @router.get("/autorun")
 async def trigger_algo():
     """
