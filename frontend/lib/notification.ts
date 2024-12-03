@@ -1,34 +1,50 @@
-import { toast } from 'sonner';
-import MESSAGES from './messages';
+import { toast } from "sonner";
+import MESSAGES from "./messages";
 
-interface SuccessResponse {
-  success?: {
-    message?: string;
-  };
-}
+type SuccessResponse =
+  | {
+      success?: {
+        message?: string;
+      };
+    }
+  | string;
 
-interface ErrorResponse {
-  error?: {
-    message?: string;
-    data?: string;
-  };
-}
+type ErrorResponse =
+  | {
+      error?: {
+        message?: string;
+        data?: string;
+      };
+    }
+  | string;
 
-export const handleSuccess = (response: SuccessResponse): void => {
-  const successMessage = response?.success?.message;
-  const formattedSuccessMessage = successMessage ? MESSAGES[successMessage as keyof typeof MESSAGES] || successMessage : undefined;
+export const notifySuccess = (response: SuccessResponse): void => {
+  const message =
+    typeof response === "string" ? response : response?.success?.message;
+
+  const formattedSuccessMessage = message
+    ? MESSAGES[message as keyof typeof MESSAGES] || message
+    : undefined;
 
   if (formattedSuccessMessage) {
     toast.success(formattedSuccessMessage);
   }
 };
 
-export const handleError = (errors: ErrorResponse): void => {
-  const errorMessage = errors?.error?.message;
-  const errorData = errors?.error?.data;
-  const formattedErrorMessage = errorMessage 
-    ? MESSAGES[errorMessage as keyof typeof MESSAGES] || errorMessage 
-    : MESSAGES['UNKNOWN_ERROR'];
+export const notifyError = (response: ErrorResponse): void => {
+  let errorMessage: string | undefined;
+  let errorData: string | undefined;
+
+  if (typeof response === "string") {
+    errorMessage = response;
+  } else {
+    errorMessage = response?.error?.message;
+    errorData = response?.error?.data;
+  }
+
+  const formattedErrorMessage = errorMessage
+    ? MESSAGES[errorMessage as keyof typeof MESSAGES] || errorMessage
+    : MESSAGES["UNKNOWN_ERROR"];
 
   toast.error(formattedErrorMessage);
   if (errorData) {

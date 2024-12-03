@@ -1,0 +1,14 @@
+{
+    "tables": {
+        "AU.users": {
+            "version": "V1",
+            "checksum": "16faca9236cbada91de6950bf865c8b74f60f26acba3940a25fa15608bc3201d",
+            "last_modified": "2024-12-03T10:14:45.107389+00:00",
+            "migration_id": "V1_20241203_AU.users"
+        }
+    },
+    "metadata": {
+        "current_version": 1,
+        "last_updated": "2024-12-03T10:14:45.107389+00:00"
+    }
+}

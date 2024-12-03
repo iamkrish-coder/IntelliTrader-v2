@@ -9,7 +9,7 @@ export const HeroHeaderSection = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="container mx-auto flex justify-center px-4 pb-32 pt-20"
+      className="container mx-auto flex justify-center px-4 py-32"
     >
       <div className="text-center">
         <motion.div
@@ -30,9 +30,9 @@ export const HeroHeaderSection = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-2 bg-clip-text font-saira text-8xl font-extrabold tracking-tight text-white md:text-8xl"
+          className="mb-4 bg-clip-text font-daysOne text-6xl tracking-wide text-white md:text-8xl"
         >
-          IntelliTrader
+          Intell!TRADER
         </motion.h1>
         <motion.p
           initial={{ y: 20, opacity: 0 }}
@@ -43,7 +43,7 @@ export const HeroHeaderSection = () => {
           "Unleash the Power of Trading with Intelligence"
         </motion.p>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Link href="/login">
+          <Link href="/auth/login">
             <Button
               size="lg"
               className="rounded-full bg-white text-lg text-black hover:bg-gray-200"

@@ -7,17 +7,17 @@ export default function Logo() {
       <Image
         src="/vectors/logo.svg"
         alt="Brand Logo"
-        width={32}
-        height={32}
+        width={24}
+        height={24}
         className="mr-2"
       />
       <Link href="/">
-        <h3 className="font-dmSans text-4xl text-black dark:text-white">
-          IntelliTrader
+        <h3 className="font-daysOne text-2xl text-gray-800 dark:text-white">
+          Intell!TRADER
         </h3>
       </Link>
       <div
-        className="ml-2 mt-4 h-2 w-2 animate-pulse rounded-full bg-red-600 dark:bg-white"
+        className="ml-2 mt-2 h-2 w-2 animate-pulse rounded-full bg-red-600 dark:bg-white"
         aria-label="Pulsing dot"
       ></div>
     </div>

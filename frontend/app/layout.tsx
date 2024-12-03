@@ -1,24 +1,33 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import { inter, montserrat, saira, dmSans, spaceGrotesk } from "@/lib/fonts";
+import { montserrat, spaceGrotesk, daysOne } from "@/lib/fonts";
 import "./globals.css";
+import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "IntelliTrader",
   description: "Trade Smarter Not Harder!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
+
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${montserrat.variable} ${saira.variable} ${dmSans.variable} ${spaceGrotesk.variable}`}
+      className={`${montserrat.variable} ${spaceGrotesk.variable} ${daysOne.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <SessionProvider session={session}>
+          {children}
+          <Toaster position="top-center" richColors />
+        </SessionProvider>
+      </body>
     </html>
   );
 }
