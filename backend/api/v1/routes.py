@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Request
 from backend.algorithm import Algorithm
-from backend.services.oauth_service import OAuthService
+from backend.services.user_service import UserService
 from backend.core.exceptions import ApiException
 from backend.utils.logging_utils import *
-from backend.database.database_manager import DatabaseManager
+from backend.database.managers.database_manager import DatabaseManager
 
 router = APIRouter()
 
-@router.post("/oauth/save")
+@router.post("/auth/create")
 async def handle_oauth(request: Request):
     """
     Handle OAuth user data storage.
@@ -20,9 +20,9 @@ async def handle_oauth(request: Request):
     """
     try:
         body = await request.json()
-        db = DatabaseManager.get_instance()
-        oauth_service = OAuthService(db, body)
-        response = await oauth_service.handle_request()
+        db_manager  = DatabaseManager.get_instance()
+        user_service_instance = UserService(db_manager, body)
+        response = await user_service_instance.handle_request()
         return response.to_http_response()
     except ApiException as error:
         log_error(f"OAuth handling error: {str(error)}")

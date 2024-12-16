@@ -1,5 +1,5 @@
 -- Table: users
--- Module: AU (Authentication)
+-- Module: (Authentication) AU
 -- Description: User authentication and profile data
 -- Last Modified: 2024-01-21
 

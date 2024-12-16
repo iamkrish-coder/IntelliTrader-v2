@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime
 
 @dataclass
-class User:
+class Users:
     """Domain model for User entity."""
     id: Optional[int] = None
     email: str = ""
