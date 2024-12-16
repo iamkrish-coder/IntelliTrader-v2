@@ -1,14 +1,24 @@
 {
-    "tables": {
-        "AU.users": {
-            "version": "V1",
-            "checksum": "16faca9236cbada91de6950bf865c8b74f60f26acba3940a25fa15608bc3201d",
-            "last_modified": "2024-12-03T10:14:45.107389+00:00",
-            "migration_id": "V1_20241203_AU.users"
+    "metadata": {
+        "current_version": 15,
+        "last_updated": "2024-12-15T13:13:30.124785+00:00"
+    },
+    "definitions": {
+        "users": {
+            "checksum": "41e0f70d598f100994a141a1a26671077b5db94537e744a9530856f5b2012132",
+            "last_modified": "2024-12-09T05:39:27.315302+00:00"
         }
     },
-    "metadata": {
-        "current_version": 1,
-        "last_updated": "2024-12-03T10:14:45.107389+00:00"
+    "procedures": {
+        "IT_AU_Create_User_Account_SP": {
+            "checksum": "f90f5e92604dc5486e372767c9b4bf03b4164d5f078c039620d405c8d26a4108",
+            "last_modified": "2024-12-09T04:20:00.680626+00:00"
+        }
+    },
+    "functions": {
+        "IT_AU_Get_User_By_Email_FN": {
+            "checksum": "760703dd88ccea13244c6beeb21cdb3ea9d06af511cf7ef862aa735b4ea15b05",
+            "last_modified": "2024-12-08T08:15:29.534839+00:00"
+        }
     }
 }

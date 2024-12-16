@@ -2,7 +2,7 @@ import uvicorn
 import os
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.database.database_manager import DatabaseManager
+from backend.database.managers.database_manager import DatabaseManager
 from backend.api.v1.routes import router as api_router
 from backend.utils.logging_utils import *
 
@@ -24,9 +24,9 @@ async def startup():
     """Initialize database connection and schema on startup."""
     try:
         await database.initialize()
-        log_info("Database connection established successfully")
+        log_info("Database Connected")
     except Exception as e:
-        log_error(f"Failed to initialize database: {str(e)}")
+        log_error(f"Database Not Connected: {str(e)}")
         raise
 
 @app.on_event("shutdown")
@@ -34,7 +34,7 @@ async def shutdown():
     """Close database connection on shutdown."""
     try:
         await database.close()
-        log_info("Database connection closed successfully")
+        log_info("Database connection closed")
     except Exception as e:
         log_error(f"Error closing database connection: {str(e)}")
         raise
