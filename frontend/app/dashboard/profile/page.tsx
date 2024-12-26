@@ -10,7 +10,7 @@ export default function Page() {
   const { data: session, status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/auth/login");
+      redirect("/auth/signin");
     },
   });
 
@@ -57,7 +57,7 @@ export default function Page() {
                 <Button
                   variant="outline"
                   className="mt-2"
-                  onClick={() => signOut({ callbackUrl: "/auth/login" })}
+                  onClick={() => signOut({ callbackUrl: "/auth/signin" })}
                 >
                   Sign Out
                 </Button>

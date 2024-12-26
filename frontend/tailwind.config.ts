@@ -1,4 +1,3 @@
-import { access } from "fs";
 import type { Config } from "tailwindcss";
 
 export default {

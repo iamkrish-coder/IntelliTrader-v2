@@ -43,7 +43,7 @@ export const HeroHeaderSection = () => {
           "Unleash the Power of Trading with Intelligence"
         </motion.p>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Link href="/auth/login">
+          <Link href="/auth/signin">
             <Button
               size="lg"
               className="rounded-full bg-white text-lg text-black hover:bg-gray-200"

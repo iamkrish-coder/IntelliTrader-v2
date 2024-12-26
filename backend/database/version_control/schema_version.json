@@ -1,12 +1,24 @@
 {
     "metadata": {
-        "current_version": 15,
-        "last_updated": "2024-12-15T13:13:30.124785+00:00"
+        "current_version": 19,
+        "last_updated": "2024-12-26T07:17:51.417065+00:00"
     },
     "definitions": {
         "users": {
-            "checksum": "41e0f70d598f100994a141a1a26671077b5db94537e744a9530856f5b2012132",
-            "last_modified": "2024-12-09T05:39:27.315302+00:00"
+            "checksum": "a0fc4d3861cfef1fa50081a5d011f8b8cc18a53e0f17ed16ca89022a7781028c",
+            "last_modified": "2024-12-25T19:07:16.649459+00:00"
+        },
+        "accounts": {
+            "checksum": "362f1cddd31caa2e094673bf859df46172e94d0024f247772c4bcb111d246ed1",
+            "last_modified": "2024-12-25T19:07:16.601621+00:00"
+        },
+        "sessions": {
+            "checksum": "db74d32b1ce23a0bd93e3015787621f560b26fe30a7145f363e4f6ee8539533e",
+            "last_modified": "2024-12-25T19:07:16.624622+00:00"
+        },
+        "verification_token": {
+            "checksum": "38605393f5154b74bbe62b377479bf8ed2a909d609c84321f952e557776180f4",
+            "last_modified": "2024-12-25T19:07:16.680337+00:00"
         }
     },
     "procedures": {

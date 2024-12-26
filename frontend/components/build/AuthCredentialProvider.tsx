@@ -101,7 +101,7 @@ export default function AuthCredentialProvider({
             <p className="mt-2 text-center text-sm">
               Already have an account?{" "}
               <Link
-                href="/auth/login"
+                href="/auth/signin"
                 className="text-muted-foreground hover:text-foreground hover:underline"
               >
                 Sign In

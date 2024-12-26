@@ -5,11 +5,13 @@ import asyncpg
 import threading
 from typing import Optional, Any, Dict, List
 from datetime import datetime
+from dotenv import load_dotenv
 
 from backend.database.managers.migration_manager import MigrationManager
 from backend.constants.const import *
 from backend.utils.logging_utils import *
 
+load_dotenv()
 DATABASE_URL = f"postgresql://{os.getenv('DB_USER')}:{os.getenv('DB_PASSWORD')}@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
 
 class DatabaseManager:
