@@ -3,7 +3,7 @@ import socket
 from backend.utils.logging_utils import *
 
 
-class RedisServiceController:
+class Redis:
     def __init__(self):
         pass
 

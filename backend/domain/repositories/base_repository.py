@@ -2,7 +2,7 @@ from typing import Optional, Dict, List, Any
 import asyncpg
 from backend.core.exceptions import ApiException
 from backend.database.managers.database_manager import DatabaseManager
-from backend.schemas.schema import StoredProcedureResponse
+from backend.domain.schemas.base_schema import StoredProcedureResponse
 
 class BaseRepository:
     def __init__(self, db_manager: DatabaseManager):

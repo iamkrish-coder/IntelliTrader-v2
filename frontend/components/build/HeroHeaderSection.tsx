@@ -19,11 +19,12 @@ export const HeroHeaderSection = () => {
           className="flex justify-center"
         >
           <Image
-            src="/vectors/Logo.svg"
-            alt="IntelliTrader Logo"
-            width={128}
-            height={128}
-            className="mb-4 invert-0 filter"
+              src="/vectors/logo.svg"
+              alt="IntelliTrader Logo"
+              width={128}
+              height={128}
+              className="mb-4"
+              priority
           />
         </motion.div>
         <motion.h1

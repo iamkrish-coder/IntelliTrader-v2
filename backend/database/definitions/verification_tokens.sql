@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS verification_token
+CREATE TABLE IF NOT EXISTS verification_tokens
 (
     identifier TEXT NOT NULL,
     expires TIMESTAMPTZ NOT NULL,

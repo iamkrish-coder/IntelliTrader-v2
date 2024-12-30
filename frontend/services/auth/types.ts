@@ -15,3 +15,14 @@ export interface OAuthResponse {
   };
   message?: string;
 }
+
+export interface loginRequest {
+  email: string;
+  password: string;
+}
+
+export interface loginResponse {
+  id: string;
+  name?: string;
+  email: string;
+}

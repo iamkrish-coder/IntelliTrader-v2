@@ -10,6 +10,7 @@ export default function Logo() {
         width={24}
         height={24}
         className="mr-2"
+        priority
       />
       <Link href="/">
         <h3 className="font-daysOne text-2xl text-gray-800 dark:text-white">

@@ -1,34 +1,24 @@
+import { auth } from "./auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { auth } from "@/auth";
 
 export async function middleware(request: NextRequest) {
   const session = await auth();
+  const isAuth = request.nextUrl.pathname.startsWith("/auth");
 
-  // Skip middleware for auth callback routes
-  if (request.nextUrl.pathname.startsWith("/api/auth/callback")) {
-    return NextResponse.next();
-  }
-
-  // If the user is not logged in and trying to access a protected route
-  if (!session && request.nextUrl.pathname.startsWith("/secure")) {
-    const loginUrl = new URL("/auth/signin", request.url);
-    loginUrl.searchParams.set("callbackUrl", request.url);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  // If the user is logged in and trying to access login or signup pages
-  if (
-    session &&
-    (request.nextUrl.pathname === "/auth/signin" ||
-      request.nextUrl.pathname === "/auth/signup")
-  ) {
+  // If they're on an auth page and are authenticated, redirect to dashboard
+  if (isAuth && session) {
     return NextResponse.redirect(new URL("/dashboard/profile", request.url));
+  }
+
+  // If they're not on an auth page and not authenticated, redirect to signin
+  if (!isAuth && !session) {
+    return NextResponse.redirect(new URL("/auth/signin", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-    matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
-}
+  matcher: ["/dashboard/:path*", "/secure/:path*", "/auth/:path*"],
+};

@@ -1,9 +1,5 @@
--- Table: accounts
--- Module: (Authentication) AU
--- Description: User authentication and profile data
--- Last Modified: 2024-12-26
-
-CREATE TABLE IF NOT EXISTS accounts (
+CREATE TABLE IF NOT EXISTS accounts
+(
     id SERIAL,
     "userId" INTEGER NOT NULL,
     type VARCHAR(255) NOT NULL,
@@ -18,4 +14,4 @@ CREATE TABLE IF NOT EXISTS accounts (
     token_type TEXT,
 
     PRIMARY KEY (id)
-);
+); 
