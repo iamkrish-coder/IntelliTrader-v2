@@ -19,12 +19,12 @@ export const HeroHeaderSection = () => {
           className="flex justify-center"
         >
           <Image
-              src="/vectors/logo.svg"
-              alt="IntelliTrader Logo"
-              width={128}
-              height={128}
-              className="mb-4"
-              priority
+            src="/vectors/logo.svg"
+            alt="IntelliTrader Logo"
+            width={256}
+            height={256}
+            className="mb-4 transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-lg"
+            priority
           />
         </motion.div>
         <motion.h1
@@ -41,7 +41,7 @@ export const HeroHeaderSection = () => {
           transition={{ delay: 0.2, duration: 0.5 }}
           className="mb-4 mt-4 pb-8 pt-4 font-montserrat text-2xl font-light text-gray-300 md:text-3xl"
         >
-          "Unleash the Power of Trading with Intelligence"
+          Unleash the Power of Trading with Intelligence
         </motion.p>
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link href="/auth/signin">

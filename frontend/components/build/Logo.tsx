@@ -7,9 +7,9 @@ export default function Logo() {
       <Image
         src="/vectors/logo.svg"
         alt="Brand Logo"
-        width={24}
-        height={24}
-        className="mr-2"
+        width={32}
+        height={32}
+        className="mr-1"
         priority
       />
       <Link href="/">
