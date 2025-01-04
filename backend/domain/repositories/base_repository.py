@@ -2,7 +2,7 @@ from typing import Optional, Dict, List, Any
 import asyncpg
 from backend.core.exceptions import ApiException
 from backend.database.managers.database_manager import DatabaseManager
-from backend.domain.schemas.base_schema import StoredProcedureResponse
+from backend.domain.schemas.base_schema import BaseResponse
 
 class BaseRepository:
     def __init__(self, db_manager: DatabaseManager):
@@ -15,7 +15,7 @@ class BaseRepository:
         transaction: bool = False
     ) -> Dict[str, Any]:
         """Execute a stored procedure"""
-        output_params = StoredProcedureResponse()
+        output_params = BaseResponse()
         args_with_output = list(args) + [
             output_params.status, 
             output_params.message, 

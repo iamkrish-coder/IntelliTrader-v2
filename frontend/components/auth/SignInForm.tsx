@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { Shell } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -16,24 +18,29 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import Logo from "@/components/build/Logo";
 import { SignInButton } from "@/components/auth/SignInButton";
-import { useRouter } from "next/router";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleCredentialsLogin = async (e: React.FormEvent) => {
+  const handleEmailAndCredentialsLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
 
+    setIsLoading(true);
+
     if (showPassword) {
+      // Credentials Login
       const result = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
+
+      setIsLoading(false);
 
       if (result?.error) {
         // Handle error
@@ -41,6 +48,7 @@ export default function SignInForm() {
       }
       // Handle success
     } else {
+      // Email Link Login
       try {
         const response = await fetch("/api/auth/email", {
           method: "POST",
@@ -48,11 +56,14 @@ export default function SignInForm() {
           body: JSON.stringify({ email }),
         });
 
+        setIsLoading(false);
+
         if (!response.ok) throw new Error("Failed to send email");
 
         // Redirect to verify-request page
         router.push("/auth/verify-request");
       } catch (error) {
+        setIsLoading(false);
         console.error("Error sending magic link:", error);
         // Show error toast
       }
@@ -83,7 +94,7 @@ export default function SignInForm() {
           </div>
         </div>
 
-        <form onSubmit={handleCredentialsLogin} className="grid gap-4">
+        <form onSubmit={handleEmailAndCredentialsLogin} className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -97,8 +108,15 @@ export default function SignInForm() {
           </div>
 
           {!showPassword && (
-            <Button type="submit" className="w-full">
-              Sign in with Email
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? (
+                <>
+                  <Shell className="mr-2 h-4 w-4 animate-spin" />
+                  Sending Login Link...
+                </>
+              ) : (
+                "Sign In with Email"
+              )}
             </Button>
           )}
 
@@ -131,19 +149,19 @@ export default function SignInForm() {
 
           <Button
             type="button"
-            variant="ghost"
+            variant="outline"
             className="text-sm text-muted-foreground hover:text-foreground"
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword
-              ? "Sign in with email instead"
-              : "Sign in with password instead"}
+              ? "Sign In with email instead"
+              : "Sign In with password instead"}
           </Button>
         </form>
       </CardContent>
       <CardFooter>
         <div className="flex w-full flex-col items-center justify-between space-y-2">
-          <p className="mt-2 text-center text-sm">
+          <p className="text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
             <Link
               href="/auth/signup"

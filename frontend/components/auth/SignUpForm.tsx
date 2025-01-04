@@ -51,7 +51,7 @@ export default function SignUpForm() {
       </CardContent>
       <CardFooter>
         <div className="flex w-full flex-col items-center justify-between space-y-2">
-          <p className="mt-2 text-center text-sm">
+          <p className="text-center text-sm text-muted-foreground">
             Already have an account?{" "}
             <Link
               href="/auth/signin"

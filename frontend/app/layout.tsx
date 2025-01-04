@@ -1,29 +1,29 @@
-import type {Metadata} from "next";
-import {montserrat, spaceGrotesk, daysOne} from "@/lib/fonts";
+import type { Metadata } from "next";
+import { montserrat, spaceGrotesk, daysOne } from "@/lib/ui/fonts";
 import "./globals.css";
-import {Toaster} from "sonner";
-import {Providers} from "./providers";
+import { Toaster } from "sonner";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-    title: "IntelliTrader",
-    description: "Trade Smarter Not Harder!",
+  title: "IntelliTrader",
+  description: "Trade Smarter Not Harder!",
 };
 
 export default async function RootLayout({
-                                             children,
-                                         }: Readonly<{
-    children: React.ReactNode;
+  children,
+}: Readonly<{
+  children: React.ReactNode;
 }>) {
-    return (
-        <html
-            lang="en"
-            className={`${montserrat.variable} ${spaceGrotesk.variable} ${daysOne.variable}`}
-        >
-        <body>
+  return (
+    <html
+      lang="en"
+      className={`${montserrat.variable} ${spaceGrotesk.variable} ${daysOne.variable}`}
+    >
+      <body>
         <Providers>{children}</Providers>
 
-        <Toaster position="top-center" richColors/>
-        </body>
-        </html>
-    );
+        <Toaster position="top-center" richColors />
+      </body>
+    </html>
+  );
 }

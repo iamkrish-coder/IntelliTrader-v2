@@ -1,7 +1,7 @@
 from typing import Optional
 from dataclasses import dataclass
 from datetime import datetime
-from .users import User
+from .user_model import UserModel
 
 @dataclass
 class SessionModel:
@@ -12,7 +12,7 @@ class SessionModel:
     expires: datetime
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    user: Optional[User] = None
+    user: Optional[UserModel] = None
 
     def to_dict(self) -> dict:
         """Convert Session instance to dictionary."""

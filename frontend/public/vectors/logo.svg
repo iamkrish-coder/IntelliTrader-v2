@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
-	 viewBox="0 0 512 512" xml:space="preserve">
-<polygon style="fill:#E21B1B;" points="145.976,45.272 291.944,466.728 0,466.728"/>
-<polygon style="fill:#009E60;" points="366.024,466.728 220.056,45.272 512,45.272 "/>
+<svg height="1200px" width="1200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+    viewBox="0 0 800 512" xml:space="preserve">
+    <polygon style="fill:#009E60;" points="145.976,45.272 291.944,466.728 0,466.728"/>
+    <polygon style="fill:#E21B1B;" points="366.024,466.728 220.056,45.272 512,45.272"/>
+    <polygon style="fill:#009E60;" points="585.976,45.272 731.944,466.728 440,466.728"/>
 </svg>
