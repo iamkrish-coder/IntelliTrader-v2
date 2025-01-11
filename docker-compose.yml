@@ -1,31 +1,29 @@
-version: '3.8'
-
 services:
-  db:
+  postgres:
     image: postgres:latest
-    container_name: IntelliTrader-DB
+    container_name: postgres
+    restart: always
     environment:
-      POSTGRES_USER: ${DB_USER}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
-      - IntelliTrader_data:/var/lib/postgresql/data
+      - ./postgres_data:/var/lib/postgresql/data
 
-  mysql:
-    image: mysql:latest
-    container_name: IntelliTrader-MySQL
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_SERVER_JSON_FILE: /pgadmin4/servers.json
     ports:
-      - "3306:3306"
+      - "5050:80"
     volumes:
-      - IntelliTrader_mysql_data:/var/lib/mysql
-
-volumes:
-  IntelliTrader_data: 
-  IntelliTrader_mysql_data: 
+      - ./pgadmin_data:/var/lib/pgadmin
+      - ./servers.json:/pgadmin4/servers.json
+    depends_on:
+      - postgres
