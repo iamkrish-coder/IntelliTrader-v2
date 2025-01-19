@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import time
 from typing import Dict, Any
 
@@ -23,15 +23,14 @@ class SessionService:
                 id=str(time.time_ns()),
                 sessionToken=session_schema.sessionToken,
                 userId=session_schema.userId,
-                expires=session_schema.expires,
-                created_at=datetime.utcnow(),
-                updated_at=datetime.utcnow()
+                expires=datetime.fromisoformat(session_schema.expires) if isinstance(session_schema.expires, str) else session_schema.expires
             )
             
             result = await self.session_repository.create_session(session)
             if not result["success"]:
                 raise ApiException.internal_server_error(
-                    message="Failed to create session"
+                    message="Failed to create session",
+                    data=result["error"]
                 )
                 
             return ApiResponse(

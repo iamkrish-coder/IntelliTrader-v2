@@ -25,7 +25,7 @@ class UserService:
                 email=user_schema.email,
                 name=user_schema.name,
                 image=user_schema.image,
-                emailVerified=datetime.utcnow() if user_schema.emailVerified else None,
+                emailVerified=user_schema.emailVerified or datetime.utcnow(),
                 created_at=datetime.utcnow(),
                 updated_at=datetime.utcnow()
             )
@@ -40,14 +40,17 @@ class UserService:
                     raise ApiException.internal_server_error(
                         message="Failed to create account"
                     )
+                
+                # Return the created user data
                 return ApiResponse(
                     message="Account created successfully",
-                    data=None
+                    data=save_result.get("data")
                 )
             else:
+                # Return existing user data
                 return ApiResponse(
                     message="Account already exists",
-                    data=None
+                    data=existing_user.get("data")
                 )             
         except Exception as e:
             log_error(f"Create user error: {str(e)}")
@@ -80,22 +83,50 @@ class UserService:
 
     async def get_user_by_email(self) -> ApiResponse:
         """Get a user by their email address."""
+        email = self.request_parameters.get("email")
+        if not email:
+            return ApiException.bad_request(message="Email is required")
+        
+        user = await self.user_repository.get_user_by_email(email)
+        if not user or user.get("data") is None:
+            return ApiResponse(
+                message="No user found with the provided email.",
+                data=None
+            )
+        
+        return ApiResponse(
+            message="User retrieved successfully",
+            data=user
+        )
+
+    async def get_user_by_account(self) -> ApiResponse:
+        """Get a user by their provider account details."""
         try:
-            email = self.request_parameters.get("email")
-            if not email:
-                raise ApiException.bad_request(message="Email is required")
+            provider = self.request_parameters.get("provider")
+            provider_account_id = self.request_parameters.get("providerAccountId")
             
-            user = await self.user_repository.get_user_by_email(email)
-            if not user:
-                raise ApiException.not_found(message="User not found")
-                
+            if not provider or not provider_account_id:
+                raise ApiException.bad_request(
+                    message="Provider and provider account ID are required"
+                )
+            
+            user = await self.user_repository.get_user_by_account(
+                provider=str(provider),
+                provider_account_id=str(provider_account_id)
+            )
+            if not user or user.get("data") is None:
+                return ApiResponse(
+                    message="No user found with the provided account details.",
+                    data=None
+                )
+            
             return ApiResponse(
                 message="User retrieved successfully",
                 data=user
             )
         except Exception as e:
-            log_error(f"Get user by email error: {str(e)}")
+            log_error(f"Get user by account error: {str(e)}")
             raise ApiException.internal_server_error(
-                message="Failed to retrieve user",
+                message="Failed to retrieve user by account",
                 data=str(e)
             )

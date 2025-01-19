@@ -1,7 +1,7 @@
 {
     "metadata": {
-        "current_version": 29,
-        "last_updated": "2025-01-11T11:58:50.347388+00:00"
+        "current_version": 48,
+        "last_updated": "2025-01-18T19:16:05.890992+00:00"
     },
     "definitions": {
         "accounts": {
@@ -25,6 +25,24 @@
             "last_modified": "2025-01-11T11:50:09.050212+00:00"
         }
     },
-    "procedures": {},
-    "functions": {}
+    "procedures": {
+        "it_au_create_session_sp": {
+            "checksum": "e08fd36f0f5cae07a43718b7c788d54137f5559f547666391973658cf44292b2",
+            "last_modified": "2025-01-18T18:42:19.766245+00:00"
+        },
+        "it_au_create_user_sp": {
+            "checksum": "38171fd7d331b79bee114eecddcc896189d1bbb273111e1c1d2ba84fdbdcd1a1",
+            "last_modified": "2025-01-18T17:32:48.167625+00:00"
+        }
+    },
+    "functions": {
+        "IT_AU_Get_User_By_Email_FN": {
+            "checksum": "db9c0a7372079a017718d606d8ca16e5a5db19f089d3d6221bd434a916d653b4",
+            "last_modified": "2025-01-18T12:15:51.116309+00:00"
+        },
+        "IT_AU_Get_User_By_Account_FN": {
+            "checksum": "4979e14fb166b98aea331c32025dc0d7b80af96498f2c9ac1818ae98ad609a6a",
+            "last_modified": "2025-01-18T12:40:54.751356+00:00"
+        }
+    }
 }

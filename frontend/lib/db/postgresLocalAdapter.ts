@@ -31,13 +31,21 @@ export function PostgresLocalAdapter(): Adapter {
       return authService.updateSession(session);
     },
     async deleteSession(sessionToken) {
-      await authService.deleteSession(sessionToken);
+      return authService.deleteSession(sessionToken);
     },
-    async createVerificationToken(token) {
-      return authService.createVerificationToken(token);
+    async createVerificationToken(params: {
+      identifier: string;
+      expires: Date;
+      token: string;
+    }) {
+      return authService.createVerificationToken({
+        identifier: params.identifier,
+        expires: params.expires,
+        token: params.token
+      });
     },
     async useVerificationToken({ identifier, token }) {
       return authService.useVerificationToken(identifier, token);
     },
   };
-} 
+}

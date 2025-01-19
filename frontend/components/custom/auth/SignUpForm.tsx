@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/build/Logo";
+import Logo from "@/components/custom/Logo";
 
 export default function SignUpForm() {
   return (

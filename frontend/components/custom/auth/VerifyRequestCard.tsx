@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Logo from "@/components/build/Logo";
+import Logo from "@/components/custom/Logo";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";

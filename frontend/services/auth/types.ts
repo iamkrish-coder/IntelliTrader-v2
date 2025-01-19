@@ -26,3 +26,9 @@ export interface loginResponse {
   name?: string;
   email: string;
 }
+
+export interface SessionData {
+  userId: string;
+  sessionToken: string;
+  expires: Date;
+}

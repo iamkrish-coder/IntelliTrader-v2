@@ -1,12 +1,18 @@
 import NextAuth from "next-auth";
+import { Adapter } from "next-auth/adapters";
 import Google from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
 import { authService } from "@/services/auth/authService";
 import { PostgresLocalAdapter } from "@/lib/db/postgresLocalAdapter";
+import { toast } from "sonner";
+import { exit } from "process";
+
+const adapter: Adapter = PostgresLocalAdapter();
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PostgresLocalAdapter(),
+  adapter,
+  debug: true,
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "database",
@@ -23,28 +29,40 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
       },
       from: process.env.EMAIL_FROM,
-      async sendVerificationRequest({ identifier: email }) {
-        try {
-          console.log("Sending verification request for:", email);
-          
-          const response = await fetch("/api/auth/email", {
+      sendVerificationRequest: async ({ identifier: email, url }) => {
+        console.log('EmailProvider: Starting verification request', { email });
+        
+        try {      
+          console.log('EmailProvider: Sending request to email API', { 
+            email, 
+            url,
+            apiUrl: `${process.env.NEXTAUTH_URL}/api/auth/email` 
+          });
+
+          const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/email`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ email }),
+            body: JSON.stringify({ 
+              email,
+              url,
+            }),
           });
 
           if (!response.ok) {
-            const error = await response.text();
-            console.error("Verification request failed:", error);
-            throw new Error(`Failed to send verification email: ${error}`);
+            const errorText = await response.text();
+            console.error('EmailProvider: Failed to send email', { 
+              status: response.status, 
+              error: errorText 
+            });
+            throw new Error(`Failed to send verification email: ${errorText}`);
           }
 
           const result = await response.json();
-          console.log("Verification email sent successfully:", result);
+          console.log('EmailProvider: Email sent successfully', result);
         } catch (error) {
-          console.error("Error in sendVerificationRequest:", error);
+          console.error('EmailProvider: Error in sendVerificationRequest:', error);
           throw error;
         }
       },
@@ -97,8 +115,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/auth/signin",
     error: "/auth/error",
     signOut: "/auth/signin",
+    verifyRequest: "/auth/verify-request",
   },
   callbacks: {
+    async signIn({ user, account, email }) {
+      console.log('SignIn callback:', { user, account, email });
+      return true;
+    },
     async jwt({ token, account, profile }) {
       if (account && profile) {
         token.accessToken = account.access_token;
@@ -111,6 +134,23 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = token.id as string;
       }
       return session;
+    },
+  },
+  events: {
+    signIn: async (message) => {
+      console.log('NextAuth Event: signIn', message);
+    },
+    signOut: async (message) => {
+      console.log('NextAuth Event: signOut', message);
+    },
+    createUser: async (message) => {
+      console.log('NextAuth Event: createUser', message);
+    },
+    linkAccount: async (message) => {
+      console.log('NextAuth Event: linkAccount', message);
+    },
+    session: async (message) => {
+      console.log('NextAuth Event: session', message);
     },
   },
 });
