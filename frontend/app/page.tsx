@@ -1,10 +1,10 @@
 "use client";
 
-import HeroHeaderSection from "@/components/build/HeroHeaderSection";
-import HeroImageSection from "@/components/build/HeroImageSection";
-import HeroFeaturesSection from "@/components/build/HeroFeaturesSection";
-import HeroTechnologiesSection from "@/components/build/HeroTechnologiesSection";
-import HeroFooterSection from "@/components/build/HeroFooterSection";
+import HeroHeaderSection from "@/components/custom/landing/HeroHeaderSection";
+import HeroImageSection from "@/components/custom/landing/HeroImageSection";
+import HeroFeaturesSection from "@/components/custom/landing/HeroFeaturesSection";
+import HeroTechnologiesSection from "@/components/custom/landing/HeroTechnologiesSection";
+import HeroFooterSection from "@/components/custom/landing/HeroFooterSection";
 
 export default function Page() {
   return (

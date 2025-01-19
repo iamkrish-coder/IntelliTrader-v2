@@ -7,11 +7,9 @@ class SessionSchema(BaseModel):
     """Schema for Session entity."""
     id: Optional[str] = None
     sessionToken: str
-    userId: str
+    userId: str = "Srikrishnan"
     expires: datetime
     user: Optional[UserSchema] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
 
 class SessionAndUserSchema(BaseModel):
     """Schema for combined Session and User data."""

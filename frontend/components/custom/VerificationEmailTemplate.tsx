@@ -72,21 +72,22 @@ export function VerificationEmailTemplate({
         <div class="container">
           <div class="header">
             <div class="logo">
-              <svg height="40" width="40" viewBox="0 0 800 512" xmlns="http://www.w3.org/2000/svg">
-                <polygon style="fill:#009E60;" points="145.976,45.272 291.944,466.728 0,466.728"/>
-                <polygon style="fill:#E21B1B;" points="366.024,466.728 220.056,45.272 512,45.272"/>
-                <polygon style="fill:#009E60;" points="585.976,45.272 731.944,466.728 440,466.728"/>
+              <svg height="1200px" width="1200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                  viewBox="0 0 800 512" xml:space="preserve">
+                  <polygon style="fill:#009E60;" points="145.976,45.272 291.944,466.728 0,466.728"/>
+                  <polygon style="fill:#E21B1B;" points="366.024,466.728 220.056,45.272 512,45.272"/>
+                  <polygon style="fill:#009E60;" points="585.976,45.272 731.944,466.728 440,466.728"/>
               </svg>
-              <span>IntelliTrader</span>
+              <span>IntelliTrader .</span>
             </div>
           </div>
           <div class="content">
-            <h2 style="color: #1e293b; margin-bottom: 16px;">Verify your email</h2>
+            <h2 style="color: #1e293b; margin-bottom: 16px;">Verify and Sign in to your IntelliTrader account</h2>
             <p style="color: #475569; margin-bottom: 24px;">
-              Click the button below to sign in to IntelliTrader. This link will expire in 24 hours.
+              Click the button below to sign in to your IntelliTrader account. This link will expire in 24 hours. By signing in, you agree to our Terms of Service and Privacy Policy
             </p>
             <div style="text-align: center;">
-              <a href="${callbackUrl}" class="button">Sign in to IntelliTrader</a>
+              <a href="${callbackUrl}" class="button">Sign In</a>
             </div>
             <div class="divider"></div>
             <p style="color: #64748b; font-size: 14px;">
@@ -105,7 +106,7 @@ export function VerificationEmailTemplate({
 
 export function VerificationEmailText({ callbackUrl }: VerificationEmailProps) {
   return `
-Sign in to IntelliTrader
+Sign In to IntelliTrader
 
 Click the following link to sign in to your account:
 ${callbackUrl}

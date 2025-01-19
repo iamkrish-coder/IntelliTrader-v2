@@ -1,5 +1,5 @@
 "use client";
-import VerifyRequestCard from "@/components/auth/VerifyRequestCard";
+import VerifyRequestCard from "@/components/custom/auth/VerifyRequestCard";
 
 export default function VerifyRequestPage() {
   return (

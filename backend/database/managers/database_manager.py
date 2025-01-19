@@ -149,7 +149,9 @@ class DatabaseManager:
             """
             Execute function with specified fetch mode
             """
-            query = f'SELECT * FROM {function_name}($1)'
+            # Create parameter placeholders based on number of arguments
+            placeholders = ', '.join(f'${i+1}' for i in range(len(args)))
+            query = f'SELECT * FROM {function_name}({placeholders})'
             
             if fetch_mode == 'all':
                 result = await conn.fetch(query, *args) 

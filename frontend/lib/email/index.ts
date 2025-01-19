@@ -1,13 +1,5 @@
 import { createTransport } from "nodemailer";
 
-console.log("Email configuration:", {
-  host: process.env.EMAIL_SERVER_HOST,
-  port: process.env.EMAIL_SERVER_PORT,
-  user: process.env.EMAIL_SERVER_USER,
-  from: process.env.EMAIL_FROM,
-  // Don't log password for security
-});
-
 const transporter = createTransport({
   host: process.env.EMAIL_SERVER_HOST,
   port: Number(process.env.EMAIL_SERVER_PORT),
@@ -44,14 +36,6 @@ export const sendEmail = async ({
   text: string;
 }) => {
   try {
-    console.log("Attempting to send email:", {
-      from: process.env.EMAIL_FROM,
-      to,
-      subject,
-      hasHtml: !!html,
-      hasText: !!text,
-    });
-
     const info = await transporter.sendMail({
       from: process.env.EMAIL_FROM,
       to,
@@ -60,18 +44,8 @@ export const sendEmail = async ({
       html,
     });
 
-    console.log("Email sent successfully:", {
-      messageId: info.messageId,
-      response: info.response,
-    });
-
     return info;
   } catch (error) {
-    console.error("Failed to send email. Error details:", {
-      name: error instanceof Error ? error.name : "Unknown",
-      message: error instanceof Error ? error.message : "Unknown error",
-      stack: error instanceof Error ? error.stack : undefined,
-    });
     throw new Error(
       error instanceof Error ? error.message : "Failed to send email",
     );

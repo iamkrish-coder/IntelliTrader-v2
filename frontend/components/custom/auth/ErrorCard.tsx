@@ -10,12 +10,25 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Logo from "@/components/build/Logo";
+import Logo from "@/components/custom/Logo";
 
-export default function ErrorCard() {
-  const searchParams = useSearchParams();
-  const error = searchParams.get("error");
-  const errorCode = searchParams.get("code") || "Unknown Error";
+interface ErrorCardProps {
+  error?: string | null;
+}
+
+export default function ErrorCard({ error }: ErrorCardProps) {
+  const getErrorMessage = (error: string) => {
+    switch (error) {
+      case "Configuration":
+        return "There is a problem with the server configuration. Please contact support.";
+      case "AccessDenied":
+        return "You do not have permission to sign in.";
+      case "Verification":
+        return "The verification token has expired or has already been used.";
+      default:
+        return "An unexpected error occurred. Please try again.";
+    }
+  };
 
   return (
     <Card>
@@ -25,12 +38,10 @@ export default function ErrorCard() {
           Authentication Error
         </CardTitle>
         <CardDescription className="text-red-600 md:text-sm">
-          Error Code: {errorCode}
+          Error Code: {error}
         </CardDescription>
         <CardDescription>
-          {error === "Configuration"
-            ? "There was a problem with the authentication configuration. Please try again later."
-            : error || "An unknown error occurred"}
+          {error ? getErrorMessage(error) : "An unknown error occurred"}
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4 md:gap-2">

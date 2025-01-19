@@ -1,58 +1,52 @@
-import { NextRequest } from "next/server";
+import { NextRequest } from 'next/server';
 import { sendEmail } from "@/lib/email";
 import {
   VerificationEmailTemplate,
   VerificationEmailText,
-} from "@/components/email/verification-email";
+} from "@/components/custom/VerificationEmailTemplate";
 
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
-  console.log("Email API route hit");
-
   try {
     const body = await req.json();
-    console.log("Request body:", body);
-
-    // Handle NextAuth verification request format
-    if (body.email) {
-      console.log("Processing verification email request for:", body.email);
-
-      const callbackUrl = `http://localhost:3000/auth/verify?token=${Math.random().toString(36).substring(2)}`;
+    
+    // Add debugging
+    console.log('Received email request:', {
+      ...body,
+      email: body.email ? 'REDACTED' : undefined
+    });
+    
+    // Handle custom verification request format 
+    if (body.email && body.url) {
+      const callbackUrl = body.url;
+      
+      // Add debugging
+      console.log('Sending verification email to:', body.email);
+      
       const html = VerificationEmailTemplate({ callbackUrl });
       const text = VerificationEmailText({ callbackUrl });
 
-      const result = await sendEmail({
-        to: body.email,
-        subject: "Sign in to IntelliTrader",
-        html,
-        text,
-      });
-
-      console.log("Verification email sent successfully:", result);
-      return new Response(
-        JSON.stringify({
-          success: true,
-          messageId: result.messageId,
-          response: result.response,
-        }),
-        {
-          status: 200,
-          headers: { "Content-Type": "application/json" },
-        },
-      );
+      try {
+        const result = await sendEmail({
+          to: body.email,
+          subject: "Sign In - IntelliTrader Account Verification",
+          html,
+          text,
+        });
+        
+        console.log('Email sent successfully:', result.messageId);
+        return new Response(JSON.stringify({ success: true, messageId: result.messageId }));
+      } catch (emailError) {
+        console.error('Failed to send email:', emailError);
+        throw emailError;
+      }
     }
 
     // Handle direct email sending format
     const { to, subject, html, text } = body;
 
     if (!to || !subject || !html || !text) {
-      console.error("Missing required fields:", {
-        to,
-        subject,
-        hasHtml: !!html,
-        hasText: !!text,
-      });
       return new Response(
         JSON.stringify({
           error: "Missing required fields",
@@ -71,7 +65,6 @@ export async function POST(req: NextRequest) {
     }
 
     const result = await sendEmail({ to, subject, html, text });
-    console.log("Email sent successfully:", result);
 
     return new Response(
       JSON.stringify({
@@ -85,12 +78,6 @@ export async function POST(req: NextRequest) {
       },
     );
   } catch (error) {
-    console.error("Email API error:", {
-      name: error instanceof Error ? error.name : "Unknown",
-      message: error instanceof Error ? error.message : "Unknown error",
-      stack: error instanceof Error ? error.stack : undefined,
-    });
-
     return new Response(
       JSON.stringify({
         error: "Failed to send email",

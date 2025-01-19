@@ -16,8 +16,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/build/Logo";
-import { SignInButton } from "@/components/auth/SignInButton";
+import Logo from "@/components/custom/Logo";
+import { SignInButton } from "@/components/custom/auth/SignInButton";
+import { toast } from "sonner";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
@@ -30,6 +31,7 @@ export default function SignInForm() {
     e.preventDefault();
     if (!email) return;
 
+    console.log('Submitting email sign-in request:', email);
     setIsLoading(true);
 
     if (showPassword) {
@@ -50,22 +52,25 @@ export default function SignInForm() {
     } else {
       // Email Link Login
       try {
-        const response = await fetch("/api/auth/email", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email }),
+        const result = await signIn('email', {
+          email: email,
+          redirect: true,
+          callbackUrl: '/auth/verify'
         });
 
         setIsLoading(false);
 
-        if (!response.ok) throw new Error("Failed to send email");
-
+        if (!result?.ok) {
+          throw new Error(result?.error || "Failed to send email");
+        }
+        
+        console.log('Sign-in result:', result);
         // Redirect to verify-request page
         router.push("/auth/verify-request");
       } catch (error) {
         setIsLoading(false);
-        console.error("Error sending magic link:", error);
-        // Show error toast
+        toast.error("Failed to send login email");
+        console.error('Sign-in Error:', error); 
       }
     }
   };

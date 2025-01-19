@@ -14,7 +14,9 @@ class SessionRepository(BaseRepository):
             Procedures.CREATE_SESSION_SP.value,
             session.sessionToken,
             session.userId,
-            session.expires
+            session.expires,
+            False,
+            None
         )
 
     async def get_session_and_user(self, session_token: str) -> Dict[str, Any]:

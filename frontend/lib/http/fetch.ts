@@ -1,37 +1,21 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api/v1';
 
-const result = async (response: Response) => {
+const handleResponse = async (response: Response) => {
+  const data = await response.json();
   if (!response.ok) {
-    let errorMessage = `Request failed with status code ${response.status}`;
-    let errorBody;
-    try {
-      errorBody = await response.json();
-      if (errorBody && errorBody.message) {
-        errorMessage = `${errorMessage}: ${errorBody.message}`;
-      }
-    } catch (e) {
-      // If JSON parsing fails, use the default error message
-    }
-    const error = new Error(errorMessage);
-    (error as any).response = response;
-    (error as any).body = errorBody;
-    throw error;
+    // If the response is not OK, throw an error with the response data
+    throw new Error(data.message || 'An error occurred');
   }
-  try {
-    const text = await response.text();
-    return text.length > 0 ? JSON.parse(text) : null;
-  } catch (e) {
-    return null; // No JSON body
-  }
+  return data; // Return the parsed JSON data
 };
 
 const api = {
-  get: async (url: string) => {
+  get: async <T>(url: string): Promise<T> => {
     const response = await fetch(`${API_BASE_URL}${url}`);
-    return result(response);
+    return handleResponse(response);
   },
 
-  post: async (url: string, data: any) => {
+  post: async <T>(url: string, data: any): Promise<T> => {
     const response = await fetch(`${API_BASE_URL}${url}`, {
       method: 'POST',
       headers: {
@@ -39,10 +23,10 @@ const api = {
       },
       body: JSON.stringify(data),
     });
-    return result(response);
+    return handleResponse(response);
   },
 
-  patch: async (url: string, data: any) => {
+  patch: async <T>(url: string, data: any): Promise<T> => {
     const response = await fetch(`${API_BASE_URL}${url}`, {
       method: 'PATCH',
       headers: {
@@ -50,14 +34,14 @@ const api = {
       },
       body: JSON.stringify(data),
     });
-    return result(response);
+    return handleResponse(response);
   },
 
-  delete: async (url: string) => {
+  delete: async <T>(url: string): Promise<T> => {
     const response = await fetch(`${API_BASE_URL}${url}`, {
       method: 'DELETE',
     });
-    return result(response);
+    return handleResponse(response);
   },
 };
 

@@ -23,7 +23,7 @@ async def create_user(user: UserSchema):
     """Create a new user."""
     try:
         db_manager = DatabaseManager.get_instance()
-        user_service = UserService(db_manager, user.dict())
+        user_service = UserService(db_manager, user.model_dump())
         response = await user_service.create_new_user_account()
         return response.to_http_response()
     except ApiException as error:
@@ -72,7 +72,7 @@ async def get_user_by_email(email: str):
         ).to_http_exception()
 
 
-@router.get("/auth/users/account", response_model=UserSchema)
+@router.get("/auth/users/account/{provider}/{providerAccountId}", response_model=UserSchema)
 async def get_user_by_account(provider: str, providerAccountId: str):
     """Get a user by account provider and ID."""
     try:
@@ -98,7 +98,7 @@ async def update_user(user_id: str, user: UserSchema):
     """Update an existing user."""
     try:
         db_manager = DatabaseManager.get_instance()
-        user_service = UserService(db_manager, user.dict())
+        user_service = UserService(db_manager, user.model_dump())
         response = await user_service.update_user(user_id)
         return response.to_http_response()
     except ApiException as error:
@@ -117,7 +117,7 @@ async def link_account(account: AccountSchema):
     """Link an account to a user."""
     try:
         db_manager = DatabaseManager.get_instance()
-        account_service = AccountService(db_manager, account.dict())
+        account_service = AccountService(db_manager, account.model_dump())
         response = await account_service.link_account()
         return response.to_http_response()
     except ApiException as error:
@@ -136,7 +136,7 @@ async def create_session(session: SessionSchema):
     """Create a new session."""
     try:
         db_manager = DatabaseManager.get_instance()
-        session_service = SessionService(db_manager, session.dict())
+        session_service = SessionService(db_manager, session.model_dump())
         response = await session_service.create_session()
         return response.to_http_response()
     except ApiException as error:
@@ -167,12 +167,12 @@ async def get_session_and_user(session_token: str):
         ).to_http_exception()
 
 
-@router.put("/auth/sessions/{session_token}", response_model=SessionSchema)
+@router.patch("/auth/sessions/{session_token}", response_model=SessionSchema)
 async def update_session(session_token: str, session: SessionSchema):
     """Update an existing session."""
     try:
         db_manager = DatabaseManager.get_instance()
-        session_service = SessionService(db_manager, session.dict())
+        session_service = SessionService(db_manager, session.model_dump())
         response = await session_service.update_session(session_token)
         return response.to_http_response()
     except ApiException as error:
@@ -209,7 +209,7 @@ async def create_verification_token(token: VerificationTokenSchema):
     """Create a new verification token."""
     try:
         db_manager = DatabaseManager.get_instance()
-        token_service = VerificationTokenService(db_manager, token.dict())
+        token_service = VerificationTokenService(db_manager, token.model_dump())
         response = await token_service.create_verification_token()
         return response.to_http_response()
     except ApiException as error:
@@ -228,7 +228,7 @@ async def use_verification_token(body: UseVerificationTokenSchema):
     """Use and delete a verification token."""
     try:
         db_manager = DatabaseManager.get_instance()
-        token_service = VerificationTokenService(db_manager, body.dict())
+        token_service = VerificationTokenService(db_manager, body.model_dump())
         response = await token_service.use_verification_token()
         return response.to_http_response()
     except ApiException as error:
