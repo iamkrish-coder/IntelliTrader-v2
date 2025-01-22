@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.1.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.0...v1.1.1) (2025-01-22)
+
+
+### Bug Fixes
+
+* modified github workflow to create and run releases only on feature branch ([157e8f9](https://github.com/iamkrish-coder/IntelliTrader/commit/157e8f9a5ffc9cd90b58595489386c7d6cfa0b8a))
+* new workflow action for releases ([1f184b8](https://github.com/iamkrish-coder/IntelliTrader/commit/1f184b81cab0daa753cdde89a2cd398ba3bc5a50))
+* Update Github workflow for releases ([0cc7079](https://github.com/iamkrish-coder/IntelliTrader/commit/0cc7079f5752ef002ddd40f469f506a62cbbb2f2))
+* workflow github ([ba492de](https://github.com/iamkrish-coder/IntelliTrader/commit/ba492de9356fcf6bcb41a7ef80f41c577e322bf2))
+
 ## [1.1.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.0.0...v1.1.0) (2025-01-22)
 
 
