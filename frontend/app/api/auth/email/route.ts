@@ -10,20 +10,10 @@ export const runtime = "nodejs";
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    
-    // Add debugging
-    console.log('Received email request:', {
-      ...body,
-      email: body.email ? 'REDACTED' : undefined
-    });
-    
+      
     // Handle custom verification request format 
     if (body.email && body.url) {
       const callbackUrl = body.url;
-      
-      // Add debugging
-      console.log('Sending verification email to:', body.email);
-      
       const html = VerificationEmailTemplate({ callbackUrl });
       const text = VerificationEmailText({ callbackUrl });
 
@@ -35,7 +25,6 @@ export async function POST(req: NextRequest) {
           text,
         });
         
-        console.log('Email sent successfully:', result.messageId);
         return new Response(JSON.stringify({ success: true, messageId: result.messageId }));
       } catch (emailError) {
         console.error('Failed to send email:', emailError);
