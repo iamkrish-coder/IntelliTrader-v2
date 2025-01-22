@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.0.0...v1.1.0) (2025-01-22)
+
+
+### Features
+
+* **auth:** implement NextAuth v5 email authentication ([bfcdb4f](https://github.com/iamkrish-coder/IntelliTrader/commit/bfcdb4ffb68dacfcb589929080dfb5d8aeb6ea7e))
+
 ## 1.0.0 (2025-01-11)
 
 
