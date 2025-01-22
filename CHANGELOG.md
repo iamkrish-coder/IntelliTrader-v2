@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.2...v1.1.3) (2025-01-22)
+
+
+### Bug Fixes
+
+* Prevent the workflow from running on release PRs created by the bot ([0708d9d](https://github.com/iamkrish-coder/IntelliTrader/commit/0708d9df2ac4f3274a52d5269bf9d9d2fecdb721))
+
 ## [1.1.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.1...v1.1.2) (2025-01-22)
 
 
