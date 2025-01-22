@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.1...v1.1.2) (2025-01-22)
+
+
+### Bug Fixes
+
+* updated github workflow to run only on feature branches ([eaecf88](https://github.com/iamkrish-coder/IntelliTrader/commit/eaecf88d8af589a8e5bdd5299befdadb352857f8))
+
 ## [1.1.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.0...v1.1.1) (2025-01-22)
 
 
