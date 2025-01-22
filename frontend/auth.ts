@@ -1,21 +1,21 @@
 import NextAuth from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import Google from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 import EmailProvider from "next-auth/providers/email";
-import { authService } from "@/services/auth/authService";
-import { PostgresLocalAdapter } from "@/lib/db/postgresLocalAdapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 import { toast } from "sonner";
-import { exit } from "process";
 
-const adapter: Adapter = PostgresLocalAdapter();
+const prisma = new PrismaClient();
+
+const adapter: Adapter = PrismaAdapter(prisma);
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter,
   debug: true,
   secret: process.env.NEXTAUTH_SECRET,
   session: {
-    strategy: "database",
+    strategy: "jwt",
     maxAge: 8 * 60 * 60, // 8 hours
   },
   providers: [
@@ -29,16 +29,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
       },
       from: process.env.EMAIL_FROM,
-      sendVerificationRequest: async ({ identifier: email, url }) => {
-        console.log('EmailProvider: Starting verification request', { email });
-        
+      sendVerificationRequest: async ({ identifier: email, url }) => {      
         try {      
-          console.log('EmailProvider: Sending request to email API', { 
-            email, 
-            url,
-            apiUrl: `${process.env.NEXTAUTH_URL}/api/auth/email` 
-          });
-
           const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/email`, {
             method: "POST",
             headers: {
@@ -52,15 +44,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 
           if (!response.ok) {
             const errorText = await response.text();
-            console.error('EmailProvider: Failed to send email', { 
-              status: response.status, 
-              error: errorText 
-            });
             throw new Error(`Failed to send verification email: ${errorText}`);
           }
 
           const result = await response.json();
-          console.log('EmailProvider: Email sent successfully', result);
         } catch (error) {
           console.error('EmailProvider: Error in sendVerificationRequest:', error);
           throw error;
@@ -77,39 +64,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
       },
     }),
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(
-        credentials: Partial<Record<"email" | "password", unknown>>,
-        request: Request,
-      ) {
-        if (!credentials?.email || !credentials?.password) {
-          return null;
-        }
-
-        try {
-          const response = await authService.login({
-            email: credentials.email as string,
-            password: credentials.password as string,
-          });
-
-          if (!response) return null;
-
-          return {
-            id: response.id,
-            email: credentials.email as string,
-            name: response.name || (credentials.email as string),
-          };
-        } catch (error) {
-          console.error("Authentication error:", error);
-          return null;
-        }
-      },
-    }),
   ],
   pages: {
     signIn: "/auth/signin",
@@ -119,19 +73,30 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account, email }) {
-      console.log('SignIn callback:', { user, account, email });
-      return true;
+      if (account?.provider === 'credentials') {
+        return true;
+      }
+      // For OAuth and Email providers, ensure user exists in database
+      return !!user;
     },
-    async jwt({ token, account, profile }) {
-      if (account && profile) {
-        token.accessToken = account.access_token;
-        token.id = profile.sub;
+    async jwt({ token, account, profile, user }) {
+      // Initial sign in
+      if (account && user) {
+        // Use the user ID from the database adapter
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        if (account.provider !== 'credentials') {
+          token.accessToken = account.access_token;
+        }
       }
       return token;
     },
     async session({ session, token }) {
       if (session?.user) {
         session.user.id = token.id as string;
+        session.user.email = token.email as string;
+        session.user.name = token.name as string | null;
       }
       return session;
     },
