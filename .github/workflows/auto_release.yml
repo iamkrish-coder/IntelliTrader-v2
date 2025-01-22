@@ -12,10 +12,11 @@ permissions:
 
 jobs:
   release-please:
-    # Only run if the PR was merged (not just closed) and it's not a release PR
+    # Improved condition to check PR author and title pattern
     if: |
       github.event.pull_request.merged == true &&
-      !startsWith(github.event.pull_request.title, 'chore(main): release')
+      github.event.pull_request.user.login != 'github-actions[bot]' &&
+      !contains(github.event.pull_request.title, 'chore: release')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,7 +26,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: simple
-          package-name: intellitrader
           
       - name: Show Release Output
         if: ${{ steps.release.outputs.release_created }}
