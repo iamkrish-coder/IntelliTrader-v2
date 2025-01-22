@@ -1,16 +1,21 @@
 name: release-please
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - release
-    
+
 permissions:
   contents: write
   pull-requests: write
 
 jobs:
   release-please:
+    # Only run if the PR was merged (not just closed) and it's not a release PR
+    if: |
+      github.event.pull_request.merged == true &&
+      !startsWith(github.event.pull_request.title, 'chore(main): release')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
