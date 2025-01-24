@@ -14,6 +14,10 @@ from backend.utils.logging_utils import *
 load_dotenv()
 DATABASE_URL = f"postgresql://{os.getenv('DATABASE_USER')}:{os.getenv('DATABASE_PASSWORD')}@{os.getenv('DATABASE_HOST')}:{os.getenv('DATABASE_PORT')}/{os.getenv('DATABASE_NAME')}"
 
+class DatabaseConnectionError(Exception):
+    """Custom exception for database connection errors"""
+    pass
+
 class DatabaseManager:
     _lock = threading.Lock()
     _instance = None
@@ -43,7 +47,7 @@ class DatabaseManager:
             )
             
             if not self.pool:
-                raise Exception("Failed to create database pool")
+                raise DatabaseConnectionError("Failed to create database pool")
 
             async with self.pool.acquire() as connection:
                 self.migration_manager = MigrationManager(connection)
@@ -51,6 +55,15 @@ class DatabaseManager:
             
             log_info("Database pool initialized successfully")
             
+        except (OSError, asyncpg.PostgresConnectionError) as e:
+            if "Connect call failed" in str(e):
+                raise DatabaseConnectionError(
+                    "Could not connect to PostgreSQL database. Please ensure that:\n"
+                    "1. The PostgreSQL Docker container is running\n"
+                    "2. The database credentials in .env are correct\n"
+                    "3. The database port (default: 5432) is not in use"
+                ) from e
+            raise DatabaseConnectionError(f"Database connection failed: {str(e)}") from e
         except Exception as e:
             log_error(f"Error initializing database pool: {e}")
             raise
