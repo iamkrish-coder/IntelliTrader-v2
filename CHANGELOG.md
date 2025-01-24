@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.4](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.3...v1.1.4) (2025-01-24)
+
+
+### Bug Fixes
+
+* enhance email login using magic links ([d535fc6](https://github.com/iamkrish-coder/IntelliTrader/commit/d535fc6707979cd3d0edc6614a61de8aa5a2ffde))
+
 ## [1.1.3](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.2...v1.1.3) (2025-01-22)
 
 
