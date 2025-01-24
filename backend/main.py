@@ -1,8 +1,9 @@
 import uvicorn
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from backend.database.managers.database_manager import DatabaseManager
+from fastapi.responses import JSONResponse
+from backend.database.managers.database_manager import DatabaseManager, DatabaseConnectionError
 from backend.api.v1.routes import router as api_router
 from backend.utils.logging_utils import *
 
@@ -25,9 +26,24 @@ async def startup():
     try:
         await database.initialize()
         log_info("Database Connected")
+    except DatabaseConnectionError as e:
+        log_error(str(e))
+        # We don't raise here to allow the application to start without the database
+        # This way we can show a proper error message to API clients
     except Exception as e:
-        log_error(f"Database Not Connected: {str(e)}")
+        log_error(f"Unexpected error during startup: {str(e)}")
         raise
+
+@app.middleware("http")
+async def check_database_connection(request, call_next):
+    if database.pool is None:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "detail": "Database connection is not available. Please check server logs for details."
+            }
+        )
+    return await call_next(request)
 
 @app.on_event("shutdown")
 async def shutdown():

@@ -54,23 +54,24 @@ export default function SignInForm() {
       try {
         const result = await signIn('email', {
           email: email,
-          redirect: true,
+          redirect: false,
           callbackUrl: '/auth/verify'
         });
 
         setIsLoading(false);
 
-        if (!result?.ok) {
-          throw new Error(result?.error || "Failed to send email");
+        if (result?.error) {
+          console.error('Sign-in Error:', result.error);
+          toast.error("Failed to send login email");
+          return;
         }
         
-        console.log('Sign-in result:', result);
-        // Redirect to verify-request page
+        // If we get here, the email was sent successfully
         router.push("/auth/verify-request");
       } catch (error) {
         setIsLoading(false);
+        console.error('Sign-in Error:', error);
         toast.error("Failed to send login email");
-        console.error('Sign-in Error:', error); 
       }
     }
   };

@@ -29,28 +29,36 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         },
       },
       from: process.env.EMAIL_FROM,
-      sendVerificationRequest: async ({ identifier: email, url }) => {      
-        try {      
-          const response = await fetch(`${process.env.NEXTAUTH_URL}/api/auth/email`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+      sendVerificationRequest: async ({ identifier: email, url }) => {
+        try {
+          const response = await fetch(
+            `${process.env.NEXTAUTH_URL}/api/auth/email`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email,
+                url,
+              }),
             },
-            body: JSON.stringify({ 
-              email,
-              url,
-            }),
-          });
+          );
 
           if (!response.ok) {
             const errorText = await response.text();
-            throw new Error(`Failed to send verification email: ${errorText}`);
+            console.error(`Failed to send verification email: ${errorText}`);
+            return;
           }
 
           const result = await response.json();
+          return result;
         } catch (error) {
-          console.error('EmailProvider: Error in sendVerificationRequest:', error);
-          throw error;
+          console.error(
+            "EmailProvider: Error in sendVerificationRequest:",
+            error,
+          );
+          return;
         }
       },
     }),
@@ -73,7 +81,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   callbacks: {
     async signIn({ user, account, email }) {
-      if (account?.provider === 'credentials') {
+      if (account?.provider === "credentials") {
         return true;
       }
       // For OAuth and Email providers, ensure user exists in database
@@ -86,7 +94,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = user.id;
         token.email = user.email;
         token.name = user.name;
-        if (account.provider !== 'credentials') {
+        if (account.provider !== "credentials") {
           token.accessToken = account.access_token;
         }
       }
@@ -103,19 +111,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   events: {
     signIn: async (message) => {
-      console.log('NextAuth Event: signIn', message);
+      // console.log('NextAuth Event: signIn', message);
     },
     signOut: async (message) => {
-      console.log('NextAuth Event: signOut', message);
+      // console.log('NextAuth Event: signOut', message);
     },
     createUser: async (message) => {
-      console.log('NextAuth Event: createUser', message);
+      // console.log('NextAuth Event: createUser', message);
     },
     linkAccount: async (message) => {
-      console.log('NextAuth Event: linkAccount', message);
+      // console.log('NextAuth Event: linkAccount', message);
     },
     session: async (message) => {
-      console.log('NextAuth Event: session', message);
+      // console.log('NextAuth Event: session', message);
     },
   },
 });
