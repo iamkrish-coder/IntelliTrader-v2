@@ -31,46 +31,55 @@ export default function SignInForm() {
     e.preventDefault();
     if (!email) return;
 
-    console.log('Submitting email sign-in request:', email);
     setIsLoading(true);
 
     if (showPassword) {
-      // Credentials Login
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
+      try {
+        const result = await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+          callbackUrl: "/dashboard/profile",
+        });
 
-      setIsLoading(false);
+        if (result?.error) {
+          console.log("Sign-in error:", result.error);
+          toast.error("Incorrect email or password. Please try again.");
+          return;
+        }
 
-      if (result?.error) {
-        // Handle error
-        return;
+        if (result?.ok) {
+          toast.success("Signed in successfully!");
+          router.push(result.url || "/dashboard/profile");
+        }
+      } catch (error) {
+        console.error("Sign-in error:", error);
+        toast.error("An unexpected error occurred");
+      } finally {
+        setIsLoading(false);
       }
-      // Handle success
     } else {
       // Email Link Login
       try {
-        const result = await signIn('email', {
+        const result = await signIn("email", {
           email: email,
           redirect: false,
-          callbackUrl: '/auth/verify'
+          callbackUrl: "/auth/verify",
         });
 
         setIsLoading(false);
 
         if (result?.error) {
-          console.error('Sign-in Error:', result.error);
+          console.error("Sign-in Error:", result.error);
           toast.error("Failed to send login email");
           return;
         }
-        
+
         // If we get here, the email was sent successfully
         router.push("/auth/verify-request");
       } catch (error) {
         setIsLoading(false);
-        console.error('Sign-in Error:', error);
+        console.error("Sign-in Error:", error);
         toast.error("Failed to send login email");
       }
     }
@@ -145,10 +154,18 @@ export default function SignInForm() {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Enter your password"
                   required
+                  disabled={isLoading}
                 />
               </div>
-              <Button type="submit" className="w-full">
-                Sign In with Password
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <Shell className="mr-2 h-4 w-4 animate-spin" />
+                    Signing In...
+                  </>
+                ) : (
+                  "Sign In with Password"
+                )}
               </Button>
             </>
           )}
@@ -160,8 +177,8 @@ export default function SignInForm() {
             onClick={() => setShowPassword(!showPassword)}
           >
             {showPassword
-              ? "Sign In with email instead"
-              : "Sign In with password instead"}
+              ? "Sign In with Email instead"
+              : "Sign In with Password instead"}
           </Button>
         </form>
       </CardContent>
