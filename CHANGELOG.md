@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.5](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.4...v1.1.5) (2025-01-25)
+
+
+### Bug Fixes
+
+* Implement password-based authentication with credentials provider ([bf6c414](https://github.com/iamkrish-coder/IntelliTrader/commit/bf6c4144cb51db305dd2cd206636394e556878b5))
+
 ## [1.1.4](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.3...v1.1.4) (2025-01-24)
 
 
