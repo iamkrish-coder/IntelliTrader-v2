@@ -5,115 +5,34 @@ on:
     types: [closed]
     branches:
       - release
-  # Allow manual trigger for testing
-  workflow_dispatch:
-    inputs:
-      force_release:
-        description: 'Force a new release'
-        required: false
-        type: boolean
-        default: false
 
 permissions:
   contents: write
   pull-requests: write
-  issues: write
 
 jobs:
   release-please:
     if: |
-      (github.event_name == 'workflow_dispatch') ||
-      (github.event.pull_request.merged == true &&
+      github.event.pull_request.merged == true &&
       github.event.pull_request.user.login != 'github-actions[bot]' &&
-      !contains(github.event.pull_request.title, 'chore: release'))
+      !contains(github.event.pull_request.title, 'chore: release')
     runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-      version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Debug Event Info
-        run: |
-          echo "::group::Event Information"
-          echo "Event Name: ${{ github.event_name }}"
-          echo "PR Title: ${{ github.event.pull_request.title }}"
-          echo "PR Author: ${{ github.event.pull_request.user.login }}"
-          echo "PR Base: ${{ github.event.pull_request.base.ref }}"
-          echo "PR Head: ${{ github.event.pull_request.head.ref }}"
-          echo "PR Merged: ${{ github.event.pull_request.merged }}"
-          echo "::endgroup::"
       
-      - name: Release Please Action
-        id: release
-        uses: googleapis/release-please-action@v4
+      - uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
           release-type: simple
           default-branch: release
-          skip-github-release: true  # We'll create the release ourselves
-          
-      - name: Debug Release Output
-        if: always()
-        run: |
-          echo "::group::Release-Please Outputs"
-          echo "Release Created: ${{ steps.release.outputs.release_created }}"
-          echo "Release PR: ${{ steps.release.outputs.pr }}"
-          echo "Tag Name: ${{ steps.release.outputs.tag_name }}"
-          echo "Version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
-          echo "Path: ${{ steps.release.outputs.path }}"
-          echo "SHA: ${{ steps.release.outputs.sha }}"
-          echo "::endgroup::"
-          
-      - name: Delete existing tag if exists
-        if: ${{ steps.release.outputs.release_created == 'true' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG_NAME: ${{ steps.release.outputs.tag_name }}
-        run: |
-          echo "::group::Checking Existing Release"
-          if gh release view "$TAG_NAME" &>/dev/null; then
-            echo "Found existing release $TAG_NAME - deleting..."
-            gh release delete "$TAG_NAME" --yes
-            git push --delete origin "$TAG_NAME" || true
-            echo "Successfully deleted existing release and tag"
-          else
-            echo "No existing release found for $TAG_NAME"
-          fi
-          echo "::endgroup::"
-          
-      - name: Create GitHub Release
-        if: ${{ steps.release.outputs.release_created == 'true' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG_NAME: ${{ steps.release.outputs.tag_name }}
-          SHA: ${{ steps.release.outputs.sha }}
-        run: |
-          echo "::group::Creating Release"
-          echo "Creating release for tag: $TAG_NAME"
-          echo "Target SHA: $SHA"
-          
-          # Create the release
-          gh release create "$TAG_NAME" \
-            --target $SHA \
-            --title "Release $TAG_NAME" \
-            --notes "$(cat CHANGELOG.md)" \
-            --latest
-            
-          echo "Successfully created release $TAG_NAME"
-          echo "::endgroup::"
 
   notify:
     needs: release-please
-    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    if: needs.release-please.outputs.release_created == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Create Release Notification Issue
