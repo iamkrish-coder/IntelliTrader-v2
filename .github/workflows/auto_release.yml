@@ -1,104 +1,34 @@
-name: release-please
-
-# Prevent multiple release workflows from running simultaneously
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+name: Auto Release
 
 on:
   push:
     branches:
-      - release
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - '.release-please-manifest.json'
-      - 'package.json'
-      - 'package-lock.json'
-      - '**.md'
-  workflow_dispatch:
-    inputs:
-      force_release:
-        description: 'Force a release even if no relevant changes'
-        required: false
-        type: boolean
-        default: false
-
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
+      - release  # or the default branch of your repository
 
 jobs:
   release-please:
-    if: |
-      github.event_name == 'workflow_dispatch' ||
-      (!contains(github.event.head_commit.message, 'chore(release):') &&
-       !contains(github.event.head_commit.message, 'chore: release'))
-    runs-on: ubuntu-22.04
-    timeout-minutes: 10
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    outputs:
-      releases_created: ${{ steps.release.outputs.releases_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-      version: ${{ steps.release.outputs.version }}
-      major: ${{ steps.release.outputs.major }}
-      minor: ${{ steps.release.outputs.minor }}
-      patch: ${{ steps.release.outputs.patch }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      
     steps:
-      - name: Begin Release Process
-        run: |
-          echo "Starting release process at $(date)"
-          echo "Repository: ${{ github.repository }}"
-          echo "Branch: ${{ github.ref }}"
-          echo "Commit: ${{ github.sha }}"
-          echo "Triggered by: ${{ github.actor }}"
-
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Run Release Please
         id: release
         uses: googleapis/release-please-action@v4
         with:
+          release-type: "simple"  # Change this to match your project type (e.g., "python", "java", "ruby", etc.)
           token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: simple
-          config-file: .release-please-config.json
-          manifest-file: .release-please-manifest.json
-          target-branch: release
 
-      - name: Debug Release Output
-        if: always()
-        run: |
-          echo "Release Please Action Completed"
-          echo "Exit Code: ${{ job.status }}"
-          echo "Has Release Output: ${{ steps.release.outputs.releases_created != '' }}"
-          echo "Release Created: ${{ steps.release.outputs.releases_created }}"
-
-      - name: Log Release Details
-        if: ${{ steps.release.outputs.releases_created == 'true' }}
-        run: |
-          echo "🎉 Release successfully created!"
-          echo "Release Tag: ${{ steps.release.outputs.tag_name }}"
-          echo "Version: ${{ steps.release.outputs.version }}"
-          echo "Major: ${{ steps.release.outputs.major }}"
-          echo "Minor: ${{ steps.release.outputs.minor }}"
-          echo "Patch: ${{ steps.release.outputs.patch }}"
-          echo "Release URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ steps.release.outputs.tag_name }}"
-
-      - name: Notify on Failure
-        if: failure()
-        run: |
-          echo "::error::Release workflow failed!"
-          echo "Error occurred in job: ${{ github.job }}"
-          echo "Workflow: ${{ github.workflow }}"
-          echo "Action: ${{ github.action }}"
-          echo "Event: ${{ github.event_name }}"
-          echo "Please check the logs above for more details."
-
-      - name: Completion Summary
-        if: always()
-        run: |
-          echo "Release workflow completed at $(date)"
-          echo "Final Status: ${{ job.status }}"
+      - name: Create GitHub Release
+        if: steps.release.outputs.release_created == 'true'
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ steps.release.outputs.tag_name }}
+          release_name: ${{ steps.release.outputs.release_name }}
+          body: ${{ steps.release.outputs.release_body }}
+          draft: false
+          prerelease: false
