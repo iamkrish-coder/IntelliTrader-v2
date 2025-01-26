@@ -12,16 +12,16 @@ permissions:
 
 jobs:
   release-please:
-    # Improved condition to check PR author and title pattern
     if: |
       github.event.pull_request.merged == true &&
       github.event.pull_request.user.login != 'github-actions[bot]' &&
       !contains(github.event.pull_request.title, 'chore: release')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Release Please Action
         uses: googleapis/release-please-action@v4
@@ -30,20 +30,27 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
+          release-type: simple
+          
+      - name: Create GitHub Release
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ steps.release.outputs.tag_name }}
+          SHA: ${{ steps.release.outputs.sha }}
+        run: |
+          echo "Creating release for tag: $TAG_NAME"
+          gh release create "$TAG_NAME" \
+            --target $SHA \
+            --title "Release $TAG_NAME" \
+            --notes "$(cat CHANGELOG.md)"
           
       - name: Show Release Output
         if: ${{ steps.release.outputs.release_created }}
         run: |
           echo "::group::Release Information"
-          echo "Tag Name: ${TAG_NAME}"
-          echo "Release SHA: ${RELEASE_SHA}"
-          echo "Release PR: ${PR_NUMBER}"
-          echo "Version: ${MAJOR}.${MINOR}.${PATCH}"
+          echo "Tag Name: ${{ steps.release.outputs.tag_name }}"
+          echo "Release SHA: ${{ steps.release.outputs.sha }}"
+          echo "Release PR: ${{ steps.release.outputs.pr }}"
+          echo "Version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
           echo "::endgroup::"
-        env:
-          TAG_NAME: ${{ steps.release.outputs.tag_name }}
-          RELEASE_SHA: ${{ steps.release.outputs.sha }}
-          PR_NUMBER: ${{ steps.release.outputs.pr }}
-          MAJOR: ${{ steps.release.outputs.major }}
-          MINOR: ${{ steps.release.outputs.minor }}
-          PATCH: ${{ steps.release.outputs.patch }}
