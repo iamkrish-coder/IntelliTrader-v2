@@ -22,13 +22,3 @@ jobs:
         with:
           release-type: "simple"  # Change this to match your project type (e.g., "python", "java", "ruby", etc.)
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create GitHub Release
-        if: steps.release.outputs.release_created == 'true'
-        uses: actions/create-release@v1
-        with:
-          tag_name: ${{ steps.release.outputs.tag_name }}
-          release_name: ${{ steps.release.outputs.release_name }}
-          body: ${{ steps.release.outputs.release_body }}
-          draft: false
-          prerelease: false
