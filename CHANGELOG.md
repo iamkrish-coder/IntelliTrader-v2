@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.3.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.2.1...v1.3.0) (2025-01-26)
+
+
+### Features
+
+* **auth:** Enhance OAuth account linking and session management ([9231205](https://github.com/iamkrish-coder/IntelliTrader/commit/923120552ac967f93ff20cb1d0cf31da9da4391a))
+
+
+### Miscellaneous
+
+* **release:** release 1.2.2 ([e0dbb83](https://github.com/iamkrish-coder/IntelliTrader/commit/e0dbb836eff10bf7b9c043e29977b330465c3f7a))
+* sync version files to 1.2.1 ([4d887e0](https://github.com/iamkrish-coder/IntelliTrader/commit/4d887e0fa7440212e801e34b6e9a7642b6daca9f))
+* sync versions to 1.2.1 ([0ede974](https://github.com/iamkrish-coder/IntelliTrader/commit/0ede9744e7d77dc206045c89a1f197e517a3107d))
+
 ## [1.2.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.2.1...v1.2.2) (2025-01-26)
 
 
