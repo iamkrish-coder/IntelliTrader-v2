@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.2.1...v1.2.2) (2025-01-26)
+
+
+### Miscellaneous
+
+* sync version files to 1.2.1 ([4d887e0](https://github.com/iamkrish-coder/IntelliTrader/commit/4d887e0fa7440212e801e34b6e9a7642b6daca9f))
+
 ## [1.2.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.2.0...v1.2.1) (2025-01-26)
 
 
