@@ -20,27 +20,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       
       - uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: simple
+          config-file: .release-please-config.json
+          manifest-file: .release-please-manifest.json
           
       - name: Show Release Output
         if: ${{ steps.release.outputs.release_created }}
         run: |
           echo "Release created: ${{ steps.release.outputs.tag_name }}"
           echo "Release SHA: ${{ steps.release.outputs.sha }}"
-          
-      - name: Create Release
-        if: ${{ steps.release.outputs.release_created }}
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.release.outputs.tag_name }}
-          release_name: Release ${{ steps.release.outputs.tag_name }}
-          body: ${{ steps.release.outputs.body }}
-          draft: false
-          prerelease: false
+          echo "Release PR: ${{ steps.release.outputs.pr }}"
+          echo "Major: ${{ steps.release.outputs.major }}"
+          echo "Minor: ${{ steps.release.outputs.minor }}"
+          echo "Patch: ${{ steps.release.outputs.patch }}"
