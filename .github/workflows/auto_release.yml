@@ -30,6 +30,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
+          skip-github-release: false
+          clean: true
           
       - name: Show Release Output
         if: ${{ steps.release.outputs.release_created }}
