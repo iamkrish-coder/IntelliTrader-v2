@@ -4,11 +4,6 @@ on:
   push:
     branches:
       - release
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - '.release-please-manifest.json'
-      - 'package.json'
-      - 'package-lock.json'
 
 permissions:
   contents: write
