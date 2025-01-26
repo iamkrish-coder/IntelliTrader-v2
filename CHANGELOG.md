@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.5...v1.2.0) (2025-01-26)
+
+
+### Features
+
+* Implement password reset and forgot password functionality ([573a313](https://github.com/iamkrish-coder/IntelliTrader/commit/573a3134daf3b36891e7dc12a2e646c0a87a0d23))
+
 ## [1.1.5](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.1.4...v1.1.5) (2025-01-25)
 
 
