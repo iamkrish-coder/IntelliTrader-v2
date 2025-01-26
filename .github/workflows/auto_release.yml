@@ -4,26 +4,37 @@ on:
   push:
     branches:
       - release
+  workflow_dispatch:
 
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.version }}
+      major: ${{ steps.release.outputs.major }}
+      minor: ${{ steps.release.outputs.minor }}
+      patch: ${{ steps.release.outputs.patch }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       
-      - uses: googleapis/release-please-action@v4
+      - name: Run Release Please
+        id: release
+        uses: google-github-actions/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           release-type: simple
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
-          default-branch: release
+          target-branch: release
 
   notify:
     needs: release-please
@@ -35,19 +46,35 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ needs.release-please.outputs.tag_name }}
           VERSION: ${{ needs.release-please.outputs.version }}
+          MAJOR: ${{ needs.release-please.outputs.major }}
+          MINOR: ${{ needs.release-please.outputs.minor }}
+          PATCH: ${{ needs.release-please.outputs.patch }}
         run: |
           gh issue create \
-            --title "🎉 New Release: $TAG_NAME" \
+            --title "New Release: $TAG_NAME" \
             --body "A new version $VERSION has been released!
+
+          ### Version Details
+          - Major: $MAJOR
+          - Minor: $MINOR
+          - Patch: $PATCH
 
           ### What's Changed
           Please check the [release notes](https://github.com/${{ github.repository }}/releases/tag/$TAG_NAME) for details.
 
           ### Next Steps
+          - [ ] Review the [changelog](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md)
           - [ ] Update documentation if needed
           - [ ] Monitor for any post-release issues
           - [ ] Update dependencies in dependent projects
+          - [ ] Deploy to staging environment
+          - [ ] Run post-deployment tests
           
-          [View Release](${{ github.server_url }}/${{ github.repository }}/releases/tag/$TAG_NAME)" \
+          ### Quick Links
+          - [View Release](${{ github.server_url }}/${{ github.repository }}/releases/tag/$TAG_NAME)
+          - [Compare Changes](${{ github.server_url }}/${{ github.repository }}/compare/${{ needs.release-please.outputs.tag_name }}^...${{ needs.release-please.outputs.tag_name }})
+          - [Project Board](https://github.com/${{ github.repository }}/projects)
+          
+          Please report any issues or concerns in the [issue tracker](https://github.com/${{ github.repository }}/issues)." \
             --label "release" \
             --label "documentation"
