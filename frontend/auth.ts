@@ -127,12 +127,48 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     verifyRequest: "/auth/verify-request",
   },
   callbacks: {
-    async signIn({ user, account, email }) {
-      if (account?.provider === "credentials") {
+    async signIn({ user, account, profile, email }) {
+      try {
+        // Case 1: Credentials login - no linking needed
+        if (account?.provider === "credentials") {
+          return true;
+        }
+
+        // Case 2: OAuth login (e.g., Google)
+        const existingUser = await prisma.user.findUnique({
+          where: { email: user.email! },
+          include: { accounts: true },
+        });
+
+        if (existingUser) {
+          // If user exists but doesn't have this OAuth account linked
+          if (!existingUser.accounts.some(acc => acc.provider === account?.provider)) {
+            await prisma.account.create({
+              data: {
+                userId: existingUser.id,
+                type: account?.type!,
+                provider: account?.provider!,
+                providerAccountId: account?.providerAccountId!,
+                access_token: account?.access_token,
+                expires_at: account?.expires_at,
+                token_type: account?.token_type,
+                scope: account?.scope,
+                id_token: account?.id_token,
+                refresh_token: account?.refresh_token,
+              },
+            });
+          }
+          return true;
+        }
+
+        // Case 3: New OAuth user - account will be created automatically by the adapter
         return true;
+      } catch (error) {
+        console.error("Error in signIn callback:", error);
+        return false;
+      } finally {
+        await prisma.$disconnect();
       }
-      // For OAuth and Email providers, ensure user exists in database
-      return !!user;
     },
     async jwt({ token, account, profile, user }) {
       // Initial sign in
@@ -149,9 +185,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async session({ session, token }) {
       if (session?.user) {
+        // Fetch the user with their linked accounts
+        const userWithAccounts = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          include: { accounts: true },
+        });
+
         session.user.id = token.id as string;
         session.user.email = token.email as string;
         session.user.name = token.name as string | null;
+        // Add linked providers to the session
+        session.user.linkedAccounts = userWithAccounts?.accounts.map(acc => acc.provider) || [];
       }
       return session;
     },
