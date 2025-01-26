@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "reset-auth": "tsx scripts/reset-auth.ts"
   },
   "dependencies": {
     "@auth/pg-adapter": "^1.7.4",
