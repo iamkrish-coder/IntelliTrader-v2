@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.4](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.3...v1.3.4) (2025-01-26)
+
+
+### Bug Fixes
+
+* Add checkout step to release notification workflow ([2aff18a](https://github.com/iamkrish-coder/IntelliTrader/commit/2aff18aedc507420d22364934e791f8fb6a76dc5))
+
 ## [1.3.3](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.2...v1.3.3) (2025-01-26)
 
 
