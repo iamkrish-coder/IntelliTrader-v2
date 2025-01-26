@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.5](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.4...v1.3.5) (2025-01-26)
+
+
+### Bug Fixes
+
+* Modify auto release workflow to prevent duplicate releases ([3ad1f48](https://github.com/iamkrish-coder/IntelliTrader/commit/3ad1f484731d422ac60912aaef6ec7d3c3913457))
+
 ## [1.3.4](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.3...v1.3.4) (2025-01-26)
 
 
