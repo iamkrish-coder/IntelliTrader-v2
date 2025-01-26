@@ -5,27 +5,49 @@ on:
     types: [closed]
     branches:
       - release
+  # Allow manual trigger for testing
+  workflow_dispatch:
+    inputs:
+      force_release:
+        description: 'Force a new release'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 jobs:
   release-please:
     if: |
-      github.event.pull_request.merged == true &&
+      (github.event_name == 'workflow_dispatch') ||
+      (github.event.pull_request.merged == true &&
       github.event.pull_request.user.login != 'github-actions[bot]' &&
-      !contains(github.event.pull_request.title, 'chore: release')
+      !contains(github.event.pull_request.title, 'chore: release'))
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+      tag_name: ${{ steps.release.outputs.tag_name }}
+      version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}
+
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
       
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
       - name: Release Please Action
-        uses: googleapis/release-please-action@v4
         id: release
+        uses: googleapis/release-please-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           config-file: .release-please-config.json
@@ -38,12 +60,16 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ steps.release.outputs.tag_name }}
         run: |
-          echo "Checking for existing tag: $TAG_NAME"
+          echo "::group::Checking Existing Release"
           if gh release view "$TAG_NAME" &>/dev/null; then
-            echo "Deleting existing release and tag: $TAG_NAME"
+            echo "Found existing release $TAG_NAME - deleting..."
             gh release delete "$TAG_NAME" --yes
             git push --delete origin "$TAG_NAME" || true
+            echo "Successfully deleted existing release and tag"
+          else
+            echo "No existing release found for $TAG_NAME"
           fi
+          echo "::endgroup::"
           
       - name: Create GitHub Release
         if: ${{ steps.release.outputs.release_created }}
@@ -52,12 +78,19 @@ jobs:
           TAG_NAME: ${{ steps.release.outputs.tag_name }}
           SHA: ${{ steps.release.outputs.sha }}
         run: |
+          echo "::group::Creating Release"
           echo "Creating release for tag: $TAG_NAME"
+          echo "Target SHA: $SHA"
+          
+          # Create the release
           gh release create "$TAG_NAME" \
             --target $SHA \
             --title "Release $TAG_NAME" \
             --notes "$(cat CHANGELOG.md)" \
             --latest
+            
+          echo "Successfully created release $TAG_NAME"
+          echo "::endgroup::"
           
       - name: Show Release Output
         if: ${{ steps.release.outputs.release_created }}
@@ -68,3 +101,30 @@ jobs:
           echo "Release PR: ${{ steps.release.outputs.pr }}"
           echo "Version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
           echo "::endgroup::"
+
+  notify:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release Notification Issue
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ needs.release-please.outputs.tag_name }}
+          VERSION: ${{ needs.release-please.outputs.version }}
+        run: |
+          gh issue create \
+            --title "🎉 New Release: $TAG_NAME" \
+            --body "A new version $VERSION has been released!
+
+          ### What's Changed
+          Please check the [release notes](https://github.com/${{ github.repository }}/releases/tag/$TAG_NAME) for details.
+
+          ### Next Steps
+          - [ ] Update documentation if needed
+          - [ ] Monitor for any post-release issues
+          - [ ] Update dependencies in dependent projects
+          
+          [View Release](${{ github.server_url }}/${{ github.repository }}/releases/tag/$TAG_NAME)" \
+            --label "release" \
+            --label "documentation"
