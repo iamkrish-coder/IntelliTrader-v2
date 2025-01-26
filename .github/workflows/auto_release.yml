@@ -3,7 +3,7 @@ name: Auto Release
 on:
   push:
     branches:
-      - release  # or the default branch of your repository
+      - release  
 
 jobs:
   release-please:
@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-      
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
