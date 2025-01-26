@@ -38,13 +38,17 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-      
-      # Only set up Node.js if we need it for the release process
-      - name: Setup Node.js
-        if: ${{ steps.release.outputs.release_created }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+
+      - name: Debug Event Info
+        run: |
+          echo "::group::Event Information"
+          echo "Event Name: ${{ github.event_name }}"
+          echo "PR Title: ${{ github.event.pull_request.title }}"
+          echo "PR Author: ${{ github.event.pull_request.user.login }}"
+          echo "PR Base: ${{ github.event.pull_request.base.ref }}"
+          echo "PR Head: ${{ github.event.pull_request.head.ref }}"
+          echo "PR Merged: ${{ github.event.pull_request.merged }}"
+          echo "::endgroup::"
       
       - name: Release Please Action
         id: release
@@ -54,6 +58,16 @@ jobs:
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
           release-type: simple
+          
+      - name: Debug Release Output
+        if: always()
+        run: |
+          echo "::group::Release-Please Outputs"
+          echo "Release Created: ${{ steps.release.outputs.release_created }}"
+          echo "Release PR: ${{ steps.release.outputs.pr }}"
+          echo "Tag Name: ${{ steps.release.outputs.tag_name }}"
+          echo "Version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
+          echo "::endgroup::"
           
       - name: Delete existing tag if exists
         if: ${{ steps.release.outputs.release_created }}
@@ -91,16 +105,6 @@ jobs:
             --latest
             
           echo "Successfully created release $TAG_NAME"
-          echo "::endgroup::"
-          
-      - name: Show Release Output
-        if: ${{ steps.release.outputs.release_created }}
-        run: |
-          echo "::group::Release Information"
-          echo "Tag Name: ${{ steps.release.outputs.tag_name }}"
-          echo "Release SHA: ${{ steps.release.outputs.sha }}"
-          echo "Release PR: ${{ steps.release.outputs.pr }}"
-          echo "Version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
           echo "::endgroup::"
 
   notify:
