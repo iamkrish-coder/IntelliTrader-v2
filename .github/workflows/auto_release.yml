@@ -23,7 +23,8 @@ jobs:
         with:
           fetch-depth: 0
       
-      - uses: googleapis/release-please-action@v4
+      - name: Release Please Action
+        uses: googleapis/release-please-action@v4
         id: release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -33,9 +34,16 @@ jobs:
       - name: Show Release Output
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          echo "Release created: ${{ steps.release.outputs.tag_name }}"
-          echo "Release SHA: ${{ steps.release.outputs.sha }}"
-          echo "Release PR: ${{ steps.release.outputs.pr }}"
-          echo "Major: ${{ steps.release.outputs.major }}"
-          echo "Minor: ${{ steps.release.outputs.minor }}"
-          echo "Patch: ${{ steps.release.outputs.patch }}"
+          echo "::group::Release Information"
+          echo "Tag Name: ${TAG_NAME}"
+          echo "Release SHA: ${RELEASE_SHA}"
+          echo "Release PR: ${PR_NUMBER}"
+          echo "Version: ${MAJOR}.${MINOR}.${PATCH}"
+          echo "::endgroup::"
+        env:
+          TAG_NAME: ${{ steps.release.outputs.tag_name }}
+          RELEASE_SHA: ${{ steps.release.outputs.sha }}
+          PR_NUMBER: ${{ steps.release.outputs.pr }}
+          MAJOR: ${{ steps.release.outputs.major }}
+          MINOR: ${{ steps.release.outputs.minor }}
+          PATCH: ${{ steps.release.outputs.patch }}

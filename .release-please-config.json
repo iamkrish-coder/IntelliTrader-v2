@@ -2,7 +2,7 @@
   "packages": {
     ".": {
       "release-type": "simple",
-      "initial-version": "1.2.0",
+      "initial-version": "1.2.1",
       "changelog-path": "CHANGELOG.md",
       "bump-minor-pre-major": true,
       "bump-patch-for-minor-pre-major": false,
