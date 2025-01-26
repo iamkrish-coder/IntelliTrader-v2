@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.6](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.5...v1.3.6) (2025-01-26)
+
+
+### Bug Fixes
+
+* Adjust workflow condition to match broader pattern ([ec9ba14](https://github.com/iamkrish-coder/IntelliTrader/commit/ec9ba149c03e69fade0b8a467b5c5e0fd3acd1fa))
+
 ## [1.3.5](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.4...v1.3.5) (2025-01-26)
 
 
