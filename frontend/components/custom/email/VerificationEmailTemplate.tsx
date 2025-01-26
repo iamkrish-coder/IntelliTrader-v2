@@ -82,7 +82,7 @@ export function VerificationEmailTemplate({
             </div>
           </div>
           <div class="content">
-            <h2 style="color: #1e293b; margin-bottom: 16px;">Verify and Sign in to your IntelliTrader account</h2>
+            <h2 style="color: #1e293b; margin-bottom: 16px;">Verify Your Account</h2>
             <p style="color: #475569; margin-bottom: 24px;">
               Click the button below to sign in to your IntelliTrader account. This link will expire in 24 hours. By signing in, you agree to our Terms of Service and Privacy Policy
             </p>

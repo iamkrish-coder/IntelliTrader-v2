@@ -3,7 +3,7 @@ import { sendEmail } from "@/lib/email";
 import {
   VerificationEmailTemplate,
   VerificationEmailText,
-} from "@/components/custom/VerificationEmailTemplate";
+} from "@/components/custom/email/VerificationEmailTemplate";
 
 export const runtime = "nodejs";
 
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
       try {
         const result = await sendEmail({
           to: body.email,
-          subject: "Sign In - IntelliTrader Account Verification",
+          subject: "Verify Your IntelliTrader Account",
           html,
           text,
         });
