@@ -32,6 +32,19 @@ jobs:
           manifest-file: .release-please-manifest.json
           release-type: simple
           
+      - name: Delete existing tag if exists
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ steps.release.outputs.tag_name }}
+        run: |
+          echo "Checking for existing tag: $TAG_NAME"
+          if gh release view "$TAG_NAME" &>/dev/null; then
+            echo "Deleting existing release and tag: $TAG_NAME"
+            gh release delete "$TAG_NAME" --yes
+            git push --delete origin "$TAG_NAME" || true
+          fi
+          
       - name: Create GitHub Release
         if: ${{ steps.release.outputs.release_created }}
         env:
@@ -43,7 +56,8 @@ jobs:
           gh release create "$TAG_NAME" \
             --target $SHA \
             --title "Release $TAG_NAME" \
-            --notes "$(cat CHANGELOG.md)"
+            --notes "$(cat CHANGELOG.md)" \
+            --latest
           
       - name: Show Release Output
         if: ${{ steps.release.outputs.release_created }}
