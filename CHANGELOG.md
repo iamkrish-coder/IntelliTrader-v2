@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.7](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.6...v1.3.7) (2025-01-26)
+
+
+### Bug Fixes
+
+* update workflows ([162b121](https://github.com/iamkrish-coder/IntelliTrader/commit/162b121039deca26ababedbe04a0e0647d25b0bf))
+
 ## [1.3.6](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.5...v1.3.6) (2025-01-26)
 
 
