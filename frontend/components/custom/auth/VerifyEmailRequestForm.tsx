@@ -17,49 +17,93 @@ import { Shell } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 
-export default function VerifyRequestCard() {
+export default function VerifyEmailRequestForm() {
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
+  const type = searchParams.get("type") || "signin"; // 'signin' or 'reset'
 
   const handleResendEmail = async () => {
+    if (!email) {
+      toast.error("Email address is required");
+      return;
+    }
+
     try {
       setIsLoading(true);
-      const response = await signIn("email", {
-        email: email,
-        redirect: false,
-      });
-      if (response?.ok) {
-        toast.success("Verification email sent successfully!");
+      if (type === "signin") {
+        const response = await signIn("email", {
+          email,
+          redirect: false,
+          callbackUrl: "/auth/verify",
+        });
+        if (response?.ok) {
+          toast.success("Verification email sent successfully!");
+        } else {
+          toast.error("Failed to send verification email");
+        }
       } else {
-        toast.error("Failed to send verification email");
+        // Handle password reset email resend
+        const response = await fetch("/api/auth/forgot-password", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email }),
+        });
+
+        if (response.ok) {
+          toast.success("Password reset email sent successfully!");
+        } else {
+          toast.error("Failed to send password reset email");
+        }
       }
     } catch (error) {
-      toast.error("An error occurred");
+      console.error("Email resend error:", error);
+      toast.error("An error occurred while sending the email");
     } finally {
       setIsLoading(false);
     }
   };
+
+  const renderContent = () => {
+    if (type === "reset") {
+      return {
+        title: "Check your email",
+        description: "Password reset instructions sent",
+        message: "We've sent password reset instructions to your email address:",
+        buttonText: "Resend reset instructions",
+      };
+    }
+
+    return {
+      title: "Check your email",
+      description: "Email sent to sign in to your account",
+      message: "We've sent a sign in link to your email address:",
+      buttonText: "Resend verification email",
+    };
+  };
+
+  const content = renderContent();
 
   return (
     <Card>
       <CardHeader className="space-y-2">
         <Logo />
         <CardTitle className="text-2xl font-bold md:text-xl">
-          Check your email
+          {content.title}
         </CardTitle>
         <CardDescription className="md:text-sm">
-          Sign In link sent to your email
+          {content.description}
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-4 md:gap-2">
         <div className="space-y-4">
           <div className="grid gap-2">
             <p className="text-sm">
-              We've sent a sign in link to your email address:
+              {content.message}
               <span className="font-medium"> {email} </span>
-              Click the link in the email to sign in. The link will expire in 24
-              hours.
+              {type === "reset" 
+                ? "Click the link in the email to reset your password. The link will expire in 1 hour."
+                : "Click the link in the email to sign in. The link will expire in 24 hours."}
             </p>
           </div>
         </div>
@@ -69,7 +113,7 @@ export default function VerifyRequestCard() {
           disabled={isLoading}
         >
           {isLoading && <Shell className="mr-2 h-4 w-4 animate-spin" />}
-          Resend verification email
+          {content.buttonText}
         </Button>
         <Button asChild>
           <Link href="/auth/signin">Return to Sign In</Link>

@@ -76,7 +76,7 @@ export default function SignInForm() {
         }
 
         // If we get here, the email was sent successfully
-        router.push("/auth/verify-request");
+        router.push(`/auth/verify-request?email=${encodeURIComponent(email)}&type=signin`);
       } catch (error) {
         setIsLoading(false);
         console.error("Sign-in Error:", error);
