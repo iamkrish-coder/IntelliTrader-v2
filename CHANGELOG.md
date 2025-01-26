@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.1...v1.3.2) (2025-01-26)
+
+
+### Bug Fixes
+
+* Enhance release-please configuration and auto release workflow ([8551e06](https://github.com/iamkrish-coder/IntelliTrader/commit/8551e06bdc15bb654ac15a791acfccd6943e4137))
+
 ## [1.3.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.0...v1.3.1) (2025-01-26)
 
 
