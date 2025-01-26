@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.8](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.7...v1.3.8) (2025-01-26)
+
+
+### Bug Fixes
+
+* Remove redundant GitHub Release creation step in auto release workflow ([138ea2e](https://github.com/iamkrish-coder/IntelliTrader/commit/138ea2e7abddb163f068797c73516043d9f8113e))
+
 ## [1.3.7](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.6...v1.3.7) (2025-01-26)
 
 
