@@ -58,6 +58,8 @@ jobs:
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
           release-type: simple
+          default-branch: release
+          skip-github-release: true  # We'll create the release ourselves
           
       - name: Debug Release Output
         if: always()
@@ -67,10 +69,12 @@ jobs:
           echo "Release PR: ${{ steps.release.outputs.pr }}"
           echo "Tag Name: ${{ steps.release.outputs.tag_name }}"
           echo "Version: ${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}.${{ steps.release.outputs.patch }}"
+          echo "Path: ${{ steps.release.outputs.path }}"
+          echo "SHA: ${{ steps.release.outputs.sha }}"
           echo "::endgroup::"
           
       - name: Delete existing tag if exists
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ steps.release.outputs.tag_name }}
@@ -87,7 +91,7 @@ jobs:
           echo "::endgroup::"
           
       - name: Create GitHub Release
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created == 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ steps.release.outputs.tag_name }}
