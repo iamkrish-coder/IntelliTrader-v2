@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.3.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.0...v1.3.1) (2025-01-26)
+
+
+### Miscellaneous
+
+* Simplify release workflow configuration ([95f48f4](https://github.com/iamkrish-coder/IntelliTrader/commit/95f48f41aa9f2a71e7f08846b3289e548dcd4329))
+* Update release configuration and workflow settings ([723e6f0](https://github.com/iamkrish-coder/IntelliTrader/commit/723e6f055d1021bab1f4478199c1f4c27fa774b8))
+
 ## [1.3.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.2.1...v1.3.0) (2025-01-26)
 
 
