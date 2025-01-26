@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   release-please:
+    if: ${{ !contains(github.event.head_commit.message, '[release-please]') }}
     runs-on: ubuntu-latest
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
@@ -39,49 +40,3 @@ jobs:
           config-file: .release-please-config.json
           manifest-file: .release-please-manifest.json
           target-branch: release
-
-  notify:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.releases_created == 'true' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Create Release Notification Issue
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG_NAME: ${{ needs.release-please.outputs.tag_name }}
-          VERSION: ${{ needs.release-please.outputs.version }}
-          MAJOR: ${{ needs.release-please.outputs.major }}
-          MINOR: ${{ needs.release-please.outputs.minor }}
-          PATCH: ${{ needs.release-please.outputs.patch }}
-        run: |
-          gh issue create \
-            --title "New Release: $TAG_NAME" \
-            --body "A new version $VERSION has been released!
-
-          ### Version Details
-          - Major: $MAJOR
-          - Minor: $MINOR
-          - Patch: $PATCH
-
-          ### What's Changed
-          Please check the [release notes](https://github.com/${{ github.repository }}/releases/tag/$TAG_NAME) for details.
-
-          ### Next Steps
-          - [ ] Review the [changelog](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md)
-          - [ ] Update documentation if needed
-          - [ ] Monitor for any post-release issues
-          - [ ] Update dependencies in dependent projects
-          - [ ] Deploy to staging environment
-          - [ ] Run post-deployment tests
-          
-          ### Quick Links
-          - [View Release](${{ github.server_url }}/${{ github.repository }}/releases/tag/$TAG_NAME)
-          - [Compare Changes](${{ github.server_url }}/${{ github.repository }}/compare/${{ needs.release-please.outputs.tag_name }}^...${{ needs.release-please.outputs.tag_name }})
-          - [Project Board](https://github.com/${{ github.repository }}/projects)
-          
-          Please report any issues or concerns in the [issue tracker](https://github.com/${{ github.repository }}/issues)." \
-            --label "release" \
-            --label "documentation"
