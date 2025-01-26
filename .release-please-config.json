@@ -1,0 +1,20 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "initial-version": "1.2.0",
+      "changelog-path": "CHANGELOG.md",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": false,
+      "draft": false,
+      "prerelease": false,
+      "include-v-in-tag": true,
+      "changelog-sections": [
+        { "type": "feat", "section": "Features", "hidden": false },
+        { "type": "fix", "section": "Bug Fixes", "hidden": false },
+        { "type": "chore", "section": "Miscellaneous", "hidden": false }
+      ]
+    }
+  },
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
+} 
