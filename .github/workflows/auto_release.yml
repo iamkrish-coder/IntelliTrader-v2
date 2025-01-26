@@ -4,7 +4,11 @@ on:
   push:
     branches:
       - release
-  workflow_dispatch:
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - '.release-please-manifest.json'
+      - 'package.json'
+      - 'package-lock.json'
 
 permissions:
   contents: write
@@ -15,7 +19,7 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
+      releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
       version: ${{ steps.release.outputs.version }}
       major: ${{ steps.release.outputs.major }}
@@ -38,7 +42,7 @@ jobs:
 
   notify:
     needs: release-please
-    if: needs.release-please.outputs.release_created == 'true'
+    if: ${{ needs.release-please.outputs.releases_created == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Create Release Notification Issue
