@@ -1,76 +1,141 @@
 # IntelliTrader
 
-**IntelliTrader** is a cutting-edge algorithmic trading application tailored for personal use, empowering users to automate and optimize their trading strategies. The application is designed using the Python programming language and seamlessly integrates with the KiteConnect API for robust connectivity to financial markets.
+A sophisticated algorithmic trading platform built with Next.js 15, FastAPI, and KiteConnect API, designed for the Indian stock market. IntelliTrader empowers traders with automated strategies, real-time market data, and advanced portfolio management.
 
-## Development Notes
+## Features
+
+- 🚀 **Algorithmic Trading**
+  - Custom strategy implementation
+  - Real-time market data processing
+  - Automated trade execution
+
+- 🔒 **Security**
+  - JWT-based authentication
+  - Secure API endpoints
+  - Environment-based configuration
+  - Role-based access control
+
+- 📊 **Trading Capabilities**
+  - Custom strategy implementation
+  - Real-time market data processing
+  - Automated trade execution
+  - Handsfree trading
+  - Strategy and Portfolio Dashboard
+
+## Tech Stack
+
+### Frontend
+- Next.js 15 with App Router
+- TypeScript
+- TailwindCSS
+- Shadcn UI
+- NextAuth v5 (Auth.js)
+- Prisma ORM
+
+### Backend
+- FastAPI
+- SQLAlchemy
+- PostgreSQL
+- Docker
+- KiteConnect API
+
+## Project Structure
+
+```
+IntelliTrader/
+├── frontend/
+│   ├── app/                 # Next.js 15 app router
+│   ├── components/          # Reusable UI components
+│   ├── lib/                 # Utility functions
+│   ├── services/           # API services
+│   └── types.ts            # TypeScript definitions
+│
+├── backend/
+│   ├── api/                # FastAPI routes
+│   ├── services/           # Business logic
+│   ├── domain/             # Models and schemas
+│   ├── algorithms/         # Trading algorithms
+│   └── database/           # DB migrations and functions
+```
+
+## Setup and Installation
+
+### Prerequisites
+- Node.js 18+
+- Python 3.9+
+- PostgreSQL
+- Docker
+
+### Frontend Setup
+```bash
+cd frontend
+npm install
+cp .env.example .env.local
+npm run dev
+```
+
+### Backend Setup
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
 pip install -r requirements.txt
+uvicorn main:app --reload
+```
 
-### Historical API Frequency and Limit on Number of Candles Fetched
+### Database Setup
+```bash
+docker-compose up -d
+```
 
-- **Minute: 60 days**
-- **3-minute: 100 days**
-- **5-minute: 100 days**
-- **10-minute: 100 days**
-- **15-minute: 200 days**
-- **30-minute: 200 days**
-- **60-minute: 400 days**
-- **Day: 2000 days**
+## Environment Variables
 
-### Variety
+### Frontend (.env.local)
+```
+NEXT_PUBLIC_API_URL=http://localhost:8000
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your-secret
+```
 
-- **Regular:** Regular order
-- **AMO:** After Market Order
-- **CO:** Cover Order
-- **Iceberg:** Iceberg Order
-- **Auction:** Auction Order
+### Backend (.env)
+```
+DATABASE_URL=postgresql://user:password@localhost:5432/intellitrader
+KITE_API_KEY=your-kite-api-key
+KITE_API_SECRET=your-kite-api-secret
+```
 
-### Order Types
+## Development Guidelines
 
-- **MARKET:** Market order
-- **LIMIT:** Limit order
-- **SL:** Stoploss order
-- **SL-M:** Stoploss-market order
+### Git Commit Convention
+- `fix:` Bug fixes (patch)
+- `feat:` New features (minor)
+- `feat!:`, `fix!:`, `refactor!:` Breaking changes (major)
+- `docs:` Documentation updates
+- `revert:` Revert changes
 
-### Product Types
+### Code Style
+- TypeScript: Follow strict type checking
+- Python: Follow PEP 8 guidelines
+- Use descriptive variable names
+- Implement proper error handling
+- Write comprehensive tests
 
-- **CNC:** Cash & Carry for equity
-- **NRML:** Normal for futures and options
-- **MIS:** Margin Intraday Squareoff for futures and options.
-  
-### Commit Message Convention
+## Architecture Flow
 
-#### fix: Represents bug fixes, correlates to a SemVer patch.
-#### feat: Represents a new feature, correlates to a SemVer minor.
-#### feat!:, fix!:, refactor!: Represents a breaking change (indicated by the !) and will result in a SemVer major.
-#### feat(lang): add Polish language
-#### feat(api)!: send an email to the customer when a product is shipped
-#### docs: correct spelling of CHANGELOG
-#### revert: let us never again speak of the noodle incident
+```
+Frontend ←→ FastAPI Backend ←→ KiteConnect API
+    ↓            ↓
+    └────→ PostgreSQL ←────┘
+```
 
------------------------------------------------------------------------------------------------------------------
+## License
 
-Architecture Flow:
+MIT License - See LICENSE file for details
 
-Publisher: Your Python application publishes a message to an SNS topic.
-SNS Topic: The SNS topic routes the message to all its subscribers.
-SQS Queue: In this case, the subscriber is your SQS queue. The message gets delivered to the SQS queue.
-Subscriber: Your Python application (acting as the subscriber) polls the SQS queue for new messages.
-Message Processing: Upon receiving a message, your application processes the message content.
-Diagram:
+## Contributing
 
-+-------------------+      +-------------------+      +-------------------+
-| Publisher App     |----->| SNS Topic         |----->| SQS Queue           |
-+-------------------+      +-------------------+      +-------------------+
-                         ^                         |
-                         | Receives message        | (Subscriber)
-                         |                         |
-+-------------------+       +-------------------+        +-------------------+
-| Subscriber App     |----->| SQS Queue (Polling) |----->| Message Processing |
-+-------------------+       +-------------------+        +-------------------+
-Explanation:
-
-The publisher application sends a message to the SNS topic.
-The SNS topic, acting as a pub/sub mechanism, forwards the message to all its subscribers, which in this case is a single SQS queue.
-The SQS queue acts as a buffer, storing the message until the subscriber application polls it.
-The subscriber application periodically polls the SQS queue for new messages.
-Upon receiving a message, the subscriber application extracts and processes the message content according to your application logic.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
