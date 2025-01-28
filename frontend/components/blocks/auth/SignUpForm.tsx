@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/custom/Logo";
+import Logo from "@/components/blocks/core/AppLogo";
 import { toast } from "sonner";
 import { Shell } from "lucide-react";
 
@@ -30,7 +30,7 @@ export default function SignUpForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Check passwords match before setting loading state
     if (password !== confirmPassword) {
       setShowValidationError(true);
@@ -66,7 +66,7 @@ export default function SignUpForm() {
       }
 
       toast.success("Registration successful!");
-      router.push("/dashboard/profile");
+      router.push("/dashboard");
     } catch (error) {
       toast.error(
         error instanceof Error ? error.message : "Something went wrong",
@@ -136,7 +136,7 @@ export default function SignUpForm() {
               disabled={isLoading}
             />
           </div>
-          
+
           <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? (
               <>

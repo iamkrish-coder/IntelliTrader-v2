@@ -1,5 +1,5 @@
 "use client";
-import SignInForm from "@/components/custom/auth/SignInForm";
+import SignInForm from "@/components/blocks/auth/SignInForm";
 
 export default function SignInPage() {
   return (

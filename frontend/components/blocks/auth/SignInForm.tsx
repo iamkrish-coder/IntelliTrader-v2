@@ -16,8 +16,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/custom/Logo";
-import { SignInButton } from "@/components/custom/auth/SignInButton";
+import Logo from "@/components/blocks/core/AppLogo";
+import { SignInButton } from "@/components/blocks/auth/SignInButton";
 import { toast } from "sonner";
 
 export default function SignInForm() {
@@ -39,7 +39,7 @@ export default function SignInForm() {
           email,
           password,
           redirect: false,
-          callbackUrl: "/dashboard/profile",
+          callbackUrl: "/dashboard",
         });
 
         if (result?.error) {
@@ -50,7 +50,7 @@ export default function SignInForm() {
 
         if (result?.ok) {
           toast.success("Signed in successfully!");
-          router.push(result.url || "/dashboard/profile");
+          router.push(result.url || "/dashboard");
         }
       } catch (error) {
         console.error("Sign-in error:", error);
@@ -76,7 +76,9 @@ export default function SignInForm() {
         }
 
         // If we get here, the email was sent successfully
-        router.push(`/auth/verify-request?email=${encodeURIComponent(email)}&type=signin`);
+        router.push(
+          `/auth/verify-request?email=${encodeURIComponent(email)}&type=signin`,
+        );
       } catch (error) {
         setIsLoading(false);
         console.error("Sign-in Error:", error);

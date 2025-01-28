@@ -1,4 +1,4 @@
-// frontend/components/custom/TechnologiesSection.tsx
+// frontend/components/blocks/landing/TechnologiesSection.tsx
 import { motion } from "motion/react";
 
 const technologies = [

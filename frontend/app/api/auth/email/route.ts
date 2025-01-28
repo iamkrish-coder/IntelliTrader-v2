@@ -1,17 +1,17 @@
-import { NextRequest } from 'next/server';
+import { NextRequest } from "next/server";
 import { sendEmail } from "@/lib/email";
 import {
   VerificationEmailTemplate,
   VerificationEmailText,
-} from "@/components/custom/email/VerificationEmailTemplate";
+} from "@/components/blocks/email/VerificationEmailTemplate";
 
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-      
-    // Handle custom verification request format 
+
+    // Handle custom verification request format
     if (body.email && body.url) {
       const callbackUrl = body.url;
       const html = VerificationEmailTemplate({ callbackUrl });
@@ -24,10 +24,12 @@ export async function POST(req: NextRequest) {
           html,
           text,
         });
-        
-        return new Response(JSON.stringify({ success: true, messageId: result.messageId }));
+
+        return new Response(
+          JSON.stringify({ success: true, messageId: result.messageId }),
+        );
       } catch (emailError) {
-        console.error('Failed to send email:', emailError);
+        console.error("Failed to send email:", emailError);
         throw emailError;
       }
     }

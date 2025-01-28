@@ -1,5 +1,5 @@
 "use client";
-import VerifyEmailRequestForm from "@/components/custom/auth/VerifyEmailRequestForm";
+import VerifyEmailRequestForm from "@/components/blocks/auth/VerifyEmailRequestForm";
 
 export default function VerifyRequestPage() {
   return (
