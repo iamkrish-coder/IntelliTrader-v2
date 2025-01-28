@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
 
   // If they're on an auth page and are authenticated, redirect to dashboard
   if (isAuth && token) {
-    return NextResponse.redirect(new URL("/dashboard/profile", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   // If they're not on an auth page and not authenticated, redirect to signin

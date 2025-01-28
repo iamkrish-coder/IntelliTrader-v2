@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import ResetPasswordForm from "@/components/custom/auth/ResetPasswordForm";
+import ResetPasswordForm from "@/components/blocks/auth/ResetPasswordForm";
 
 export const metadata: Metadata = {
   title: "Reset Password",
@@ -20,4 +20,4 @@ export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
       </div>
     </div>
   );
-} 
+}

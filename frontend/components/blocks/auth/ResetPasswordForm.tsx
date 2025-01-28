@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/custom/Logo";
+import Logo from "@/components/blocks/core/AppLogo";
 import { toast } from "sonner";
 
 interface ResetPasswordFormProps {
@@ -56,7 +56,9 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
         throw new Error(data.error || "Failed to reset password");
       }
 
-      toast.success("Password reset successful! Please sign in with your new password.");
+      toast.success(
+        "Password reset successful! Please sign in with your new password.",
+      );
       router.push("/auth/signin");
     } catch (error) {
       console.error("Reset password error:", error);
@@ -138,4 +140,4 @@ export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
       </CardFooter>
     </Card>
   );
-} 
+}

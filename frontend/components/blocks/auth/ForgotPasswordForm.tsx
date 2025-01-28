@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/custom/Logo";
+import Logo from "@/components/blocks/core/AppLogo";
 import { toast } from "sonner";
 
 export default function ForgotPasswordForm() {
@@ -43,7 +43,9 @@ export default function ForgotPasswordForm() {
       }
 
       toast.success("Password reset email sent! Please check your inbox.");
-      router.push(`/auth/verify-request?email=${encodeURIComponent(email)}&type=reset`);
+      router.push(
+        `/auth/verify-request?email=${encodeURIComponent(email)}&type=reset`,
+      );
     } catch (error) {
       console.error("Reset password error:", error);
       toast.error(
@@ -110,4 +112,4 @@ export default function ForgotPasswordForm() {
       </CardFooter>
     </Card>
   );
-} 
+}

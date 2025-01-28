@@ -1,4 +1,4 @@
-// frontend/components/custom/FeaturesSection.tsx
+// frontend/components/blocks/landing/FeaturesSection.tsx
 import { motion } from "motion/react";
 import { Card } from "@/components/ui/card";
 import { ChartBar, Bot, Lock, Zap } from "lucide-react";

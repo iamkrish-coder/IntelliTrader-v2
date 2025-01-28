@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Logo from "@/components/custom/Logo";
+import Logo from "@/components/blocks/core/AppLogo";
 import Link from "next/link";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
@@ -69,7 +69,8 @@ export default function VerifyEmailRequestForm() {
       return {
         title: "Check your email",
         description: "Password reset instructions sent",
-        message: "We've sent password reset instructions to your email address:",
+        message:
+          "We've sent password reset instructions to your email address:",
         buttonText: "Resend reset instructions",
       };
     }
@@ -101,7 +102,7 @@ export default function VerifyEmailRequestForm() {
             <p className="text-sm">
               {content.message}
               <span className="font-medium"> {email} </span>
-              {type === "reset" 
+              {type === "reset"
                 ? "Click the link in the email to reset your password. The link will expire in 1 hour."
                 : "Click the link in the email to sign in. The link will expire in 24 hours."}
             </p>

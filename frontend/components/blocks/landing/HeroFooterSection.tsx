@@ -1,4 +1,4 @@
-// frontend/components/custom/CTASection.tsx
+// frontend/components/blocks/landing/CTASection.tsx
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 

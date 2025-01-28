@@ -1,4 +1,4 @@
-// frontend/components/custom/HeroImageSection.tsx
+// frontend/components/blocks/landing/HeroImageSection.tsx
 import React, { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import { LayoutGrid } from "@/components/vendor/layout-grid";

@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import { randomBytes } from "crypto";
 import { PrismaClient } from "@prisma/client";
 import { sendEmail } from "@/lib/email";
-import { ResetPasswordEmailTemplate, ResetPasswordEmailText } from "@/components/custom/email/ResetPasswordEmailTemplate";
+import {
+  ResetPasswordEmailTemplate,
+  ResetPasswordEmailText,
+} from "@/components/blocks/email/ResetPasswordEmailTemplate";
 
 const prisma = new PrismaClient();
 
@@ -19,7 +22,8 @@ export async function POST(req: Request) {
       // Return success even if user doesn't exist for security
       return NextResponse.json({
         success: true,
-        message: "If an account exists with that email, a password reset link will be sent.",
+        message:
+          "If an account exists with that email, a password reset link will be sent.",
       });
     }
 
@@ -60,4 +64,4 @@ export async function POST(req: Request) {
   } finally {
     await prisma.$disconnect();
   }
-} 
+}
