@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.8...v1.4.0) (2025-01-29)
+
+
+### Miscellaneous Chores
+
+* release 1.4.0 ([855e135](https://github.com/iamkrish-coder/IntelliTrader/commit/855e135646b89e024912e1002934c4f733f24090))
+
 ## [1.3.8](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.7...v1.3.8) (2025-01-26)
 
 
