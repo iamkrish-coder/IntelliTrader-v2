@@ -50,6 +50,7 @@ export const Menu = {
       title: "Trading",
       url: "/trading",
       icon: TrendingUp,
+      isActive: true,
       items: [
         {
           title: "Auto Pilot",
@@ -61,7 +62,7 @@ export const Menu = {
         },
         {
           title: "Watchlist",
-          url: "/dashboard/watchlist",
+          url: "/trading/watchlist",
         },
         {
           title: "Orders",
