@@ -3,7 +3,7 @@
 import { ChevronRight, type LucideIcon } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
 import {
   Collapsible,
@@ -37,6 +37,7 @@ export function NavMain({
 }) {
   const pathname = usePathname();
   const [expandedMenus, setExpandedMenus] = useState<Record<string, boolean>>({});
+  const isMounted = useRef(false);
 
   // Load expanded state from localStorage on mount
   useEffect(() => {
@@ -52,6 +53,7 @@ export function NavMain({
       setExpandedMenus(defaultState);
       localStorage.setItem('menu-expanded-state', JSON.stringify(defaultState));
     }
+    isMounted.current = true;
   }, []);
 
   const handleMenuToggle = (menuTitle: string, isOpen: boolean) => {
