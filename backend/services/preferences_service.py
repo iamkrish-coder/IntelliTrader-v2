@@ -48,7 +48,7 @@ class PreferencesService:
         
         # Handle database operation result
         if not save_result["success"]:
-            raise ApiException.database_error(
+            raise ApiException.internal_server_error(
                 message=save_result.get("message", "Failed to save preferences"),
                 data=save_result.get("data")
             )
