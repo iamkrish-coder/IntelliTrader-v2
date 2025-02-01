@@ -1,48 +1,19 @@
 {
     "metadata": {
-        "current_version": 48,
-        "last_updated": "2025-01-28T01:42:26.184838+00:00"
+        "current_version": 5,
+        "last_updated": "2025-02-01T11:27:37.770588+00:00"
     },
     "definitions": {
-        "accounts": {
-            "checksum": "90de4de89d025209100d8f5f68f237b0545492897eaa6162b202fc4aff6a480d",
-            "last_modified": "2025-01-11T11:58:50.212915+00:00"
-        },
-        "sessions": {
-            "checksum": "f418a2411ab72727ff3f84a680192746bc7b7d5a0c2488e307a6efe290216d94",
-            "last_modified": "2025-01-11T11:58:50.257748+00:00"
-        },
-        "users": {
-            "checksum": "66113df4924c0ded67170927a3bbb7b79c4568e7d087c20b4963ed52b54e1579",
-            "last_modified": "2025-01-11T11:58:50.298555+00:00"
-        },
-        "verification_tokens": {
-            "checksum": "fe88682640ec36ce3202f1971ca2f436358f5e5869c1201aea1a62b3c5b5009f",
-            "last_modified": "2025-01-11T11:58:50.345371+00:00"
-        },
-        "verification_token": {
-            "checksum": "a5daebe0143981ace28126e3c54987e2fdfee07d301c3073105c2e994246dd1a",
-            "last_modified": "2025-01-11T11:50:09.050212+00:00"
+        "preferences": {
+            "checksum": "65977b4dd6cc4f6976f609a9746c6180ee315230a677f7379e841854732d032c",
+            "last_modified": "2025-02-01T02:37:10.249593+00:00"
         }
     },
     "procedures": {
-        "it_au_create_session_sp": {
-            "checksum": "e08fd36f0f5cae07a43718b7c788d54137f5559f547666391973658cf44292b2",
-            "last_modified": "2025-01-18T18:42:19.766245+00:00"
-        },
-        "it_au_create_user_sp": {
-            "checksum": "38171fd7d331b79bee114eecddcc896189d1bbb273111e1c1d2ba84fdbdcd1a1",
-            "last_modified": "2025-01-18T17:32:48.167625+00:00"
+        "it_se_save_preferences_sp": {
+            "checksum": "05aecddf47de26f0afa7759cd2704edde6e81b4dd66f4db41eb2464563a7db66",
+            "last_modified": "2025-02-01T06:11:12.633677+00:00"
         }
     },
-    "functions": {
-        "IT_AU_Get_User_By_Email_FN": {
-            "checksum": "db9c0a7372079a017718d606d8ca16e5a5db19f089d3d6221bd434a916d653b4",
-            "last_modified": "2025-01-18T12:15:51.116309+00:00"
-        },
-        "IT_AU_Get_User_By_Account_FN": {
-            "checksum": "4979e14fb166b98aea331c32025dc0d7b80af96498f2c9ac1818ae98ad609a6a",
-            "last_modified": "2025-01-18T12:40:54.751356+00:00"
-        }
-    }
+    "functions": {}
 }

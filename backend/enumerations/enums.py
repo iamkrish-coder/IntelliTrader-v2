@@ -262,18 +262,14 @@ class AverageTrueRange(Enum):
 class Modules(Enum):
     AUTHENTICATION = "AU"
     DASHBOARD = "DA"
-    ORDERS = "OR"
-    POSITIONS = "PO"
-    STRATEGIES = "ST"
-    REPORTS = "RE"
+    TRADING = "TR"
+    ANALYTICS = "AN"
     SETTINGS = "SE"
-    TRADES = "TR"
 
 
 class Procedures(Enum):
-    CREATE_USER_ACCOUNT_SP = "it_au_create_user_account_sp"
-    CREATE_SESSION_SP = "it_au_create_session_sp"
+    SAVE_PREFERENCES_SP = "it_se_save_preferences_sp"
+    GET_PREFERENCES_SP = "it_se_get_preferences_sp"
 
 class Functions(Enum):
-    GET_USER_BY_EMAIL_FN = "it_au_get_user_by_email_fn"
-    GET_USER_BY_ACCOUNT_FN = "it_au_get_user_by_account_fn"
+    pass

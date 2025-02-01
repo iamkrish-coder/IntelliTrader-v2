@@ -6,12 +6,16 @@ from fastapi.responses import JSONResponse
 from backend.database.managers.database_manager import DatabaseManager, DatabaseConnectionError
 from backend.api.v1.routes import router as api_router
 from backend.utils.logging_utils import *
+from backend.core.middleware import error_handling_middleware
 
 app = FastAPI()
 
+# Add error handling middleware first
+app.middleware("http")(error_handling_middleware)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://127.0.0.1:3000"],
+    allow_origins=["http://127.0.0.1:3000", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
