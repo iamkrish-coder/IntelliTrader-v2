@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.5.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.4.0...v1.5.0) (2025-02-01)
+
+
+### Features
+
+* Add user preferences management with backend and frontend integration ([77d4d36](https://github.com/iamkrish-coder/IntelliTrader/commit/77d4d36547ddbd9aa446c3c0826f64aaa8f988ec))
+* Enhance dashboard and navigation with user-centric improvements ([1fa2549](https://github.com/iamkrish-coder/IntelliTrader/commit/1fa254956ffb205b40916541fb51cf87c2294c80))
+
+
+### Bug Fixes
+
+* next hydration issue when user loads dashboard from breadcrumb ([94eab55](https://github.com/iamkrish-coder/IntelliTrader/commit/94eab55db31ce0488e71fecd63917577e16cd003))
+
 ## [1.4.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.3.8...v1.4.0) (2025-01-29)
 
 
