@@ -87,20 +87,11 @@ class DatabaseManager:
         """
         try:
             async with self.pool.acquire() as conn:
-                # Build the parameter placeholders with type casts
-                param_types = []
-                for i in range(len(args)):
-                    if i < len(args) - 3:  # Regular parameters
-                        param_types.append(f"${i+1}::text")
-                    elif i == len(args) - 3:  # status
-                        param_types.append(f"${i+1}::integer")
-                    elif i == len(args) - 2:  # message
-                        param_types.append(f"${i+1}::text")
-                    else:  # data
-                        param_types.append(f"${i+1}::jsonb")
+                # Simple parameter placeholders
+                param_placeholders = [f"${i+1}" for i in range(len(args))]
+                params = ", ".join(param_placeholders)
                 
                 # Construct the query
-                params = ", ".join(param_types)
                 query = f"CALL {procedure_name}({params})"
                 
                 # Execute the query
@@ -111,15 +102,17 @@ class DatabaseManager:
                     result = await conn.fetch(query, *args)
                 
                 return {
-                    "success": True,
-                    "data": result,
-                    "rows_affected": len(result) if result else 0
+                    "success": result[0][0] if result and len(result) > 0 else False,
+                    "message": result[0][1] if result and len(result) > 0 else "",
+                    "data": result[0][2] if result and len(result) > 0 else None
                 }
+                
         except Exception as e:
             log_error(f"Error executing procedure {procedure_name}: {str(e)}")
             return {
                 "success": False,
-                "error": str(e)
+                "message": f"Error executing procedure: {str(e)}",
+                "data": None
             }
 
     async def call_function(

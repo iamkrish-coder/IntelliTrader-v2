@@ -53,7 +53,7 @@ export const Menu = {
       isActive: true,
       items: [
         {
-          title: "Auto Pilot",
+          title: "Terminal",
           url: "/trading/terminal",
         },
         {
@@ -82,10 +82,6 @@ export const Menu = {
         {
           title: "Reports",
           url: "/analytics/reports",
-        },
-        {
-          title: "Risk Analysis",
-          url: "/analytics/risk",
         },
       ],
     },

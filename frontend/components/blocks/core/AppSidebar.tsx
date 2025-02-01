@@ -27,18 +27,22 @@ export function AppSidebar({ menuConfig = Menu, ...props }: AppSidebarProps) {
   const isCollapsed = state === "collapsed";
 
   return (
-    <Sidebar collapsible="icon" {...props}>
-      <SidebarHeader>
+    <Sidebar 
+      collapsible="icon" 
+      className="flex flex-col h-full overflow-hidden" 
+      {...props}
+    >
+      <SidebarHeader className="shrink-0">
         <Logo collapsed={isCollapsed} className={isCollapsed ? "" : "my-2"} />
         <Separator orientation="horizontal" className="" />
         <TeamSwitcher teams={menuConfig.teams} />
         <Separator orientation="horizontal" className="" />
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="flex-1 overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         <NavMain items={menuConfig.navMain} />
         <NavProjects projects={menuConfig.projects} />
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="shrink-0">
         <NavUser />
       </SidebarFooter>
       <SidebarRail />
