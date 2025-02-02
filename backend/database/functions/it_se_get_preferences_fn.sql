@@ -1,5 +1,4 @@
-DROP FUNCTION IF EXISTS it_se_get_preferences_fn(p_user_id TEXT);
-
+DROP FUNCTION IF EXISTS it_se_get_preferences_fn(TEXT);
 CREATE OR REPLACE FUNCTION it_se_get_preferences_fn(
     p_user_id TEXT
 )
