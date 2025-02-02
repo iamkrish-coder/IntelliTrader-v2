@@ -29,7 +29,7 @@ async def startup():
     """Initialize database connection and schema on startup."""
     try:
         await database.initialize()
-        log_info("Database Connected")
+        log_info("Database connected")
     except DatabaseConnectionError as e:
         log_error(str(e))
         # We don't raise here to allow the application to start without the database
