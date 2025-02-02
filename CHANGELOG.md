@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.5.0...v1.5.1) (2025-02-02)
+
+
+### Bug Fixes
+
+* Enhance error handling and response management on frontend. ([a345f90](https://github.com/iamkrish-coder/IntelliTrader/commit/a345f90cd1ea3e5aaa45ca9db56e41be95e3761e))
+
 ## [1.5.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.4.0...v1.5.0) (2025-02-01)
 
 
