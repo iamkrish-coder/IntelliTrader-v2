@@ -1,6 +1,6 @@
 "use client";
 
-import ErrorCard from "@/components/blocks/auth/ErrorCard";
+import ErrorCard from "../components/error-card";
 import { useSearchParams } from "next/navigation";
 
 export default function ErrorPage() {

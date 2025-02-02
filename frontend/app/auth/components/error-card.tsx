@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import Logo from "@/components/blocks/core/AppLogo";
+import Logo from "@/components/blocks/core/app-logo";
 
 interface ErrorCardProps {
   error?: string | null;

@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { SignOutButton } from "@/components/blocks/auth/SignOutButton";
+import { SignOutButton } from "@/components/blocks/auth/sign-out-button";
 
 export default async function Page() {
   const session = await auth();

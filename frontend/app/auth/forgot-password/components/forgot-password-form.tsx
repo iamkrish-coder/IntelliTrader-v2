@@ -15,7 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/blocks/core/AppLogo";
+import Logo from "@/components/blocks/core/app-logo";
 import { toast } from "sonner";
 
 export default function ForgotPasswordForm() {

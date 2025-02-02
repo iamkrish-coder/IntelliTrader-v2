@@ -1,3 +1,11 @@
+import {
+  ApiSuccessResponse,
+  ApiErrorResponse,
+  ApiError,
+  isApiErrorResponse,
+  isApiSuccessResponse,
+} from "../types/api";
+
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api/v1";
 
@@ -6,65 +14,101 @@ const defaultHeaders = {
   Accept: "application/json",
 };
 
-const handleResponse = async (response: Response) => {
-  if (!response.ok) {
-    // Try to parse error response
-    try {
-      const errorData = await response.json();
-      throw new Error(
-        errorData.message || errorData.detail || "An error occurred",
-      );
-    } catch (e) {
-      // If parsing fails, throw generic error with status
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-  }
-
-  // Only try to parse JSON if there's content
+async function handleResponse<T>(response: Response): Promise<T> {
   const contentType = response.headers.get("content-type");
-  if (contentType && contentType.includes("application/json")) {
-    return response.json();
+  if (!contentType?.includes("application/json")) {
+    throw new ApiError(
+      "Invalid response format from server",
+      "network-error",
+      response.url,
+      response.type,
+      null,
+      response.status,
+    );
   }
 
-  return null;
-};
+  const jsonResponse = await response.json();
+
+  // Check for API error response
+  if (isApiErrorResponse(jsonResponse)) {
+    throw new ApiError(
+      jsonResponse.error.message,
+      jsonResponse.error.request_id,
+      jsonResponse.error.path,
+      jsonResponse.error.method,
+      jsonResponse.error.data,
+      response.status,
+    );
+  }
+
+  // Validate success response
+  if (!isApiSuccessResponse<T>(jsonResponse)) {
+    throw new ApiError(
+      "Invalid response format from server",
+      "format-error",
+      response.url,
+      response.type,
+      jsonResponse,
+      response.status,
+    );
+  }
+
+  return jsonResponse.data;
+}
+
+async function makeRequest<T>(url: string, options: RequestInit): Promise<T> {
+  try {
+    const response = await fetch(`${API_BASE_URL}${url}`, {
+      ...options,
+      credentials: "include",
+      headers: {
+        ...defaultHeaders,
+        ...options.headers,
+      },
+    });
+
+    return await handleResponse<T>(response);
+  } catch (error) {
+    // Handle network errors
+    if (error instanceof TypeError && error.message === "Failed to fetch") {
+      throw new ApiError(
+        "Unable to connect to server. Please check your internet connection.",
+        "network-error",
+        url,
+        options.method || "GET",
+        null,
+        0,
+      );
+    }
+    throw error;
+  }
+}
 
 const api = {
   get: async <T>(url: string): Promise<T> => {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
-      credentials: "include",
-      headers: defaultHeaders,
+    return makeRequest<T>(url, {
+      method: "GET",
     });
-    return handleResponse(response);
   },
 
   post: async <T>(url: string, data: any): Promise<T> => {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
+    return makeRequest<T>(url, {
       method: "POST",
-      credentials: "include",
-      headers: defaultHeaders,
       body: JSON.stringify(data),
     });
-    return handleResponse(response);
   },
 
   patch: async <T>(url: string, data: any): Promise<T> => {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
+    return makeRequest<T>(url, {
       method: "PATCH",
-      credentials: "include",
-      headers: defaultHeaders,
       body: JSON.stringify(data),
     });
-    return handleResponse(response);
   },
 
   delete: async <T>(url: string): Promise<T> => {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
+    return makeRequest<T>(url, {
       method: "DELETE",
-      credentials: "include",
-      headers: defaultHeaders,
     });
-    return handleResponse(response);
   },
 };
 

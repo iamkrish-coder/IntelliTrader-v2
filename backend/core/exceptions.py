@@ -70,3 +70,8 @@ class ApiException(Exception):
     @classmethod
     def gateway_timeout_error(cls, message="Gateway timeout", data=None):
         return cls(status.HTTP_504_GATEWAY_TIMEOUT, message, data)
+
+    @classmethod
+    def database_error(cls, message="Database operation failed", data=None):
+        """Handle database-specific errors with internal server error status."""
+        return cls(status.HTTP_500_INTERNAL_SERVER_ERROR, message, data)

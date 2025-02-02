@@ -28,3 +28,11 @@ class PreferencesRepository(BaseRepository):
             preferences.region_name,
             preferences.updated_by
         )
+
+    async def get_preferences(self, user_id: str) -> Dict[str, Any]:
+        """Get user preferences."""
+        return await self.execute_function(
+            Functions.GET_PREFERENCES_FN.value,
+            user_id,
+            fetch_mode='one'
+        )

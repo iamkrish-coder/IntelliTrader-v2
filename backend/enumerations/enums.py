@@ -269,7 +269,6 @@ class Modules(Enum):
 
 class Procedures(Enum):
     SAVE_PREFERENCES_SP = "it_se_save_preferences_sp"
-    GET_PREFERENCES_SP = "it_se_get_preferences_sp"
 
 class Functions(Enum):
-    pass
+    GET_PREFERENCES_FN = "it_se_get_preferences_fn"
