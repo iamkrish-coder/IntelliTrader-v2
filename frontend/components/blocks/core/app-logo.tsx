@@ -25,8 +25,8 @@ export default function Logo({ collapsed = false, className }: LogoProps) {
             collapsed ? "w-0 opacity-0" : "w-auto opacity-100",
           )}
         >
-          <h3 className="whitespace-nowrap font-daysOne text-2xl text-gray-800 dark:text-white">
-            Intell!TRADER
+          <h3 className="whitespace-nowrap font-gugi text-2xl text-gray-800 dark:text-white">
+            INTEL!iTRADER
           </h3>
           <div
             className="mx-1 mt-3 h-2 w-2 animate-pulse rounded-full bg-red-600 dark:bg-white"

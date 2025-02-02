@@ -1,4 +1,4 @@
-import { Montserrat, Space_Grotesk, Days_One } from "next/font/google";
+import { Montserrat, Space_Grotesk, Days_One, Gugi } from "next/font/google";
 
 export const montserrat = Montserrat({
   subsets: ["latin"],
@@ -16,4 +16,10 @@ export const daysOne = Days_One({
   subsets: ["latin"],
   weight: ["400"],
   variable: "--font-daysOne",
+});
+
+export const gugi = Gugi({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-gugi",
 });
