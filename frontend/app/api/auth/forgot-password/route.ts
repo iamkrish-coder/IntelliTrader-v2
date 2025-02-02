@@ -5,7 +5,7 @@ import { sendEmail } from "@/lib/email";
 import {
   ResetPasswordEmailTemplate,
   ResetPasswordEmailText,
-} from "@/components/blocks/email/ResetPasswordEmailTemplate";
+} from "@/components/blocks/email/reset-password-email-template";
 
 const prisma = new PrismaClient();
 

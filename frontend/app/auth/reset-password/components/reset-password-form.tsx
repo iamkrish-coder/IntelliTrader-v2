@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { Shell } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -15,61 +15,57 @@ import {
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import Logo from "@/components/blocks/core/AppLogo";
+import Logo from "@/components/blocks/core/app-logo";
 import { toast } from "sonner";
-import { Shell } from "lucide-react";
 
-export default function SignUpForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+interface ResetPasswordFormProps {
+  token: string;
+}
+
+export default function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [showValidationError, setShowValidationError] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Check passwords match before setting loading state
     if (password !== confirmPassword) {
-      setShowValidationError(true);
       toast.error("Passwords do not match");
+      return;
+    }
+
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
       return;
     }
 
     setIsLoading(true);
 
     try {
-      // Register the user
-      const response = await fetch("/api/auth/register", {
+      const response = await fetch("/api/auth/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ token, password }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to register");
+        throw new Error(data.error || "Failed to reset password");
       }
 
-      // Sign in the user after successful registration
-      const signInResult = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (signInResult?.error) {
-        throw new Error(signInResult.error);
-      }
-
-      toast.success("Registration successful!");
-      router.push("/dashboard");
+      toast.success(
+        "Password reset successful! Please sign in with your new password.",
+      );
+      router.push("/auth/signin");
     } catch (error) {
+      console.error("Reset password error:", error);
       toast.error(
-        error instanceof Error ? error.message : "Something went wrong",
+        error instanceof Error
+          ? error.message
+          : "Failed to reset password. Please try again.",
       );
     } finally {
       setIsLoading(false);
@@ -80,59 +76,39 @@ export default function SignUpForm() {
     <Card>
       <CardHeader className="space-y-2">
         <Logo />
-        <CardTitle className="text-2xl font-bold md:text-xl">Sign Up</CardTitle>
+        <CardTitle className="text-2xl font-bold md:text-xl">
+          Reset Password
+        </CardTitle>
         <CardDescription className="md:text-sm">
-          It&apos;s free to signup and only takes a minute.
+          Please enter your new password below.
         </CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4 md:gap-2">
-        <form onSubmit={handleSubmit} className="space-y-4">
+      <CardContent className="grid gap-4">
+        <form onSubmit={handleSubmit} className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="name">Full Name</Label>
-            <Input
-              id="name"
-              type="text"
-              placeholder="Enter your full name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              disabled={isLoading}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="Enter your email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              disabled={isLoading}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">New Password</Label>
             <Input
               id="password"
               type="password"
-              placeholder="Enter a password with at least 6 characters"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your new password"
               required
               minLength={6}
               disabled={isLoading}
             />
           </div>
+
           <div className="grid gap-2">
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
+            <Label htmlFor="confirmPassword">Confirm New Password</Label>
             <Input
               id="confirmPassword"
               type="password"
-              placeholder="Enter the password again"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm your new password"
               required
+              minLength={6}
               disabled={isLoading}
             />
           </div>
@@ -141,10 +117,10 @@ export default function SignUpForm() {
             {isLoading ? (
               <>
                 <Shell className="mr-2 h-4 w-4 animate-spin" />
-                Creating Account...
+                Resetting Password...
               </>
             ) : (
-              "Create Account"
+              "Reset Password"
             )}
           </Button>
         </form>
@@ -152,7 +128,7 @@ export default function SignUpForm() {
       <CardFooter>
         <div className="flex w-full flex-col items-center justify-between space-y-2">
           <p className="text-center text-sm text-muted-foreground">
-            Already have an account?{" "}
+            Remember your password?{" "}
             <Link
               href="/auth/signin"
               className="text-muted-foreground hover:text-foreground hover:underline"

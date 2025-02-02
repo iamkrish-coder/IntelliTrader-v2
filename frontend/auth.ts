@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import { Adapter } from "next-auth/adapters";
 import Google from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
@@ -9,6 +9,18 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 const adapter: Adapter = PrismaAdapter(prisma);
+
+// Add types for the session
+declare module "next-auth" {
+    interface Session {
+        user: {
+            id: string;
+            email: string;
+            name: string | null;
+            linkedAccounts: string[];
+        } & DefaultSession["user"];
+    }
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter,

@@ -1,7 +1,7 @@
 {
     "metadata": {
-        "current_version": 7,
-        "last_updated": "2025-02-01T14:54:28.119158+00:00"
+        "current_version": 12,
+        "last_updated": "2025-02-02T03:56:42.297478+00:00"
     },
     "definitions": {
         "preferences": {
@@ -15,5 +15,10 @@
             "last_modified": "2025-02-01T14:54:28.119158+00:00"
         }
     },
-    "functions": {}
+    "functions": {
+        "it_se_get_preferences_fn": {
+            "checksum": "4fef3523c67e325a36255a76c946999f8116a9c1d924d964fd00d2d4e075af0b",
+            "last_modified": "2025-02-02T02:01:19.973689+00:00"
+        }
+    }
 }

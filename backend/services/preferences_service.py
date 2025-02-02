@@ -48,7 +48,7 @@ class PreferencesService:
         
         # Handle database operation result
         if not save_result["success"]:
-            raise ApiException.internal_server_error(
+            raise ApiException.database_error(
                 message=save_result.get("message", "Failed to save preferences"),
                 data=save_result.get("data")
             )
@@ -58,3 +58,39 @@ class PreferencesService:
             "message": "Preferences saved successfully",
             "data": save_result["data"]
         }
+
+    async def get_preferences(self, user_id: str) -> Dict[str, Any]:
+        """Get user preferences with streamlined error handling."""
+        try:
+            # Get preferences from database
+            result = await self.preferences_repository.get_preferences(user_id=user_id)
+            
+            # Check if result was successful
+            if not result.get("success", False):
+                raise Exception(result.get("error", "Unknown error"))
+            
+            # Get the data from the result
+            preferences_data = result.get("data")
+            
+            # If no preferences found, return default values
+            if not preferences_data:
+                return {
+                    "message": "No preferences found for user",
+                    "data": PreferencesSchema().dict()
+                }
+            
+            # Validate and serialize using schema
+            preferences_schema = PreferencesSchema(**preferences_data)
+            
+            # Return successful response
+            return {
+                "message": "Preferences retrieved successfully",
+                "data": preferences_schema.dict()
+            }
+            
+        except Exception as e:
+            log_error(f"Error getting preferences: {str(e)}")
+            raise ApiException.database_error(
+                message="Failed to retrieve preferences",
+                data={"error": str(e)}
+            )

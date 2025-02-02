@@ -1,6 +1,6 @@
 "use client";
 
-import { AppSidebar } from "./AppSidebar";
+import { AppSidebar } from "./app-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,7 +15,6 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import Logo from "./AppLogo";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 

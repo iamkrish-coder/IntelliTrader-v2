@@ -3,7 +3,7 @@ import { sendEmail } from "@/lib/email";
 import {
   VerificationEmailTemplate,
   VerificationEmailText,
-} from "@/components/blocks/email/VerificationEmailTemplate";
+} from "@/components/blocks/email/verification-email-template";
 
 export const runtime = "nodejs";
 
