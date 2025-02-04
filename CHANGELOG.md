@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.6.0](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.5.1...v1.6.0) (2025-02-04)
+
+
+### Features
+
+* Add notification preferences to user settings ([9883b13](https://github.com/iamkrish-coder/IntelliTrader/commit/9883b13b1a5290323a0883ed78180bde7fae1339))
+
+
+### Bug Fixes
+
+* changed logo font ([6618ccd](https://github.com/iamkrish-coder/IntelliTrader/commit/6618ccd4a28e743c427a7a9829c847218d89c66f))
+
 ## [1.5.1](https://github.com/iamkrish-coder/IntelliTrader/compare/v1.5.0...v1.5.1) (2025-02-02)
 
 
