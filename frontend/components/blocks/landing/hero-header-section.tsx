@@ -31,9 +31,9 @@ export const HeroHeaderSection = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="mb-4 bg-clip-text font-daysOne text-6xl tracking-wide text-white md:text-8xl"
+          className="mb-4 bg-clip-text font-gugi text-6xl tracking-wide text-white md:text-8xl"
         >
-          Intell!TRADER
+          INTEL!iTRADER
         </motion.h1>
         <motion.p
           initial={{ y: 20, opacity: 0 }}

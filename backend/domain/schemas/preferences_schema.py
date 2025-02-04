@@ -22,6 +22,17 @@ class PreferencesSchema(BaseModel):
     global_trade: bool = Field(default=True)
     runtime_interval: str = Field(default="5MINUTE")
     
+    # Notification Settings
+    notify_trades: bool = Field(default=False)
+    notify_trades_email: bool = Field(default=False)
+    notify_trades_push: bool = Field(default=False)
+    notify_price_alerts: bool = Field(default=False)
+    notify_price_alerts_email: bool = Field(default=False)
+    notify_price_alerts_push: bool = Field(default=False)
+    notify_portfolio: bool = Field(default=False)
+    notify_portfolio_email: bool = Field(default=False)
+    notify_portfolio_push: bool = Field(default=False)
+    
     # System Settings
     secret_name: str = Field(default="IntelliTrader")
     region_name: str = Field(default="ap-south-1")

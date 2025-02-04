@@ -1,3 +1,7 @@
+---
+description: IntelliTrader - Source Code Deep Dive
+globs: 
+---
 ### Coding Environment
 
 - Frameworks & Libraries: NextJS v15, TypeScript, TailwindCSS, Shadcn UI

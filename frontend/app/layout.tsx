@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { montserrat, spaceGrotesk, daysOne } from "@/lib/ui/fonts";
+import { montserrat, spaceGrotesk, daysOne, gugi } from "@/lib/ui/fonts";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Providers } from "./providers";
+
 
 export const metadata: Metadata = {
   title: "IntelliTrader",
@@ -17,11 +18,10 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${spaceGrotesk.variable} ${daysOne.variable}`}
+      className={`${montserrat.variable} ${spaceGrotesk.variable} ${daysOne.variable} ${gugi.variable}`}
     >
       <body>
         <Providers>{children}</Providers>
-
         <Toaster position="top-center" richColors />
       </body>
     </html>

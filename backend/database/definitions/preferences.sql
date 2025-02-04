@@ -32,6 +32,17 @@ CREATE TABLE preferences (
     global_trade BOOLEAN DEFAULT true,
     runtime_interval VARCHAR(20) DEFAULT '5MINUTE',
     
+    -- Notification Settings
+    notify_trades BOOLEAN DEFAULT false,
+    notify_trades_email BOOLEAN DEFAULT false,
+    notify_trades_push BOOLEAN DEFAULT false,
+    notify_price_alerts BOOLEAN DEFAULT false,
+    notify_price_alerts_email BOOLEAN DEFAULT false,
+    notify_price_alerts_push BOOLEAN DEFAULT false,
+    notify_portfolio BOOLEAN DEFAULT false,
+    notify_portfolio_email BOOLEAN DEFAULT false,
+    notify_portfolio_push BOOLEAN DEFAULT false,
+    
     -- System Settings
     secret_name VARCHAR(100) DEFAULT 'IntelliTrader',
     region_name VARCHAR(20) DEFAULT 'ap-south-1',

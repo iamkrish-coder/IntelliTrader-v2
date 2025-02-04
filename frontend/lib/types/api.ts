@@ -65,10 +65,14 @@ export function isApiSuccessResponse<T>(
 export interface Preferences {
   id?: number;
   user_id?: string;
+  
+  // General Settings
   debugger_mode: boolean;
   log_level: string;
   reset_app: boolean;
   prettier_print: boolean;
+  
+  // Trade Settings
   live_trade: boolean;
   topic_type: string;
   queue_type: string;
@@ -76,8 +80,23 @@ export interface Preferences {
   historical_data_subscription: boolean;
   global_trade: boolean;
   runtime_interval: string;
+  
+  // Notification Settings
+  notify_trades: boolean;
+  notify_trades_email: boolean;
+  notify_trades_push: boolean;
+  notify_price_alerts: boolean;
+  notify_price_alerts_email: boolean;
+  notify_price_alerts_push: boolean;
+  notify_portfolio: boolean;
+  notify_portfolio_email: boolean;
+  notify_portfolio_push: boolean;
+  
+  // System Settings
   secret_name: string;
   region_name: string;
+  
+  // Audit Fields
   created_at?: string;
   updated_at?: string;
   created_by?: string;
@@ -85,4 +104,4 @@ export interface Preferences {
   is_active: boolean;
 }
 
-export type PreferencesResponse = ApiSuccessResponse<Preferences>;
+export interface PreferencesResponse extends ApiSuccessResponse<Preferences> {}

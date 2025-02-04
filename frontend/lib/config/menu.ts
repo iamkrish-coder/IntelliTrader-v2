@@ -95,10 +95,6 @@ export const Menu = {
           url: "/settings/profile",
         },
         {
-          title: "API Keys",
-          url: "/settings/api-keys",
-        },
-        {
           title: "Preferences",
           url: "/settings/preferences",
         },

@@ -23,6 +23,17 @@ class PreferencesModel:
     global_trade: bool = True
     runtime_interval: str = "5MINUTE"
     
+    # Notification Settings
+    notify_trades: bool = False
+    notify_trades_email: bool = False
+    notify_trades_push: bool = False
+    notify_price_alerts: bool = False
+    notify_price_alerts_email: bool = False
+    notify_price_alerts_push: bool = False
+    notify_portfolio: bool = False
+    notify_portfolio_email: bool = False
+    notify_portfolio_push: bool = False
+    
     # System Settings
     secret_name: str = "IntelliTrader"
     region_name: str = "ap-south-1"
@@ -50,6 +61,15 @@ class PreferencesModel:
             "historical_data_subscription": self.historical_data_subscription,
             "global_trade": self.global_trade,
             "runtime_interval": self.runtime_interval,
+            "notify_trades": self.notify_trades,
+            "notify_trades_email": self.notify_trades_email,
+            "notify_trades_push": self.notify_trades_push,
+            "notify_price_alerts": self.notify_price_alerts,
+            "notify_price_alerts_email": self.notify_price_alerts_email,
+            "notify_price_alerts_push": self.notify_price_alerts_push,
+            "notify_portfolio": self.notify_portfolio,
+            "notify_portfolio_email": self.notify_portfolio_email,
+            "notify_portfolio_push": self.notify_portfolio_push,
             "secret_name": self.secret_name,
             "region_name": self.region_name,
             "created_at": self.created_at.isoformat() if self.created_at else None,

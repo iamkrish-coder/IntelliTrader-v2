@@ -17,7 +17,8 @@ class BaseRepository:
         """Execute a stored procedure"""
         output_params = BaseResponse()
         args_with_output = list(args) + [
-            output_params.status, 
+            output_params.status,
+            output_params.message,
             output_params.data
         ]
         

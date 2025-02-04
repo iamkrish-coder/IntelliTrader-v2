@@ -20,7 +20,9 @@ export default {
         montserrat: ["var(--font-montserrat)", "sans-serif"],
         spaceGrotesk: ["var(--font-space-grotesk)", "sans-serif"],
         daysOne: ["var(--font-daysOne)", "sans-serif"],
+        gugi: ["var(--font-gugi)", "sans-serif"],
       },
+
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

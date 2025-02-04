@@ -6,21 +6,25 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { REGIONS } from "@/lib/config/constants";
+import { Separator } from "@/components/ui/separator";
 
 interface SystemSettingsProps {
   formData: Preferences;
   setFormData: (data: Preferences) => void;
 }
 
+
 export function SystemSettings({ formData, setFormData }: SystemSettingsProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>System Settings</CardTitle>
+        <CardTitle>System Preferences</CardTitle>
         <CardDescription>Configure system and region settings</CardDescription>
+        <Separator />
       </CardHeader>
       <CardContent>
         <div className="flex">
+
           <div className="flex-1 space-y-4 pr-8">
             <div className="flex items-center justify-between space-x-2">
               <Label htmlFor="secret_name" className="flex-1">

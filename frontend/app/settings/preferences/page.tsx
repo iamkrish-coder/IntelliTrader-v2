@@ -4,10 +4,11 @@ import { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Shell } from "lucide-react";
-import { GeneralSettings } from "./components/general-settings";
-import { TradeSettings } from "./components/trade-settings";
-import { SystemSettings } from "./components/system-settings";
+
+import { SystemSettings } from "./components/system-preferences";
 import { usePreferences } from "./hooks/use-preferences";
+import { NotificationSettings } from "./components/notification-preferences";
+import { ApplicationPreferences } from "./components/application-preferences";
 
 export default function PreferencesPage() {
   const {
@@ -31,25 +32,25 @@ export default function PreferencesPage() {
   return (
     <div className="container mx-auto py-6">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold">Preferences</h1>
+        <h3 className="text-3xl font-bold">Preferences</h3>
         <p className="text-muted-foreground">
-          Configure your trading settings and preferences
+          Configure your application and trading preferences
         </p>
       </div>
 
-      <Tabs defaultValue="general" className="space-y-4">
+      <Tabs defaultValue="application" className="space-y-4">
         <TabsList>
-          <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="trade">Trade</TabsTrigger>
+          <TabsTrigger value="application">Application</TabsTrigger>
+          <TabsTrigger value="notifications">Notifications</TabsTrigger>
           <TabsTrigger value="system">System</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="general">
-          <GeneralSettings formData={formData} setFormData={setFormData} />
+        <TabsContent value="application">
+          <ApplicationPreferences formData={formData} setFormData={setFormData} />
         </TabsContent>
 
-        <TabsContent value="trade">
-          <TradeSettings formData={formData} setFormData={setFormData} />
+        <TabsContent value="notifications">
+          <NotificationSettings formData={formData} setFormData={setFormData} />
         </TabsContent>
 
         <TabsContent value="system">
